@@ -1,22 +1,50 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+
 #include "movimiento.h"
 
+void iniciarteclado(teclado *t){
+    t->arriba = false;
+    t->abajo = false;
+    t->der = false;
+    t->izq = false;
+}
+void teclapresionada(teclado *t, int tecla){
+    switch (tecla)
+    {
+    case ALLEGRO_KEY_UP:
+        t->arriba = true;
+        break;
+    
+    case ALLEGRO_KEY_DOWN:
+        t->abajo = true;
+        break;
+    
+    case ALLEGRO_KEY_LEFT:
+        t->izq = true;
+        break;
+    case ALLEGRO_KEY_RIGHT:
+    t->der = true;
+    break;    
+    }   
 
-void movimiento(jugador *j){
-
-ALLEGRO_KEYBOARD_STATE teclado;
-
-al_get_keyboard_state(&teclado);
-
-/*arriba y abajo acordarse explicaicon allegro si sube se resta, si baja se suma*/
-if (al_key_down(&teclado, ALLEGRO_KEY_UP)) j->ejey += j->velocidad;
-
-if (al_key_down(&teclado, ALLEGRO_KEY_DOWN)) j->ejey -= j->velocidad;
-
-if (al_key_down(&teclado, ALLEGRO_KEY_LEFT)) j->ejex -= j->velocidad;
-
-if (al_key_down(&teclado, ALLEGRO_KEY_RIGHT)) j->ejex += j-> velocidad;
-
-
+}
+void teclasoltada(teclado *t, int tecla){
+    switch (tecla)
+    {
+    case ALLEGRO_KEY_UP:
+        t->arriba = false;
+        break;
+    
+    case ALLEGRO_KEY_DOWN:
+        t->abajo = false;
+        break;
+    
+    case ALLEGRO_KEY_LEFT:
+        t->izq = false;
+        break;
+    case ALLEGRO_KEY_RIGHT:
+    t->der = false;
+    break;    
+    }   
 }

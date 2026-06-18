@@ -2,20 +2,26 @@
 #include <allegro5/allegro_primitives.h>
 
 #include "jugador.h"
+#include "movimiento.h"
 
 
-void inicjugador(jugador *e,float start_x, float start_y){
-    e->ejex = start_x;
-    e->ejey = start_y;
-
+void inicjugador(jugador *j,float ejex, float ejey){
+    j->ejex = ejex;
+    j ->ejey = ejey;
+    j->velocidad= 5;
     
 
 }
-void actJugador(jugador *e){
-    e->ejex += e->velocidad;
-    e->ejey += e->velocidad;
-}
-void dibuJugador(jugador *e){
- /*al_draw_bitmap*/
- al_draw_filled_rectangle(e->ejex, e->ejey, e->ejex + e->ancho, e->ejey + e->alto, al_map_rgb(255,0,0));
+
+//void actJugador(jugador *j, teclado *t){
+ //   j ->ejex += posix* j->velocidad;
+ //   j ->ejey += posiy* j->velocidad;
+//}
+
+void dibuJugador(jugador *j){
+ //al_draw_bitmap;
+ al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+20, j->ejey+20,al_map_rgb(255,0,0));
+
+ /*cuando encuentre sprite*/
+  /*j ->sprite = al_load_bitmap("imagenes/scv.png");*/
 }

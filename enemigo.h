@@ -8,7 +8,10 @@ typedef struct
     float posx;
     float posy;
     float velocidad;
-    /*ALLEGRO_BITMAP *sprite; */
+    int vida;
+    int dano;
+    ALLEGRO_BITMAP *sprite;
+    
 }enemigo;
 
 void inicioEnemigo(enemigo *e , float posx, float posy);
