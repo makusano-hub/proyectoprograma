@@ -10,12 +10,11 @@
 #include "jugador.h"
 
 
-
-
 int main() {
 
 	teclado teclado;
 	jugador jugador;
+	enemigo enemigo1;
 	al_init();
  
 	al_init_image_addon();
@@ -43,6 +42,8 @@ int main() {
 	al_start_timer(timer);
 	
 	inicjugador(&jugador,400,200);
+	inicioEnemigo(&enemigo1,200,200);
+	
 	while (running){
 
 		ALLEGRO_EVENT event;
@@ -64,6 +65,8 @@ int main() {
 		}
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{
+			moverEnemigo(&enemigo1);
+
 			if(teclado.arriba)
 			{
 				jugador.ejey -= jugador.velocidad;
@@ -85,6 +88,7 @@ int main() {
 		if(redraw && al_is_event_queue_empty(queue)){
 			al_clear_to_color(al_map_rgb(255,255,255));
 			dibuJugador(&jugador);
+			dibujoEnemigo(&enemigo1);
 			al_flip_display();
 			
 			

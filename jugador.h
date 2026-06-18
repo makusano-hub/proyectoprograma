@@ -1,6 +1,9 @@
 #ifndef jugador_h
 #define jugador_h
 
+#define anchojugador 32
+#define altojugador 32
+
 typedef struct 
 {
   float ejex;

@@ -2,12 +2,14 @@
 #define enemigo_h
 
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
 
 typedef struct 
 {
     float posx;
     float posy;
     float velocidad;
+    float radio;
     int vida;
     int dano;
     ALLEGRO_BITMAP *sprite;

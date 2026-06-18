@@ -20,7 +20,7 @@ void inicjugador(jugador *j,float ejex, float ejey){
 
 void dibuJugador(jugador *j){
  //al_draw_bitmap;
- al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+20, j->ejey+20,al_map_rgb(255,0,0));
+ al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+anchojugador, j->ejey+altojugador,al_map_rgb(255,0,0));
 
  /*cuando encuentre sprite*/
   /*j ->sprite = al_load_bitmap("imagenes/scv.png");*/
