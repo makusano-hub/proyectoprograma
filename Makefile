@@ -9,7 +9,7 @@ LIBS = -lallegro -lallegro_main -lallegro_image -lallegro_font -lallegro_ttf -la
 TARGET = juego
 
 # Lista de todos tus archivos de código (.c)
-SRCS = main.c jugador.c movimiento.c pantalla.c enemigo.c
+SRCS = main.c jugador.c movimiento.c pantalla.c enemigo.c matriz.c
 
 # Convierte la lista de .c en archivos de objeto (.o) automáticamente
 OBJS = $(SRCS:.c=.o)

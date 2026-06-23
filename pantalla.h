@@ -2,9 +2,10 @@
 #define PANTALLA_H
 
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
 
-#define anchoP   800
-#define altoP  600
+#define anchoP 1280
+#define altoP   720
 
 
 /*corregido pantalla*/

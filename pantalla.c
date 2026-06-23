@@ -14,7 +14,8 @@ ALLEGRO_DISPLAY* crear_pantalla(void) {
 
     
     /*color blanco*/
-    al_clear_to_color(al_map_rgb(255, 255, 255));
+    //al_clear_to_color(al_map_rgb(255, 255, 255));
+    
     al_flip_display();
 
     return display;

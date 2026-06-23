@@ -27,9 +27,9 @@ int main() {
 	ALLEGRO_DISPLAY *display = crear_pantalla();
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/ 60.0);
 	ALLEGRO_EVENT_QUEUE * queue = al_create_event_queue();
-/*
-	ALLEGRO_BITMAP *imagen = al_load_bitmap("imagenes/scv.png");	
-*/
+
+	ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondo1280x720.png");	
+
 	bool redraw = true;
 	bool running = true;
 
@@ -41,8 +41,8 @@ int main() {
 
 	al_start_timer(timer);
 	
-	inicjugador(&jugador,400,200);
-	inicioEnemigo(&enemigo1,200,200);
+	inicjugador(&jugador,400,550);
+	inicioEnemigo(&enemigo1,200,550);
 	
 	while (running){
 
@@ -50,9 +50,7 @@ int main() {
 
 		al_wait_for_event(queue, &event);
 
-		if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){	
-			
-			
+		if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){						
 			running = false;
 		}
 		if(event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -83,14 +81,33 @@ int main() {
 			{
 				jugador.ejex -= jugador.velocidad;
 			}
+
+			if(jugador.ejex < 0 )
+			{
+				jugador.ejex=0;
+			}
+			if(jugador.ejex>anchoP-anchojugador)
+			{
+				jugador.ejex = anchoP-anchojugador;
+			}
+			if(jugador.ejey > altoP-altojugador)
+			{
+				jugador.ejey = altoP-altojugador;
+			}
+			if(jugador.ejey < 0)
+			{
+				jugador.ejey = 0;
+			}
+
 			redraw = true;
 		}
 		if(redraw && al_is_event_queue_empty(queue)){
-			al_clear_to_color(al_map_rgb(255,255,255));
+		//	al_clear_to_color(al_map_rgb(255,255,255));
+			al_draw_bitmap(fondo,0,0,0);
+
 			dibuJugador(&jugador);
 			dibujoEnemigo(&enemigo1);
-			al_flip_display();
-			
+			al_flip_display();			
 			
 			redraw = false;
 		}
