@@ -11,8 +11,8 @@ void inicjugador(jugador *j,float ejex, float ejey){
     j ->ejey = ejey;
     j->velocidad= 5;
     j->sprite = al_load_bitmap("imagenes/jugplaceholder.png");
-    j->ancho = al_get_bitmap_width(j->sprite);
-    j->alto = al_get_bitmap_height(j->sprite);
+    j->ancho = 64;//al_get_bitmap_width(j->sprite);
+    j->alto = 64;//al_get_bitmap_height(j->sprite);
     
 
 }
@@ -25,7 +25,7 @@ void inicjugador(jugador *j,float ejex, float ejey){
 void dibuJugador(jugador *j){
  
  //al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+anchojugador, j->ejey+altojugador,al_map_rgb(255,0,0));
-  al_draw_scaled_bitmap(j->sprite,0,0,j->ancho,j->alto, j->ejex, j->ejey,64,64,0);
+  al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
  
   
 }

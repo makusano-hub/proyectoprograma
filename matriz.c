@@ -40,3 +40,6 @@ void imprimirMatriz(char A[N][M+2]) {
         printf("%s", A[i]);
     }
 }
+void crearNivel(char A[N][M]){
+    
+}

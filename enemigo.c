@@ -2,44 +2,44 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 
-void inicioEnemigo(enemigo *e , float posx , float posy){
-    e->posx = posx;
-    e->posy = posy;  
+void inicioEnemigo(enemigo *e , float ejex , float ejey){
+    e->ejex = ejex;
+    e->ejey = ejey;  
     
     e->velocidad = 1; /*la velocidad es en frames segun el timer*/
     e->sprite = al_load_bitmap("imagenes/zombie.png");
-    e->ancho = al_get_bitmap_width(e->sprite);
-    e->alto = al_get_bitmap_height(e->sprite);
+    e->ancho = 64;//al_get_bitmap_width(e->sprite);
+    e->alto = 64;//al_get_bitmap_height(e->sprite);
 }
 
 void moverEnemigo(enemigo *e){
-    e->posx -= e->velocidad;
+    e->ejex -= e->velocidad;
 
     /*colision con borde*/
-    if(e->posx + e->ancho >= 1280){
-        e->posx = 1280 - e->ancho;
+    if(e->ejex + e->ancho >= 1280){
+        e->ejex = 1280 - e->ancho;
         e->velocidad *= -1;
     }
-    if(e->posx <= 0){
-        e->posx = 0;
+    if(e->ejex <= 0){
+        e->ejex = 0;
         e->velocidad *=-1;
     }
     /*movimiento de figura
-    if(e->posx + e->radio >= 800){
-    e->posx = 800 - e->radio;
+    if(e->ejex + e->radio >= 800){
+    e->ejex = 800 - e->radio;
     e->velocidad *= -1;
         }
-    if(e->posx - e->radio <=0)
+    if(e->ejex - e->radio <=0)
     {
-    e->posx = e->radio;
+    e->ejex = e->radio;
     e->velocidad *= -1;
     }*/
 
 }
 
 void dibujoEnemigo(enemigo *e){
-//al_draw_filled_circle(e->posx,e->posy,e->radio,al_map_rgb(0,255,0));
-  al_draw_scaled_bitmap(e->sprite,0,0,e->ancho,e->alto,e->posx,e->posy,64,64,0); 
+//al_draw_filled_circle(e->ejex,e->ejey,e->radio,al_map_rgb(0,255,0));
+  al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0); 
 }
 void colisionEnemigo(enemigo *e){
     

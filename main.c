@@ -16,6 +16,7 @@ int main() {
 	teclado teclado;
 	jugador jugador;
 	enemigo enemigo1;
+	
 	al_init();
  
 	al_init_image_addon();
@@ -83,8 +84,10 @@ int main() {
 				jugador.ejex -= jugador.velocidad;
 			}
 
-			if(colisionJugEn(&jugador, &enemigo1)) {
-        	printf("Hubo colision\n");
+			if(colisionJugEn(jugador, enemigo1)) {
+	        	printf("Hubo colision");
+				//printf("jugador: %f %f ", jugador.ejex, jugador.ejey);
+				//printf("enemigo: %f %f ", enemigo1.posx,enemigo1.posy);
     		}
 
 

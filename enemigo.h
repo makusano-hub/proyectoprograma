@@ -7,8 +7,8 @@
 
 typedef struct 
 {
-    float posx;
-    float posy;
+    float ejex;
+    float ejey;
     float velocidad;
     int ancho;
     int alto;
