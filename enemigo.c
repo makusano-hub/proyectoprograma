@@ -41,3 +41,7 @@ void dibujoEnemigo(enemigo *e){
 //al_draw_filled_circle(e->posx,e->posy,e->radio,al_map_rgb(0,255,0));
   al_draw_scaled_bitmap(e->sprite,0,0,e->ancho,e->alto,e->posx,e->posy,64,64,0); 
 }
+void colisionEnemigo(enemigo *e){
+    
+
+}

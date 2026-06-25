@@ -8,6 +8,7 @@
 #include "pantalla.h"
 #include "enemigo.h"
 #include "jugador.h"
+#include "colision.h"
 
 
 int main() {
@@ -43,7 +44,7 @@ int main() {
 	
 	inicjugador(&jugador,400,550);
 	inicioEnemigo(&enemigo1,200,550);
-	
+
 	while (running){
 
 		ALLEGRO_EVENT event;
@@ -81,6 +82,11 @@ int main() {
 			{
 				jugador.ejex -= jugador.velocidad;
 			}
+
+			if(colisionJugEn(&jugador, &enemigo1)) {
+        	printf("Hubo colision\n");
+    		}
+
 
 			if(jugador.ejex < 0 )
 			{

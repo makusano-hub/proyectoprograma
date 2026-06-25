@@ -22,5 +22,5 @@ typedef struct
 void inicioEnemigo(enemigo *e , float posx, float posy);
 void moverEnemigo(enemigo *e);
 void dibujoEnemigo(enemigo *e);
-
+void colisionEnemigo(enemigo *e);
 #endif

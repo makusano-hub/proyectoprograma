@@ -1,18 +1,42 @@
 #include <stdio.h>
 
-#define N 3
-#define M 4
+#define N 25
+#define M 42
 
 void leerMatriz(char A[N][M]);
+void imprimirMatriz(char A[N][M+2]);
 
+/*int main()
+{
+    
+    char A[N][M+2];
+
+    FILE *fdata = fopen("matriz2.txt","r");
+
+    for(int i = 0; i < N; i++) {
+        fgets(A[i], M+2, fdata);
+    }     
+
+    fclose(fdata);
+    printf("%c \n\n",A[N-1][M-1]);
+    imprimirMatriz(A);    
+}*/
 
 void leerMatriz(char A[N][M]){
-
+    FILE *fdata = fopen("matriz2.txt", "r");
     for(int i =0; i<N; i++ ){
         for (int j=0; j<M; j++)
         {
-            printf("%c",A[i][j]);
+            fgetc(fdata);
         }
-        printf("\n");
-    }            
+        
+        
+    }        
+    fclose(fdata);       
+}
+
+void imprimirMatriz(char A[N][M+2]) {
+    for(int i = 0; i < N; i++) {
+        printf("%s", A[i]);
+    }
 }
