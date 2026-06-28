@@ -9,6 +9,7 @@
 #include "enemigo.h"
 #include "jugador.h"
 #include "colision.h"
+#include "mapa.h"
 
 
 int main() {
@@ -16,6 +17,7 @@ int main() {
 	teclado teclado;
 	jugador jugador;
 	enemigo enemigo1;
+
 	
 	al_init();
  
@@ -45,6 +47,7 @@ int main() {
 	
 	inicjugador(&jugador,400,550);
 	inicioEnemigo(&enemigo1,200,550);
+
 
 	while (running){
 
@@ -113,7 +116,7 @@ int main() {
 		if(redraw && al_is_event_queue_empty(queue)){
 		//	al_clear_to_color(al_map_rgb(255,255,255));
 			al_draw_bitmap(fondo,0,0,0);
-
+			dibujarMapa(&mapa);
 			dibuJugador(&jugador);
 			dibujoEnemigo(&enemigo1);
 			al_flip_display();			

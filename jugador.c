@@ -23,7 +23,7 @@ void inicjugador(jugador *j,float ejex, float ejey){
 //}
 
 void dibuJugador(jugador *j){
- 
+//aca se dibuja el sprite 
  //al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+anchojugador, j->ejey+altojugador,al_map_rgb(255,0,0));
   al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
  

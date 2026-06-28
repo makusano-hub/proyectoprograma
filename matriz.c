@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 #define N 25
-#define M 42
+#define M 40
 
 void leerMatriz(char A[N][M]);
 void imprimirMatriz(char A[N][M+2]);
 
-/*int main()
+int main()
 {
     
     char A[N][M+2];
@@ -20,7 +20,7 @@ void imprimirMatriz(char A[N][M+2]);
     fclose(fdata);
     printf("%c \n\n",A[N-1][M-1]);
     imprimirMatriz(A);    
-}*/
+}
 
 void leerMatriz(char A[N][M]){
     FILE *fdata = fopen("matriz2.txt", "r");
