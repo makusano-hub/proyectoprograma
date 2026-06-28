@@ -32,7 +32,8 @@ int main() {
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/ 60.0);
 	ALLEGRO_EVENT_QUEUE * queue = al_create_event_queue();
 
-	ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondo1280x720.png");	
+	//ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondo1280x720.png");	
+	ALLEGRO_BITMAP *terreno = al_load_bitmap("imagenes/terreno.png");
 
 	bool redraw = true;
 	bool running = true;
@@ -47,7 +48,7 @@ int main() {
 	
 	inicjugador(&jugador,400,550);
 	inicioEnemigo(&enemigo1,200,550);
-
+	cargarMapa();
 
 	while (running){
 
@@ -88,7 +89,7 @@ int main() {
 			}
 
 			if(colisionJugEn(jugador, enemigo1)) {
-	        	printf("Hubo colision");
+	        	printf("Hubo colision\n");
 				//printf("jugador: %f %f ", jugador.ejex, jugador.ejey);
 				//printf("enemigo: %f %f ", enemigo1.posx,enemigo1.posy);
     		}
@@ -115,8 +116,8 @@ int main() {
 		}
 		if(redraw && al_is_event_queue_empty(queue)){
 		//	al_clear_to_color(al_map_rgb(255,255,255));
-			al_draw_bitmap(fondo,0,0,0);
-			dibujarMapa(&mapa);
+			//al_draw_bitmap(fondo,0,0,0);
+			dibujarMapa(terreno);
 			dibuJugador(&jugador);
 			dibujoEnemigo(&enemigo1);
 			al_flip_display();			
@@ -124,8 +125,9 @@ int main() {
 			redraw = false;
 		}
 	} 
-/*
-	al_destroy_bitmap(imagen);*/
+
+	al_destroy_bitmap(terreno);
+	//al_destroy_bitmap(fondo);
 	destruir_pantalla(display);
 	
 	al_destroy_timer(timer);   

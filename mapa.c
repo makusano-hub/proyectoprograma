@@ -4,12 +4,14 @@
 
 #include "mapa.h"
 
+char mapa[FIL][COL];
+
 void cargarMapa(void){
-    char mapa[FIL][COL];
-    FILE *nivel = fopen("nivel1.txt", "r");
+    
+    FILE *nivel = fopen("matriz.txt", "r");
     if(nivel == NULL){
         printf("Error al abrir el archivo\n");
-        exit(1);
+        return;
     }
     for(int i = 0; i < FIL; i++){
         for(int j = 0; j < COL; j++){
@@ -21,21 +23,23 @@ void cargarMapa(void){
 
 }
 
-void dibujarMapa(char nivel){
+void dibujarMapa(ALLEGRO_BITMAP *terreno){
+      
     for (int i =0 ; i<FIL; i++){
-        for(int j = 0 ; j<COL;){
+        for(int j = 0 ; j<COL;j++){
+           
             if(mapa[i][j]== 't')
             {
-                al_draw_bitmap_region(al_load_bitmap("imagenes/terreno.png"), 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
+                al_draw_bitmap_region(terreno, 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
             }
             if(mapa[i][j]== 'c'){
-                al_draw_bitmap_region(al_load_bitmap("imagenes/terreno.png"), 32, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
+                al_draw_bitmap_region(terreno, 32, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
             }
             if(mapa[i][j]== 'b'){
-                al_draw_bitmap_region(al_load_bitmap("imagenes/terreno.png"), 64, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
+                al_draw_bitmap_region(terreno,64, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
             }
             if(mapa[i][j]== 'f'){
-                al_draw_bitmap_region(al_load_bitmap("imagenes/terreno.png"), 96, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
+                al_draw_bitmap_region(terreno, 96, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
             }
         }
     }

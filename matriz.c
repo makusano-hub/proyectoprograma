@@ -39,6 +39,7 @@ void imprimirMatriz(char A[N][M+2]) {
     for(int i = 0; i < N; i++) {
         printf("%s", A[i]);
     }
+    
 }
 void crearNivel(char A[N][M]){
     

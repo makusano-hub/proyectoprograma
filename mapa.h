@@ -5,9 +5,11 @@
 #define cuadrado 32
 
 
-void cargarMapa(char nivel[]);
-void dibujarMapa(void);
+extern char mapa[FIL][COL];
+void cargarMapa(void);
+void dibujarMapa(ALLEGRO_BITMAP *terreno);
 
-char otenerCel(int fila, int col);
+//char otenerCel(int fila, int col);
 #endif
+
 
