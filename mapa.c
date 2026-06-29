@@ -8,7 +8,7 @@ char mapa[FIL][COL];
 
 void cargarMapa(void){
     
-    FILE *nivel = fopen("matriz.txt", "r");
+    FILE *nivel = fopen("matriz2.txt", "r");
     if(nivel == NULL){
         printf("Error al abrir el archivo\n");
         return;

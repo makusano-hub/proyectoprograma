@@ -19,7 +19,7 @@ typedef struct
     
 }enemigo;
 
-void inicioEnemigo(enemigo *e , float posx, float posy);
+void inicioEnemigo(enemigo *e);
 void moverEnemigo(enemigo *e);
 void dibujoEnemigo(enemigo *e);
 void colisionEnemigo(enemigo *e);

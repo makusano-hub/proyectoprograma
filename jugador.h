@@ -20,7 +20,7 @@ typedef struct
   ALLEGRO_BITMAP *sprite;
 }jugador;
 
-void inicjugador(jugador *j, float ejex, float ejey);
+void inicjugador(jugador *j);
 void actJugador(jugador *j, float ejex, float ejey);
 void dibuJugador(jugador *j);
 

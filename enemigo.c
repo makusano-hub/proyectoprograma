@@ -3,18 +3,20 @@
 #include <allegro5/allegro_primitives.h>
 #include "mapa.h"
 
-void inicioEnemigo(enemigo *e , float ejex , float ejey){
+void inicioEnemigo(enemigo *e ){
    // e->ejex = ejex;
     //e->ejey = ejey;  
-    
+
     e->velocidad = 1; /*la velocidad es en frames segun el timer*/
     e->sprite = al_load_bitmap("imagenes/zombie.png");
     e->ancho = 32;//al_get_bitmap_width(e->sprite);
     e->alto = 32;//al_get_bitmap_height(e->sprite);
-
+    e->ejex = 0;
+    e->ejey = 0;
+    
     for(int i=0;i< FIL; i++){/*esto es para iniciar la posicion*/
         for(int j=0; j<COL;j++){
-            if (mapa[i][j == 'e'])
+            if (mapa[i][j] == 'e')
             {
                 e->ejex = j*32;
                 e->ejey = i*32;

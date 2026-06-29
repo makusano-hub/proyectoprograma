@@ -46,8 +46,8 @@ int main() {
 
 	al_start_timer(timer);
 	
-	inicjugador(&jugador,400,550);
-	inicioEnemigo(&enemigo1,200,550);
+	inicjugador(&jugador);
+	inicioEnemigo(&enemigo1);
 	cargarMapa();
 
 	while (running){

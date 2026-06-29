@@ -6,14 +6,13 @@
 #include "movimiento.h"
 #include "mapa.h"
 
-void inicjugador(jugador *j,float ejex, float ejey){
-
-  //  j->ejex = ejex;
-  //  j ->ejey = ejey;
+void inicjugador(jugador *j){ 
     j->velocidad= 5;
     j->sprite = al_load_bitmap("imagenes/jugplaceholder.png");
     j->ancho = 32;//al_get_bitmap_width(j->sprite);
     j->alto = 32;//al_get_bitmap_height(j->sprite);
+    j->ejex = 0;
+    j ->ejey = 0;
 
     /*utilizar posicio inicial en matriz*/
     for(int i=0;i< FIL; i++){
