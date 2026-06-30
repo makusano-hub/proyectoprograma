@@ -14,7 +14,7 @@ void inicjugador(jugador *j){
     j->ejex = 0;
     j ->ejey = 0;
 
-    /*utilizar posicio inicial en matriz*/
+    /*utilizar posicio inicial en matriz para iniciar el jugador*/
     for(int i=0;i< FIL; i++){
         for(int k=0; k<COL;k++){
             if (mapa[i][k] == 'j')

@@ -45,10 +45,10 @@ int main() {
 	al_register_event_source(queue, al_get_keyboard_event_source());
 
 	al_start_timer(timer);
+	cargarMapa();
 	
 	inicjugador(&jugador);
 	inicioEnemigo(&enemigo1);
-	cargarMapa();
 
 	while (running){
 

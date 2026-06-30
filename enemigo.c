@@ -13,8 +13,8 @@ void inicioEnemigo(enemigo *e ){
     e->alto = 32;//al_get_bitmap_height(e->sprite);
     e->ejex = 0;
     e->ejey = 0;
-    
-    for(int i=0;i< FIL; i++){/*esto es para iniciar la posicion*/
+
+    for(int i=0;i< FIL; i++){/*esto es para iniciar la posicion segun el mapa(atriz)*/
         for(int j=0; j<COL;j++){
             if (mapa[i][j] == 'e')
             {
