@@ -6,7 +6,7 @@
 #include <allegro5/allegro_image.h>
 
 #define MAxEnemigos 4;
-Portal spawn;
+
 
 typedef struct 
 {

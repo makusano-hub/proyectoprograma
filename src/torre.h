@@ -16,6 +16,6 @@ typedef struct
 
 void inicTorre(Torre *T);
 void dibuTorre(Torre *T);
-void disparoTorre(Torre *T, enemigo *e);
+void disparoTorre(Torre *T, Enemigo *e);
 
 #endif

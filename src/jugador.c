@@ -6,10 +6,12 @@
 #include "jugador.h"
 #include "movimiento.h"
 #include "mapa.h"
+#include "pantalla.h"
+
 
 void inicJugador(Jugador *j){ 
     j->velocidad= 5;
-    j->sprite = al_load_bitmap("imagenes/jugplaceholder.png");
+    j->sprite = al_load_bitmap("../imagenes/jugplaceholder.png");
     j->ancho = 32;
     j->alto = 32;
     j->vida = 20;
@@ -30,10 +32,25 @@ void inicJugador(Jugador *j){
 
 }
 
-//void actJugador(Jugador *j, teclado *t){
- //   j ->ejex += posix* j->velocidad;
- //   j ->ejey += posiy* j->velocidad;
-//}
+void actJugador(Jugador *j){
+    if(j->ejex < 0 )
+			{
+				j->ejex=0;
+			}
+			if(j->ejex> anchoP-j->ancho)
+			{
+				j->ejex = anchoP- j->ancho;
+			}
+			if(j->ejey > altoP- j->alto)
+			{
+				j->ejey = altoP- j->alto;
+			}
+			if(j->ejey < 0)
+			{
+				j->ejey = 0;
+			}
+
+}
 
 void dibuJugador(Jugador *j, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
     
@@ -49,4 +66,26 @@ void dibuJugador(Jugador *j, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
     }
     al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
   
+}
+void movJugador(Jugador *j, teclado *t){
+    if(t->arriba)
+			{
+				j->ejey -= j->velocidad;
+				printf("arriba\n");
+			}
+			if(t->abajo)
+			{
+				j->ejey  += j->velocidad;
+				printf("abajo\n");
+			}
+			if(t->der)
+			{
+				j->ejex += j->velocidad;
+				printf("derecha\n");
+			}
+			if(t->izq)
+			{
+				j->ejex -= j->velocidad;
+				printf("izquierda\n");
+			}
 }

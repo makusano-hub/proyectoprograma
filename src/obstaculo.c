@@ -2,6 +2,6 @@
 #include "jugador.h"
 
 
-void iniObstaculo(obstaculo *o);
-void dibObstaculo(obstaculo *o);
+void iniObstaculo(Obstaculo *o);
+void dibObstaculo(Obstaculo *o);
 

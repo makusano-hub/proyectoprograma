@@ -14,8 +14,8 @@ typedef struct
     int alto;
     int vida;
     ALLEGRO_BITMAP *sprite;
-}obstaculo;
+}Obstaculo;
 
-void dibObstaculo(obstaculo *o);
-void iniObstaculo(obstaculo *o);
+void dibObstaculo(Obstaculo *o);
+void iniObstaculo(Obstaculo *o);
 #endif

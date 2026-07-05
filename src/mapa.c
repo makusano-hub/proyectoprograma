@@ -66,7 +66,7 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno , ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP
 
     }
 }   
-bool buscarPosicion(char CharBusca,int *x, int *y){
+bool buscarPosicion(char CharBusca,float *x, float *y){
     for(int i=0;i<FIL;i++){
         for(int j=0;j<COL;j++){
             if(mapa[i][j] == CharBusca){

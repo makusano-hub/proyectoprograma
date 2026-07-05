@@ -7,10 +7,10 @@ void inicionemigo(Enemigo *e);
 void moverEnemigo(Enemigo *e);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
-void inicionemigo(Enemigo *e ){
+void inicioEnemigo(Enemigo *e ){
 
     e->velocidad = 1; 
-    e->sprite = al_load_bitmap("imagenes/zombie.png");
+    e->sprite = al_load_bitmap("../imagenes/zombie.png");
     e->ancho = 32;
     e->alto = 32;
     e->ejex = 0;
@@ -18,7 +18,8 @@ void inicionemigo(Enemigo *e ){
 
     e->vida = 20;
     e->dano = 1;
-    int cantidadEnemigos = 0;
+    //int cantidadEnemigos = 0;
+    buscarPosicion('e',&e->ejex,&e->ejey);
     /*while(cantidadEnemigos<=MAxEnemigos){
 
     }*/
@@ -72,4 +73,6 @@ void colisionEnemigo(Enemigo *e){
 void accionEnemigo(Enemigo *e){
     
 }
-void crearSpawn();
+void crearSpawn(Portal *P){
+    buscarPosicion('e',&P->ejex,&P->ejey);
+}

@@ -5,6 +5,6 @@
 #include "enemigo.h"
 #include "obstaculo.h"
 
-int colisionJugEn(jugador j,enemigo e);
-int colisionObsJug(jugador j,obstaculo o);
+bool colisionJugEn(Jugador j,Enemigo e);
+bool colisionObsJug(Jugador j,Obstaculo o);
 #endif

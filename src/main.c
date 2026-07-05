@@ -18,13 +18,10 @@ int main() {
 	Jugador Jugador;
 	Enemigo Enemigo1;
 	Portal spawn;
-
 	
-	al_init();
- 
+	al_init(); 
 	al_init_image_addon();
 	al_init_primitives_addon();
-
 	al_install_keyboard();	
 	iniciarteclado(&teclado);
 	
@@ -34,10 +31,10 @@ int main() {
 	ALLEGRO_EVENT_QUEUE * queue = al_create_event_queue();
 
 	//ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondo1280x720.png");	
-	ALLEGRO_BITMAP *terreno = al_load_bitmap("imagenes/terreno.png");
-	ALLEGRO_BITMAP *pasto = al_load_bitmap("imagenes/GrassCenter.png");
-	ALLEGRO_BITMAP *camino = al_load_bitmap("imagenes/muro.png");
-	ALLEGRO_BITMAP *agua = al_load_bitmap("imagenes/agua.png");
+	ALLEGRO_BITMAP *terreno = al_load_bitmap("../imagenes/terreno.png");
+	ALLEGRO_BITMAP *pasto = al_load_bitmap("../imagenes/GrassCenter.png");
+	ALLEGRO_BITMAP *camino = al_load_bitmap("../imagenes/muro.png");
+	ALLEGRO_BITMAP *agua = al_load_bitmap("../imagenes/agua.png");
 	
 
 	bool redraw = true;
@@ -76,44 +73,11 @@ int main() {
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{
 			moverEnemigo(&Enemigo1);
-
-			if(teclado.arriba)
-			{
-				Jugador.ejey -= Jugador.velocidad;
-			}
-			if(teclado.abajo)
-			{
-				Jugador.ejey  += Jugador.velocidad;
-			}
-			if(teclado.der)
-			{
-				Jugador.ejex += Jugador.velocidad;
-			}
-			if(teclado.izq)
-			{
-				Jugador.ejex -= Jugador.velocidad;
-			}
+			movJugador(&Jugador,&teclado);			
 			if(colisionJugEn(Jugador, Enemigo1)) {
 	        	printf("Hubo colision\n");
-    		}
-
-
-			if(Jugador.ejex < 0 )
-			{
-				Jugador.ejex=0;
-			}
-			if(Jugador.ejex>anchoP-anchoJugador)
-			{
-				Jugador.ejex = anchoP-anchoJugador;
-			}
-			if(Jugador.ejey > altoP-altoJugador)
-			{
-				Jugador.ejey = altoP-altoJugador;
-			}
-			if(Jugador.ejey < 0)
-			{
-				Jugador.ejey = 0;
-			}
+    		}			
+			actJugador(&Jugador);			
 			redraw = true;
 		}
 		if(redraw && al_is_event_queue_empty(queue)){

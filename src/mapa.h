@@ -8,7 +8,7 @@
 extern char mapa[FIL][COL];
 void cargarMapa(void);
 void dibujarMapa(ALLEGRO_BITMAP *terreno, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino, ALLEGRO_BITMAP *agua);
-void buscarPosicion(char CharBusca, int *x,int *y);
+bool buscarPosicion(char CharBusca, float *x,float *y);
 
 //char otenerCel(int fila, int col);
 #endif
