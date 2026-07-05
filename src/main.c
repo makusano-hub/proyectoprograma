@@ -15,8 +15,9 @@
 int main() {
 
 	teclado teclado;
-	jugador jugador;
-	enemigo enemigo1;
+	Jugador Jugador;
+	Enemigo Enemigo1;
+	Portal spawn;
 
 	
 	al_init();
@@ -34,6 +35,10 @@ int main() {
 
 	//ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondo1280x720.png");	
 	ALLEGRO_BITMAP *terreno = al_load_bitmap("imagenes/terreno.png");
+	ALLEGRO_BITMAP *pasto = al_load_bitmap("imagenes/GrassCenter.png");
+	ALLEGRO_BITMAP *camino = al_load_bitmap("imagenes/muro.png");
+	ALLEGRO_BITMAP *agua = al_load_bitmap("imagenes/agua.png");
+	
 
 	bool redraw = true;
 	bool running = true;
@@ -45,10 +50,11 @@ int main() {
 	al_register_event_source(queue, al_get_keyboard_event_source());
 
 	al_start_timer(timer);
-	cargarMapa();
+
+	cargarMapa();	
 	
-	inicjugador(&jugador);
-	inicioEnemigo(&enemigo1);
+	inicJugador(&Jugador);
+	inicioEnemigo(&Enemigo1);
 
 	while (running){
 
@@ -69,67 +75,59 @@ int main() {
 		}
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{
-			moverEnemigo(&enemigo1);
+			moverEnemigo(&Enemigo1);
 
 			if(teclado.arriba)
 			{
-				jugador.ejey -= jugador.velocidad;
+				Jugador.ejey -= Jugador.velocidad;
 			}
 			if(teclado.abajo)
 			{
-				jugador.ejey  += jugador.velocidad;
+				Jugador.ejey  += Jugador.velocidad;
 			}
 			if(teclado.der)
 			{
-				jugador.ejex += jugador.velocidad;
+				Jugador.ejex += Jugador.velocidad;
 			}
 			if(teclado.izq)
 			{
-				jugador.ejex -= jugador.velocidad;
+				Jugador.ejex -= Jugador.velocidad;
 			}
-
-			if(colisionJugEn(jugador, enemigo1)) {
+			if(colisionJugEn(Jugador, Enemigo1)) {
 	        	printf("Hubo colision\n");
-				//printf("jugador: %f %f ", jugador.ejex, jugador.ejey);
-				//printf("enemigo: %f %f ", enemigo1.posx,enemigo1.posy);
     		}
 
 
-			if(jugador.ejex < 0 )
+			if(Jugador.ejex < 0 )
 			{
-				jugador.ejex=0;
+				Jugador.ejex=0;
 			}
-			if(jugador.ejex>anchoP-anchojugador)
+			if(Jugador.ejex>anchoP-anchoJugador)
 			{
-				jugador.ejex = anchoP-anchojugador;
+				Jugador.ejex = anchoP-anchoJugador;
 			}
-			if(jugador.ejey > altoP-altojugador)
+			if(Jugador.ejey > altoP-altoJugador)
 			{
-				jugador.ejey = altoP-altojugador;
+				Jugador.ejey = altoP-altoJugador;
 			}
-			if(jugador.ejey < 0)
+			if(Jugador.ejey < 0)
 			{
-				jugador.ejey = 0;
+				Jugador.ejey = 0;
 			}
-
 			redraw = true;
 		}
 		if(redraw && al_is_event_queue_empty(queue)){
-		//	al_clear_to_color(al_map_rgb(255,255,255));
-			//al_draw_bitmap(fondo,0,0,0);
-			dibujarMapa(terreno);
-			dibuJugador(&jugador);
-			dibujoEnemigo(&enemigo1);
+			al_clear_to_color(al_map_rgb(255,255,255));
+			dibujarMapa(terreno,pasto,camino,agua);
+			dibuJugador(&Jugador,pasto,camino);
+			dibujoEnemigo(&Enemigo1,pasto,camino);
 			al_flip_display();			
 			
 			redraw = false;
 		}
 	} 
-
 	al_destroy_bitmap(terreno);
-	//al_destroy_bitmap(fondo);
 	destruir_pantalla(display);
-	
 	al_destroy_timer(timer);   
 	al_destroy_event_queue(queue);
     return 0;

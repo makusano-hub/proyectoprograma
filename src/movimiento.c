@@ -24,10 +24,12 @@ void teclapresionada(teclado *t, int tecla){
         t->izq = true;
         break;
     case ALLEGRO_KEY_RIGHT:
-    t->der = true;
-    break;    
-    }   
-
+        t->der = true;
+        break;
+    case ALLEGRO_KEY_ENTER:
+        
+        break;        
+    } 
 }
 void teclasoltada(teclado *t, int tecla){
     switch (tecla)

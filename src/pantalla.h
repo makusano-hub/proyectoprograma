@@ -3,9 +3,10 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+#include    "mapa.h"
 
-#define anchoP 1280
-#define altoP   720
+#define anchoP  COL*cuadrado
+#define altoP    FIL*cuadrado
 
 
 /*corregido pantalla*/

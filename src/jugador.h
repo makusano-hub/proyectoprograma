@@ -1,12 +1,12 @@
-#ifndef jugador_h
-#define jugador_h
+#ifndef Jugador_h
+#define Jugador_h
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
 
-#define anchojugador 32
-#define altojugador 32
+#define anchoJugador 32
+#define altoJugador 32
 
 
 typedef struct 
@@ -18,10 +18,11 @@ typedef struct
   int ancho;
   int alto;
   ALLEGRO_BITMAP *sprite;
-}jugador;
+}Jugador;
 
-void inicjugador(jugador *j);
-void actJugador(jugador *j, float ejex, float ejey);
-void dibuJugador(jugador *j);
+void inicJugador(Jugador *j);
+void actJugador(Jugador *j, float ejex, float ejey);
+void dibuJugador(Jugador *j,ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
+
 
 #endif
