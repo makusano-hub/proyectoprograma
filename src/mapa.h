@@ -6,8 +6,12 @@
 
 
 extern char mapa[FIL][COL];
+extern int cantidadEnemigos;
+extern int portalFila;
+extern int portalCol;
+
 void cargarMapa(void);
-void dibujarMapa(ALLEGRO_BITMAP *terreno, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino, ALLEGRO_BITMAP *agua);
+void dibujarMapa(ALLEGRO_BITMAP *terreno, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino, ALLEGRO_BITMAP *agua, ALLEGRO_BITMAP *oro, ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *portal);
 bool buscarPosicion(char CharBusca, float *x,float *y);
 
 //char otenerCel(int fila, int col);

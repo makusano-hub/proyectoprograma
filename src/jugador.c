@@ -15,6 +15,8 @@ void inicJugador(Jugador *j){
     j->ancho = 32;
     j->alto = 32;
     j->vida = 20;
+	j->oro = 0;
+	j->madera=0;
     j->ejex = 0;
     j->ejey = 0;
 
@@ -57,35 +59,29 @@ void dibuJugador(Jugador *j, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 //aca se dibuja el sprite 
  //al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+anchoJugador, j->ejey+altoJugador,al_map_rgb(255,0,0));
   
-    for(int i =0;i<FIL;i++){
-        for(int j=0;j<COL;j++){
-            if(mapa[i][j]== 'j' && mapa[i][j+1] == 'c' ){
-                al_draw_bitmap(camino, j*cuadrado, i*cuadrado,1);
-            }
-        }
-    }
+   
     al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
   
 }
 void movJugador(Jugador *j, teclado *t){
-    if(t->arriba)
+    		if(t->arriba)
 			{
 				j->ejey -= j->velocidad;
-				printf("arriba\n");
+				//printf("arriba\n");
 			}
 			if(t->abajo)
 			{
 				j->ejey  += j->velocidad;
-				printf("abajo\n");
+				//printf("abajo\n");
 			}
 			if(t->der)
 			{
 				j->ejex += j->velocidad;
-				printf("derecha\n");
+				//printf("derecha\n");
 			}
 			if(t->izq)
 			{
 				j->ejex -= j->velocidad;
-				printf("izquierda\n");
+				//printf("izquierda\n");
 			}
 }

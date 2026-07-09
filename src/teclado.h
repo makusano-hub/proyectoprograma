@@ -9,6 +9,10 @@ typedef struct
     bool abajo;
     bool der;
     bool izq;
+    bool w;
+    bool s;
+    bool d;
+    bool a;
 
 } teclado;
 

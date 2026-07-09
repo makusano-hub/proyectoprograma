@@ -4,22 +4,24 @@
 #include <stdio.h>
 #include "mapa.h"
 void inicionemigo(Enemigo *e);
-void moverEnemigo(Enemigo *e);
+void moverEnemigo(Enemigo *e,teclado *t);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 void inicioEnemigo(Enemigo *e ){
-
-    e->velocidad = 1; 
+    for(int i =0; i<MAxEnemigos;i++){
+    e->velocidad = 5; 
     e->sprite = al_load_bitmap("../imagenes/zombie.png");
     e->ancho = 32;
     e->alto = 32;
     e->ejex = 0;
     e->ejey = 0;
+    e->vivo = false;
 
-    e->vida = 20;
+    e->vida = 1;
     e->dano = 1;
+    }
     //int cantidadEnemigos = 0;
-    buscarPosicion('e',&e->ejex,&e->ejey);
+   // buscarPosicion('e',&e->ejex,&e->ejey);
     /*while(cantidadEnemigos<=MAxEnemigos){
 
     }*/
@@ -38,41 +40,78 @@ void inicioEnemigo(Enemigo *e ){
     }*/
 }
 
-void moverEnemigo(Enemigo *e){
-    e->ejex -= e->velocidad;
-    /*colision con borde no con l*/
-    if(e->ejex + e->ancho >= 1280){
-        e->ejex = 1280 - e->ancho;
-        e->velocidad *= -1;
+void moverEnemigo(Enemigo *e,teclado *t){
+     for(int i =0; i<MAxEnemigos; i++){
+        if(e->vivo == true){
+            int fila = e->ejex /cuadrado;
+            int col = e->ejey /cuadrado;
+   
+             if(t->w)
+			{
+				e->ejey -= e->velocidad;
+				//printf("arriba\n");
+			}
+			if(t->s)
+			{
+				e->ejey  += e->velocidad;
+				//printf("abajo\n");
+			}
+			if(t->d)
+			{
+				e->ejex += e->velocidad;
+				//printf("derecha\n");
+			}
+			if(t->a)
+			{
+				e->ejex -= e->velocidad;
+				//printf("izquierda\n");
+			}
+        }
     }
-    if(e->ejex <= 0){
-        e->ejex = 0;
-        e->velocidad *=-1;
-    }
+    /*e->ejex -= e->velocidad;
+        colision con borde no con l
+        if(e->ejex + e->ancho >= 1280){
+         e->ejex = 1280 - e->ancho;
+            e->velocidad *= -1;
+        }
+        if(e->ejex <= 0){
+            e->ejex = 0;
+            e->velocidad *=-1;
+        }*/
 }
 
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 //al_draw_filled_circle(e->ejex,e->ejey,e->radio,al_map_rgb(0,255,0));
+    for (int i=0; i<MAxEnemigos;i++){
   al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0); 
-   for(int i =0;i<FIL;i++){
-        for(int j=0;j<COL;j++){
-            if(mapa[i][j]== 'j' && mapa[i][j+1] == 'c' ){
-                al_draw_bitmap(camino, j*cuadrado, i*cuadrado,1);
-            }
-            if(mapa[i][j]== 'j' && mapa[i][j+1] != 'c'){
-                al_draw_bitmap(pasto, j*cuadrado, i*cuadrado,1);
-            }
-
+    }
+}
+void actualizarEnemigo(Enemigo *e){
+    for(int i=0; i <MAxEnemigos; i++){   
+        if(e->vivo == false)
+        {
+              return;
+        }
+        if(e->vida <= 0){
+            e->vivo = false;
         }
     }
+}
 
-}
-void colisionEnemigo(Enemigo *e){  
-
-}
-void accionEnemigo(Enemigo *e){
-    
-}
-void crearSpawn(Portal *P){
+void inicSpawn(Portal *P, int cantidad){
     buscarPosicion('e',&P->ejex,&P->ejey);
+   
 }
+bool enemigoMeta(Enemigo *e){
+    for(int i =0; i<MAxEnemigos;i++){    
+        if(e->vivo== true){
+            int posColumna = e->ejex/cuadrado;
+            int posFila = e->ejey/cuadrado;
+        if(posFila<0 || posFila >= FIL || posColumna < 0 || posColumna >= COL){
+            return false;
+         }
+    return mapa[posFila][posColumna] == 'f';
+    }
+  }
+}
+

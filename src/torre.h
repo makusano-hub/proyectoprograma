@@ -3,6 +3,10 @@
 
 #include "enemigo.h"
 #include "jugador.h"
+#include "mapa.h"
+#include <stdbool.h>
+
+#define cuadrado 32
 
 typedef struct 
 {
@@ -11,10 +15,13 @@ typedef struct
     int Tconstru;
     float ejex;
     float ejey;
-    
+    float ancho;
+    float alto;
+    ALLEGRO_BITMAP *sprite;
+        
 }Torre;
 
-void inicTorre(Torre *T);
+void inicTorre(Torre *T, float x, float y);
 void dibuTorre(Torre *T);
 void disparoTorre(Torre *T, Enemigo *e);
 

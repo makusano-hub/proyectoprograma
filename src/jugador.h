@@ -17,6 +17,8 @@ typedef struct
   float ejey;
   float velocidad;
   int vida;   /* data */
+  int oro;
+  int madera;
   int ancho;
   int alto;
   ALLEGRO_BITMAP *sprite;

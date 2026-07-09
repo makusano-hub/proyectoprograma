@@ -8,6 +8,10 @@ void iniciarteclado(teclado *t){
     t->abajo = false;
     t->der = false;
     t->izq = false;
+    t->w = false;
+    t->s = false;
+    t->a = false;
+    t->d = false;
 }
 void teclapresionada(teclado *t, int tecla){
     switch (tecla)
@@ -29,6 +33,19 @@ void teclapresionada(teclado *t, int tecla){
     case ALLEGRO_KEY_ENTER:
         
         break;        
+    
+    case ALLEGRO_KEY_W:
+        t->w = true;
+        break;
+    case ALLEGRO_KEY_S:
+        t->s = true;
+        break;
+    case ALLEGRO_KEY_D:
+        t->d = true;
+        break;
+    case ALLEGRO_KEY_A:
+        t->a = true;
+        break;
     } 
 }
 void teclasoltada(teclado *t, int tecla){
@@ -46,7 +63,20 @@ void teclasoltada(teclado *t, int tecla){
         t->izq = false;
         break;
     case ALLEGRO_KEY_RIGHT:
-    t->der = false;
-    break;    
+        t->der = false;
+        break;  
+    
+    case ALLEGRO_KEY_W:
+        t->w = false;
+        break;
+    case ALLEGRO_KEY_S:
+        t->s = false;
+        break;
+    case ALLEGRO_KEY_D:
+        t->d = false;
+        break;
+    case ALLEGRO_KEY_A:
+        t->a = false;
+        break;
     }   
 }

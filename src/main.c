@@ -3,6 +3,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
 
 #include "movimiento.h"
 #include "pantalla.h"
@@ -16,12 +17,13 @@ int main() {
 
 	teclado teclado;
 	Jugador Jugador;
-	Enemigo Enemigo1;
+	Enemigo enemigo;
 	Portal spawn;
 	
 	al_init(); 
 	al_init_image_addon();
 	al_init_primitives_addon();
+	al_init_font_addon();
 	al_install_keyboard();	
 	iniciarteclado(&teclado);
 	
@@ -35,6 +37,11 @@ int main() {
 	ALLEGRO_BITMAP *pasto = al_load_bitmap("../imagenes/GrassCenter.png");
 	ALLEGRO_BITMAP *camino = al_load_bitmap("../imagenes/muro.png");
 	ALLEGRO_BITMAP *agua = al_load_bitmap("../imagenes/agua.png");
+	ALLEGRO_BITMAP *oro = al_load_bitmap("../imagenes/oro.png");
+	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/arbol.png");
+	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
+	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/torre.png");
+	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
 	
 
 	bool redraw = true;
@@ -51,10 +58,10 @@ int main() {
 	cargarMapa();	
 	
 	inicJugador(&Jugador);
-	inicioEnemigo(&Enemigo1);
+	inicioEnemigo(&enemigo);
 
 	while (running){
-
+		int i=0;
 		ALLEGRO_EVENT event;
 
 		al_wait_for_event(queue, &event);
@@ -71,20 +78,43 @@ int main() {
 			teclasoltada(&teclado, event.keyboard.keycode);
 		}
 		if(event.type == ALLEGRO_EVENT_TIMER)
-		{
-			moverEnemigo(&Enemigo1);
+		{	
+				if(enemigo.vivo){
+					moverEnemigo(&enemigo,&teclado);
+					if(enemigoMeta(&enemigo)){
+							Jugador.vida -= 1;//enemigo.dano;
+							enemigo.vivo = false;
+							printf("enemigo llego a meta\n");
+							printf("vida jugador: %d",Jugador.vida);
+						if(Jugador.vida <= 0){
+							running = false;
+					}
+				}
+				i++	;		
+		}
+			//moverEnemigo(&enemigo,&teclado);
 			movJugador(&Jugador,&teclado);			
-			if(colisionJugEn(Jugador, Enemigo1)) {
-	        	printf("Hubo colision\n");
-    		}			
+			if(colisionJugEn(Jugador, enemigo)) {
+	        	printf("Hubo colision\n");				
+    		}
+			colisionRecursos(&Jugador);
+				
+					
 			actJugador(&Jugador);			
 			redraw = true;
 		}
 		if(redraw && al_is_event_queue_empty(queue)){
 			al_clear_to_color(al_map_rgb(255,255,255));
-			dibujarMapa(terreno,pasto,camino,agua);
+			dibujarMapa(terreno,pasto,camino,agua,oro,arbol,portal);
 			dibuJugador(&Jugador,pasto,camino);
-			dibujoEnemigo(&Enemigo1,pasto,camino);
+			for(int i =0; i<MAxEnemigos;i++)
+			{
+				if(enemigo.vivo){
+				dibujoEnemigo(&enemigo,pasto,camino);
+				}
+			}
+			
+			
 			al_flip_display();			
 			
 			redraw = false;
