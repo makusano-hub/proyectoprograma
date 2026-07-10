@@ -3,11 +3,12 @@
 #include <allegro5/allegro_primitives.h>
 #include <stdio.h>
 #include "mapa.h"
-void inicionemigo(Enemigo *e);
+void inicioEnemigo(Enemigo *e);
 void moverEnemigo(Enemigo *e,teclado *t);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
-void inicioEnemigo(Enemigo *e ){
+void inicioEnemigo(Enemigo *e){
+
     for(int i =0; i<MAxEnemigos;i++){
     e->velocidad = 5; 
     e->sprite = al_load_bitmap("../imagenes/zombie.png");
@@ -15,33 +16,25 @@ void inicioEnemigo(Enemigo *e ){
     e->alto = 32;
     e->ejex = 0;
     e->ejey = 0;
+
     e->vivo = false;
 
     e->vida = 1;
     e->dano = 1;
+    }    
+}
+void inicioEnemigos(Enemigo enemigos[], int cantidad){
+    for(int i = 0 ; i<cantidad; i++){
+        inicioEnemigo(&enemigos[i]);
     }
-    //int cantidadEnemigos = 0;
-   // buscarPosicion('e',&e->ejex,&e->ejey);
-    /*while(cantidadEnemigos<=MAxEnemigos){
-
-    }*/
-
-   /*for(int i=0;i< FIL; i++){/
-        for(int j=0; j<COL;j++){
-            if (mapa[i][j] == 'e')
-            {   
-                printf("%c",mapa[i][j]);
-                e->ejex = j*32;
-                e->ejey = i*32;
-                return;
-                cantidadEnemigos++;
-            } 
-        }
-    }*/
 }
 
 void moverEnemigo(Enemigo *e,teclado *t){
+    //
      for(int i =0; i<MAxEnemigos; i++){
+        if( e->vivo == false){
+            return;
+        }
         if(e->vivo == true){
             int fila = e->ejex /cuadrado;
             int col = e->ejey /cuadrado;
@@ -82,10 +75,14 @@ void moverEnemigo(Enemigo *e,teclado *t){
 
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 //al_draw_filled_circle(e->ejex,e->ejey,e->radio,al_map_rgb(0,255,0));
-    for (int i=0; i<MAxEnemigos;i++){
-  al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0); 
+    if(e->vivo == false){
+        return;
     }
+    
+  al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0);     
 }
+
+
 void actualizarEnemigo(Enemigo *e){
     for(int i=0; i <MAxEnemigos; i++){   
         if(e->vivo == false)
@@ -100,8 +97,30 @@ void actualizarEnemigo(Enemigo *e){
 
 void inicSpawn(Portal *P, int cantidad){
     buscarPosicion('e',&P->ejex,&P->ejey);
+    P-> cantmaxima = cantidad;
+    P-> enemigoscreado =0;    
    
 }
+
+void spawnEnemigos(Portal *P, Enemigo enemigos[], int cantmaxima){
+    if(P->enemigoscreado >= P->cantmaxima){
+        return;
+    }
+    P->cuantoSpawn++;
+
+    for(int i = 0; i<cantmaxima;i++){
+        if(enemigos[i].vivo == false){
+            enemigos[i].ejex = P->ejex;
+            enemigos[i].ejey = P->ejey;
+            enemigos[i].vida = 20;
+            enemigos[i].vivo = true;
+            P->enemigoscreado++;
+            return;
+        }
+    }    
+}
+
+
 bool enemigoMeta(Enemigo *e){
     for(int i =0; i<MAxEnemigos;i++){    
         if(e->vivo== true){

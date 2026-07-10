@@ -17,7 +17,7 @@ int main() {
 
 	teclado teclado;
 	Jugador Jugador;
-	Enemigo enemigo;
+	Enemigo enemigos[MAxEnemigos];
 	Portal spawn;
 	
 	al_init(); 
@@ -58,7 +58,8 @@ int main() {
 	cargarMapa();	
 	
 	inicJugador(&Jugador);
-	inicioEnemigo(&enemigo);
+	inicioEnemigos(enemigos, MAxEnemigos);
+	inicSpawn(&spawn, MAxEnemigos);
 
 	while (running){
 		int i=0;
@@ -79,22 +80,15 @@ int main() {
 		}
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{	
-				if(enemigo.vivo){
-					moverEnemigo(&enemigo,&teclado);
-					if(enemigoMeta(&enemigo)){
-							Jugador.vida -= 1;//enemigo.dano;
-							enemigo.vivo = false;
-							printf("enemigo llego a meta\n");
-							printf("vida jugador: %d",Jugador.vida);
-						if(Jugador.vida <= 0){
-							running = false;
-					}
-				}
-				i++	;		
-		}
+			spawnEnemigos(&spawn,enemigos,MAxEnemigos);
+
+			for(int i =0; i< MAxEnemigos; i++){
+				moverEnemigo(&enemigos[i],&teclado);
+			}
+
 			//moverEnemigo(&enemigo,&teclado);
 			movJugador(&Jugador,&teclado);			
-			if(colisionJugEn(Jugador, enemigo)) {
+			if(colisionJugEn(Jugador, enemigos[MAxEnemigos])) {
 	        	printf("Hubo colision\n");				
     		}
 			colisionRecursos(&Jugador);
@@ -107,13 +101,11 @@ int main() {
 			al_clear_to_color(al_map_rgb(255,255,255));
 			dibujarMapa(terreno,pasto,camino,agua,oro,arbol,portal);
 			dibuJugador(&Jugador,pasto,camino);
+
 			for(int i =0; i<MAxEnemigos;i++)
 			{
-				if(enemigo.vivo){
-				dibujoEnemigo(&enemigo,pasto,camino);
-				}
-			}
-			
+				dibujoEnemigo(&enemigos[i],pasto,camino);
+			}		
 			
 			al_flip_display();			
 			
