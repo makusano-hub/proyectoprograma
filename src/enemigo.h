@@ -8,6 +8,7 @@
 #include "movimiento.h"
 
 #define MAxEnemigos 4
+#define tiempo_spawn 60
 
 typedef struct 
 {
@@ -31,13 +32,13 @@ typedef struct
 
     int enemigoscreado;
     int cantmaxima;
-    int cuantoSpawn;
+    int tiempo;
     ALLEGRO_BITMAP *sprite;
 }Portal;
 
 
 void inicioEnemigo(Enemigo *e);
-void incioEnemigos(Enemigo enemigos[], int cantidad);
+void inicioEnemigos(Enemigo enemigos[], int cantidad);
 
 void moverEnemigo(Enemigo *e, teclado *t);
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);

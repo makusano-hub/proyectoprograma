@@ -62,7 +62,7 @@ int main() {
 	inicSpawn(&spawn, MAxEnemigos);
 
 	while (running){
-		int i=0;
+		
 		ALLEGRO_EVENT event;
 
 		al_wait_for_event(queue, &event);
@@ -84,16 +84,18 @@ int main() {
 
 			for(int i =0; i< MAxEnemigos; i++){
 				moverEnemigo(&enemigos[i],&teclado);
+				colisionMetaEnemigo(&enemigos[i], &Jugador);
 			}
-
+			
 			//moverEnemigo(&enemigo,&teclado);
 			movJugador(&Jugador,&teclado);			
 			if(colisionJugEn(Jugador, enemigos[MAxEnemigos])) {
 	        	printf("Hubo colision\n");				
     		}
 			colisionRecursos(&Jugador);
-				
-					
+			if(Jugador.vida <=0){
+				running = false;
+			}				
 			actJugador(&Jugador);			
 			redraw = true;
 		}

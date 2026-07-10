@@ -10,7 +10,7 @@ void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 void inicioEnemigo(Enemigo *e){
 
     for(int i =0; i<MAxEnemigos;i++){
-    e->velocidad = 5; 
+    e->velocidad = 1; 
     e->sprite = al_load_bitmap("../imagenes/zombie.png");
     e->ancho = 32;
     e->alto = 32;
@@ -99,6 +99,7 @@ void inicSpawn(Portal *P, int cantidad){
     buscarPosicion('e',&P->ejex,&P->ejey);
     P-> cantmaxima = cantidad;
     P-> enemigoscreado =0;    
+    P->tiempo= tiempo_spawn;
    
 }
 
@@ -106,7 +107,7 @@ void spawnEnemigos(Portal *P, Enemigo enemigos[], int cantmaxima){
     if(P->enemigoscreado >= P->cantmaxima){
         return;
     }
-    P->cuantoSpawn++;
+    P->tiempo++;
 
     for(int i = 0; i<cantmaxima;i++){
         if(enemigos[i].vivo == false){
@@ -133,4 +134,3 @@ bool enemigoMeta(Enemigo *e){
     }
   }
 }
-
