@@ -9,6 +9,7 @@
 #include "enemigo.h"
 
 char mapa[FIL][COL];
+int cantidadEnemigos = 0;
 Portal spawn[10];
 
 
@@ -18,14 +19,14 @@ void cargarMapa(void){
     int cantSpawn;
     int portalFil;
     int portalCol;
-    int cantidadEnemigos = 0;
+    
     FILE *nivel = fopen("matriz.txt", "r");
     if(nivel == NULL){
         printf("Error al abrir el archivo\n");
         return;
     }
     fscanf(nivel, "%d\n",&cantidadEnemigos); //lee el numero anterior de la matriz para cantidad de enemigos
-    fscanf(nivel,"%c",&aux); // soluciona problema de corrido al generar la matriz
+    //fscanf(nivel,"%c",&aux); // soluciona problema de corrido al generar la matriz
     //leer matriz
     for(int i = 0; i < FIL; i++){
         for(int j = 0; j < COL; j++){
@@ -88,8 +89,8 @@ bool buscarPosicion(char CharBusca,float *x, float *y){
     for(int i=0;i<FIL;i++){
         for(int j=0;j<COL;j++){
             if(mapa[i][j] == CharBusca){
-                *x= i * cuadrado;
-                *y= j * cuadrado;
+                *x= j * cuadrado;
+                *y= i * cuadrado;
                 return true;
             }
         }

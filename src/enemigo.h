@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include "movimiento.h"
 
-#define MAxEnemigos 4
+#define MAxEnemigos 40
 #define tiempo_spawn 60
 
 typedef struct 

@@ -21,7 +21,9 @@ void inicioEnemigo(Enemigo *e){
 
     e->vida = 1;
     e->dano = 1;
-    }    
+    }   
+    
+    
 }
 void inicioEnemigos(Enemigo enemigos[], int cantidad){
     for(int i = 0 ; i<cantidad; i++){
@@ -99,7 +101,7 @@ void inicSpawn(Portal *P, int cantidad){
     buscarPosicion('e',&P->ejex,&P->ejey);
     P-> cantmaxima = cantidad;
     P-> enemigoscreado =0;    
-    P->tiempo= tiempo_spawn;
+    P->tiempo= 0;
    
 }
 
@@ -108,7 +110,11 @@ void spawnEnemigos(Portal *P, Enemigo enemigos[], int cantmaxima){
         return;
     }
     P->tiempo++;
-
+    if(P->tiempo < tiempo_spawn){
+        return;
+    }
+    P->tiempo =0;
+    
     for(int i = 0; i<cantmaxima;i++){
         if(enemigos[i].vivo == false){
             enemigos[i].ejex = P->ejex;

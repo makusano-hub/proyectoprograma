@@ -34,21 +34,21 @@ bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
     {
         for(int cola = colInicio; cola<=colFin; cola++)
             {
-                if(mapa[fila][cola]=='m')
+                if(mapa[fila][cola]=='f')
                 {
                     j->vida -= e->dano;
-
+                    printf("enemigo llego a meta %d\n", j->vida);
                     if(j->vida < 0 )
                     {
                         j->vida =0;
                     }
                     e->vivo = false;
-                    printf("enemigo llego a meta %d\n", j->vida);
+                    
                     return true;
                 }
             }
     }
-     
+     return false;
 }
 void colisionRecursos(Jugador *j){
     int colInicio = j->ejex  /  cuadrado;
