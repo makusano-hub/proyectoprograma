@@ -11,6 +11,7 @@
 #include "jugador.h"
 #include "colision.h"
 #include "mapa.h"
+#include "hud.h"
 
 
 int main() {
@@ -19,6 +20,7 @@ int main() {
 	Jugador Jugador;
 	Enemigo enemigos[MAxEnemigos];
 	Portal spawn;
+	HUD hud;
 	
 	al_init(); 
 	al_init_image_addon();
@@ -26,6 +28,7 @@ int main() {
 	al_init_font_addon();
 	al_install_keyboard();	
 	iniciarteclado(&teclado);
+	initMenu(&hud);
 	
 	
 	ALLEGRO_DISPLAY *display = crear_pantalla();
@@ -83,7 +86,7 @@ int main() {
 			spawnEnemigos(&spawn,enemigos,MAxEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
-				moverEnemigo(&enemigos[i],&teclado);
+				moverEnemigo(&enemigos[i]);
 				colisionMetaEnemigo(&enemigos[i], &Jugador);
 			}
 			
@@ -108,13 +111,20 @@ int main() {
 			{
 				dibujoEnemigo(&enemigos[i],pasto,camino);
 			}		
-			
+			dibuMenu(&hud,&Jugador);
 			al_flip_display();			
 			
 			redraw = false;
 		}
 	} 
 	al_destroy_bitmap(terreno);
+	al_destroy_bitmap(pasto);
+	al_destroy_bitmap(castelo);
+	al_destroy_bitmap(oro);
+	al_destroy_bitmap(arbol);
+	
+	
+	destruMenu(&hud);
 	destruir_pantalla(display);
 	al_destroy_timer(timer);   
 	al_destroy_event_queue(queue);

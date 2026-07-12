@@ -15,10 +15,16 @@ typedef struct
     float ejex;
     float ejey;
 
+    float casillax;
+    float casillay;
+
     float velocidad;
     int ancho;
     int alto;
+
     bool vivo;
+    bool moverse;
+
     int vida;
     int dano;
     ALLEGRO_BITMAP *sprite;
@@ -40,7 +46,7 @@ typedef struct
 void inicioEnemigo(Enemigo *e);
 void inicioEnemigos(Enemigo enemigos[], int cantidad);
 
-void moverEnemigo(Enemigo *e, teclado *t);
+void moverEnemigo(Enemigo *e);
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 void colisionEnemigo(Enemigo *e);

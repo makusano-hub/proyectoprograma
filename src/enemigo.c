@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include "mapa.h"
 void inicioEnemigo(Enemigo *e);
-void moverEnemigo(Enemigo *e,teclado *t);
+void moverEnemigo(Enemigo *e);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 void inicioEnemigo(Enemigo *e){
 
-    for(int i =0; i<MAxEnemigos;i++){
-    e->velocidad = 1; 
+    
+    e->velocidad = 1.0f; 
     e->sprite = al_load_bitmap("../imagenes/zombie.png");
     e->ancho = 32;
     e->alto = 32;
@@ -21,7 +21,7 @@ void inicioEnemigo(Enemigo *e){
 
     e->vida = 1;
     e->dano = 1;
-    }   
+     
     
     
 }
@@ -31,9 +31,9 @@ void inicioEnemigos(Enemigo enemigos[], int cantidad){
     }
 }
 
-void moverEnemigo(Enemigo *e,teclado *t){
-    //
-     for(int i =0; i<MAxEnemigos; i++){
+void moverEnemigo(Enemigo *e){
+    
+    /* for(int i =0; i<MAxEnemigos; i++){
         if( e->vivo == false){
             return;
         }
@@ -41,30 +41,11 @@ void moverEnemigo(Enemigo *e,teclado *t){
             int fila = e->ejex /cuadrado;
             int col = e->ejey /cuadrado;
    
-             if(t->w)
-			{
-				e->ejey -= e->velocidad;
-				//printf("arriba\n");
-			}
-			if(t->s)
-			{
-				e->ejey  += e->velocidad;
-				//printf("abajo\n");
-			}
-			if(t->d)
-			{
-				e->ejex += e->velocidad;
-				//printf("derecha\n");
-			}
-			if(t->a)
-			{
-				e->ejex -= e->velocidad;
-				//printf("izquierda\n");
-			}
+            
         }
-    }
-    /*e->ejex -= e->velocidad;
-        colision con borde no con l
+    }*/
+    e->ejex -= e->velocidad;
+        
         if(e->ejex + e->ancho >= 1280){
          e->ejex = 1280 - e->ancho;
             e->velocidad *= -1;
@@ -72,16 +53,15 @@ void moverEnemigo(Enemigo *e,teclado *t){
         if(e->ejex <= 0){
             e->ejex = 0;
             e->velocidad *=-1;
-        }*/
+        }
 }
 
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 //al_draw_filled_circle(e->ejex,e->ejey,e->radio,al_map_rgb(0,255,0));
     if(e->vivo == false){
         return;
-    }
-    
-  al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0);     
+    }    
+    al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0);     
 }
 
 
@@ -100,8 +80,8 @@ void actualizarEnemigo(Enemigo *e){
 void inicSpawn(Portal *P, int cantidad){
     buscarPosicion('e',&P->ejex,&P->ejey);
     P-> cantmaxima = cantidad;
-    P-> enemigoscreado =0;    
-    P->tiempo= 0;
+    P-> enemigoscreado = 0;    
+    P->tiempo = 0;
    
 }
 
@@ -114,7 +94,7 @@ void spawnEnemigos(Portal *P, Enemigo enemigos[], int cantmaxima){
         return;
     }
     P->tiempo =0;
-    
+
     for(int i = 0; i<cantmaxima;i++){
         if(enemigos[i].vivo == false){
             enemigos[i].ejex = P->ejex;
