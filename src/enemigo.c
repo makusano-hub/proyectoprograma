@@ -2,6 +2,7 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <stdio.h>
+#include <math.h>
 #include "mapa.h"
 void inicioEnemigo(Enemigo *e);
 void moverEnemigo(Enemigo *e);
@@ -14,6 +15,7 @@ void inicioEnemigo(Enemigo *e){
     e->sprite = al_load_bitmap("../imagenes/zombie.png");
     e->ancho = 32;
     e->alto = 32;
+
     e->ejex = 0;
     e->ejey = 0;
 
@@ -21,6 +23,8 @@ void inicioEnemigo(Enemigo *e){
 
     e->vida = 1;
     e->dano = 1;
+
+    e->indiceCamino = 1;
      
     
     
@@ -31,9 +35,9 @@ void inicioEnemigos(Enemigo enemigos[], int cantidad){
     }
 }
 
-void moverEnemigo(Enemigo *e){
+/*void moverEnemigo(Enemigo *e){
     
-    /* for(int i =0; i<MAxEnemigos; i++){
+    for(int i =0; i<MAxEnemigos; i++){
         if( e->vivo == false){
             return;
         }
@@ -43,7 +47,7 @@ void moverEnemigo(Enemigo *e){
    
             
         }
-    }*/
+    }
     e->ejex -= e->velocidad;
         
         if(e->ejex + e->ancho >= 1280){
@@ -54,7 +58,7 @@ void moverEnemigo(Enemigo *e){
             e->ejex = 0;
             e->velocidad *=-1;
         }
-}
+}*/
 
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 //al_draw_filled_circle(e->ejex,e->ejey,e->radio,al_map_rgb(0,255,0));
@@ -101,6 +105,7 @@ void spawnEnemigos(Portal *P, Enemigo enemigos[], int cantmaxima){
             enemigos[i].ejey = P->ejey;
             enemigos[i].vida = 20;
             enemigos[i].vivo = true;
+            enemigos[i].indiceCamino = 1;
             P->enemigoscreado++;
             return;
         }
@@ -119,4 +124,48 @@ bool enemigoMeta(Enemigo *e){
     return mapa[posFila][posColumna] == 'f';
     }
   }
+}
+bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
+    if(e->vivo){
+        return false;
+    }
+    if (e->indiceCamino >= Camino->longitud){
+        return true;
+    }
+
+    Celda destino = Camino->celdas[e->indiceCamino];
+
+    float destinoX = destino.posColumna * cuadrado;
+    float destinoY = destino.posFila *cuadrado;
+
+    float diferenciaX = destinoX - e->ejex;
+    float diferenciaY = destinoY - e->ejey;
+
+    if(fabsf(diferenciaX)<= e->velocidad &&
+        fabsf(diferenciaY)<= e->velocidad){
+            e->ejex = destinoX;
+            e->ejey = destinoY;
+
+            e->indiceCamino++;
+
+            if(e->indiceCamino >= Camino->longitud){
+                return true;
+            }
+            return false;
+        }
+
+
+        if(diferenciaX > 0){
+            e->ejex += e->velocidad;
+        }
+        if(diferenciaX < 0){
+            e->ejex -= e->velocidad;
+        }
+        if(diferenciaY > 0){
+            e->ejex += e->velocidad;
+        }
+        if(diferenciaY < 0){
+            e->ejex -= e->velocidad;
+        }
+        return false;
 }

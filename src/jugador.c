@@ -35,17 +35,18 @@ void inicJugador(Jugador *j){
 }
 
 void actJugador(Jugador *j){
-    if(j->ejex < 0 )
+
+   			 if(j->ejex < 0 )
 			{
 				j->ejex=0;
 			}
-			if(j->ejex> anchoP-j->ancho)
+			if(j->ejex > anchoMap - j->ancho)
 			{
-				j->ejex = anchoP- j->ancho;
+				j->ejex = anchoMap - j->ancho;
 			}
-			if(j->ejey > altoP- j->alto)
+			if(j->ejey > altoMap - j->alto)
 			{
-				j->ejey = altoP- j->alto;
+				j->ejey = altoMap - j->alto;
 			}
 			if(j->ejey < 0)
 			{

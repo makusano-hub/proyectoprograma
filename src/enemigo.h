@@ -6,6 +6,7 @@
 #include <allegro5/allegro_image.h>
 #include <stdbool.h>
 #include "movimiento.h"
+#include "camino.h"
 
 #define MAxEnemigos 40
 #define tiempo_spawn 60
@@ -22,8 +23,8 @@ typedef struct
     int ancho;
     int alto;
 
+    int indiceCamino;
     bool vivo;
-    bool moverse;
 
     int vida;
     int dano;
@@ -35,7 +36,8 @@ typedef struct
 {
     float ejex;
     float ejey;
-
+    
+    int movimiento;
     int enemigoscreado;
     int cantmaxima;
     int tiempo;
@@ -55,6 +57,8 @@ void actualizar(Enemigo *e);
 void inicSpawn(Portal *P, int cantmaxima);
 void spawnEnemigos(Portal *P,Enemigo enemigos[], int cantmaxima);
 bool enemigoMeta(Enemigo *e);
+
+bool moverEnemigoCamino(Enemigo *e, Camino *Camino);
 
 //void crearEnemigosPortal(Portal *P,Enemigo enemigos[]);
 #endif

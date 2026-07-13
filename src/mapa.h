@@ -1,5 +1,8 @@
 #ifndef mapa_H
 #define mapa_H
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+
 #define FIL 23
 #define COL 41
 #define cuadrado 32

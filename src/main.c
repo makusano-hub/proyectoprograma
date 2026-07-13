@@ -12,6 +12,7 @@
 #include "colision.h"
 #include "mapa.h"
 #include "hud.h"
+#include "camino.h"
 
 
 int main() {
@@ -21,6 +22,7 @@ int main() {
 	Enemigo enemigos[MAxEnemigos];
 	Portal spawn;
 	HUD hud;
+	Camino caminoEnemigos;
 	
 	al_init(); 
 	al_init_image_addon();
@@ -60,6 +62,8 @@ int main() {
 
 	cargarMapa();	
 	
+	if(!calcularCamino(mapa,'e','f',&caminoEnemigos));
+
 	inicJugador(&Jugador);
 	inicioEnemigos(enemigos, MAxEnemigos);
 	inicSpawn(&spawn, MAxEnemigos);
@@ -86,7 +90,11 @@ int main() {
 			spawnEnemigos(&spawn,enemigos,MAxEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
-				moverEnemigo(&enemigos[i]);
+				if(enemigos[i].vivo){
+					continue;
+				}
+			
+				moverEnemigoCamino(&enemigos[i],&caminoEnemigos);
 				colisionMetaEnemigo(&enemigos[i], &Jugador);
 			}
 			
