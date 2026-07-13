@@ -90,9 +90,10 @@ int main() {
 			spawnEnemigos(&spawn,enemigos,MAxEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
-				if(enemigos[i].vivo){
+				if(!enemigos[i].vivo){
 					continue;
 				}
+				
 			
 				moverEnemigoCamino(&enemigos[i],&caminoEnemigos);
 				colisionMetaEnemigo(&enemigos[i], &Jugador);

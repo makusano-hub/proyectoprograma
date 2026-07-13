@@ -126,7 +126,7 @@ bool enemigoMeta(Enemigo *e){
   }
 }
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
-    if(e->vivo){
+    if(!e->vivo){
         return false;
     }
     if (e->indiceCamino >= Camino->longitud){
@@ -162,10 +162,10 @@ bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
             e->ejex -= e->velocidad;
         }
         if(diferenciaY > 0){
-            e->ejex += e->velocidad;
+            e->ejey += e->velocidad;
         }
         if(diferenciaY < 0){
-            e->ejex -= e->velocidad;
+            e->ejey -= e->velocidad;
         }
         return false;
 }

@@ -13,5 +13,5 @@ typedef struct{
     int longitud;
 }Camino;
 
-bool calcularcamino(char mapa[FIL][COL], char inicio, char meta, Camino *camino);
+bool calcularCamino(char mapa[FIL][COL], char inicio, char meta, Camino *camino);
 #endif
