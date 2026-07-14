@@ -41,12 +41,18 @@ void cargarMapa(void){
     fclose(nivel);    
 }
 
-void dibujarMapa(ALLEGRO_BITMAP *terreno , ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino, ALLEGRO_BITMAP *agua, ALLEGRO_BITMAP *oro, ALLEGRO_BITMAP *arbol,ALLEGRO_BITMAP *portal){
+void dibujarMapa(ALLEGRO_BITMAP *terreno , 
+                    ALLEGRO_BITMAP *pasto, 
+                    ALLEGRO_BITMAP *camino, 
+                    ALLEGRO_BITMAP *agua, 
+                    ALLEGRO_BITMAP *oro, 
+                    ALLEGRO_BITMAP *arbol,
+                    ALLEGRO_BITMAP *portal){
     
     for (int i =0 ; i<FIL; i++){        
         for(int j = 0 ; j<COL;j++){
            
-            if(mapa[i][j]== 't')/*tierra*/
+            if(mapa[i][j]== 't' || mapa[i][j]=='j')/*tierra*/
             {
                 //al_draw_bitmap_region(pasto, 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
@@ -80,6 +86,9 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno , ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 al_draw_bitmap(portal,j*cuadrado, i*cuadrado,0);
                 
+            }
+            if(mapa[i][j]== 'k'){
+                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
             }
         }
 

@@ -13,7 +13,7 @@
 #include "mapa.h"
 #include "hud.h"
 #include "camino.h"
-
+#include "torre.h"
 
 int main() {
 
@@ -23,6 +23,7 @@ int main() {
 	Portal spawn;
 	HUD hud;
 	Camino caminoEnemigos;
+	Torre castillo;
 	
 	al_init(); 
 	al_init_image_addon();
@@ -46,7 +47,7 @@ int main() {
 	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/arbol.png");
 	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/torre.png");
-	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
+	//ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
 	
 
 	bool redraw = true;
@@ -65,6 +66,9 @@ int main() {
 	if(!calcularCamino(mapa,'e','f',&caminoEnemigos));
 
 	inicJugador(&Jugador);
+
+	inicTorre(&castillo);
+	
 	inicioEnemigos(enemigos, MAxEnemigos);
 	inicSpawn(&spawn, MAxEnemigos);
 
@@ -115,6 +119,7 @@ int main() {
 			al_clear_to_color(al_map_rgb(255,255,255));
 			dibujarMapa(terreno,pasto,camino,agua,oro,arbol,portal);
 			dibuJugador(&Jugador,pasto,camino);
+			dibuTorre(&castillo);
 
 			for(int i =0; i<MAxEnemigos;i++)
 			{
@@ -127,8 +132,7 @@ int main() {
 		}
 	} 
 	al_destroy_bitmap(terreno);
-	al_destroy_bitmap(pasto);
-	al_destroy_bitmap(castelo);
+	al_destroy_bitmap(pasto);	
 	al_destroy_bitmap(oro);
 	al_destroy_bitmap(arbol);
 	

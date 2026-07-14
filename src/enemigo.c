@@ -83,7 +83,7 @@ void actualizarEnemigo(Enemigo *e){
 
 void inicSpawn(Portal *P, int cantidad){
     buscarPosicion('e',&P->ejex,&P->ejey);
-    P-> cantmaxima = cantidad;
+    P-> cantmaxima = cantidadEnemigos;
     P-> enemigoscreado = 0;    
     P->tiempo = 0;
    

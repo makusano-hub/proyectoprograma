@@ -60,10 +60,12 @@ void colisionRecursos(Jugador *j){
             for(int cola = colInicio; cola<=colFin; cola++){
                 if(mapa[fila][cola] == 'o'){
                     j->oro += 1;
+                    
                     printf("oro");
                 }
                 if(mapa[fila][cola] == 'a'){
                     j->madera += 1;
+
                     printf("madera");
                 }
             }

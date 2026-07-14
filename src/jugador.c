@@ -64,6 +64,7 @@ void dibuJugador(Jugador *j, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
     al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
   
 }
+
 void movJugador(Jugador *j, teclado *t){
     		if(t->arriba)
 			{
