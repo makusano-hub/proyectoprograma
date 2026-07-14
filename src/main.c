@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
@@ -20,10 +21,12 @@ int main() {
 	teclado teclado;
 	Jugador Jugador;
 	Enemigo enemigos[MAxEnemigos];
-	Portal spawn;
+	Portal spawn[MaxPortales];
 	HUD hud;
 	Camino caminoEnemigos;
 	Torre castillo;
+
+	srand(time(NULL));
 	
 	al_init(); 
 	al_init_image_addon();
@@ -104,7 +107,8 @@ int main() {
 			}
 			
 			//moverEnemigo(&enemigo,&teclado);
-			movJugador(&Jugador,&teclado);			
+			movJugador(&Jugador,&teclado);
+			actJugador(&Jugador);				
 			if(colisionJugEn(Jugador, enemigos[MAxEnemigos])) {
 	        	printf("Hubo colision\n");				
     		}
@@ -112,7 +116,7 @@ int main() {
 			if(Jugador.vida <=0){
 				running = false;
 			}				
-			actJugador(&Jugador);			
+					
 			redraw = true;
 		}
 		if(redraw && al_is_event_queue_empty(queue)){

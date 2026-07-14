@@ -28,12 +28,17 @@ void cargarMapa(void){
     fscanf(nivel, "%d\n",&cantidadEnemigos); //lee el numero anterior de la matriz para cantidad de enemigos
     //fscanf(nivel,"%c",&aux); // soluciona problema de corrido al generar la matriz
     //leer matriz
+
+    cantSpawn =0;
+
     for(int i = 0; i < FIL; i++){
         for(int j = 0; j < COL; j++){
             fscanf(nivel, "%c", &mapa[i][j]);
+            
             if(mapa[i][j]== 'e'){
                 portalFil = i;
                 portalCol = j;
+                cantSpawn++;
             }
         }
         fscanf(nivel, "%c", &aux); 
@@ -84,8 +89,7 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno ,
             }
             if(mapa[i][j]== 'e'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-                al_draw_bitmap(portal,j*cuadrado, i*cuadrado,0);
-                
+                al_draw_bitmap(portal,j*cuadrado, i*cuadrado,0);                
             }
             if(mapa[i][j]== 'k'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
