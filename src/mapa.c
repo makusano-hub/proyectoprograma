@@ -106,14 +106,14 @@ void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cant
             if(mapa[i][j]== 'a'){
                 if(*cantidadArboles<MaxArboles){
                     iniArbol(&arboles[*cantidadArboles],j*cuadrado, i*cuadrado);
-                    (*cantidadArboles++);
+                    (*cantidadArboles)++;
                 }         
             }
 
             else if(mapa[i][j]== 'o'){
                 if(*cantidadOros<MaxOro){
                     iniOro(&oros[*cantidadOros], j*cuadrado, i*cuadrado);
-                    (*cantidadOros++);
+                    (*cantidadOros)++;
                 }
             }
         }
