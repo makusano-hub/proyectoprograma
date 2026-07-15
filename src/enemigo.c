@@ -83,7 +83,7 @@ void actualizarEnemigo(Enemigo *e){
     }
 }
 
-void inicSpawn(Portal portales[], int cantPortales){
+int inicSpawn(Portal portales[], int cantPortales){
    //buscarPosicion('e',&P->ejex,&P->ejey);
     int cantidadPortales = 0;
      for(int i=0;i<FIL;i++){
@@ -100,23 +100,22 @@ void inicSpawn(Portal portales[], int cantPortales){
 }
 void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantmaxima){
 
-    for(int i = 0; i<cantmaxima;i++){
-        if(enemigos[i].vivo == false){
+    int turnoPortal = rand() % cantidadPortales;
 
-            int turnoPortal = rand() % cantidadPortales;
+        for(int i = 0; i<cantmaxima;i++){
+         
+            if(enemigos[i].vivo == false){           
 
-            enemigos[i].ejex = portales[turnoPortal].ejex;
-            enemigos[i].ejey = portales[turnoPortal].ejey;
-            enemigos[i].vida = 20;
-            enemigos[i].vivo = true;
-            enemigos[i].indiceCamino = 1;
-            enemigos[i].portalOrigen = turnoPortal;
-
-            (*enemigos)
-           //P->enemigoscreado++;
-            return;
-        }
-    }    
+                enemigos[i].ejex = portales[turnoPortal].ejex;
+                enemigos[i].ejey = portales[turnoPortal].ejey;
+                enemigos[i].vida = 20;
+                enemigos[i].vivo = true;
+                enemigos[i].indiceCamino = 1;
+                //enemigos[i].portalOrigen = turnoPortal;                 
+                //P->enemigoscreado++;
+                return;
+            }
+        }    
 }
 
 

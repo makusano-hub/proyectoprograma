@@ -25,6 +25,7 @@ typedef struct
     int alto;
 
     int indiceCamino;
+    int caminoSeguir;
     int portalOrigen;
 
     bool vivo;
@@ -39,8 +40,10 @@ typedef struct
 {
     float ejex;
     float ejey;
+
     int cantidadMaxima;
     int enemigosCreados;    
+
     int tiempo;
     ALLEGRO_BITMAP *sprite;
 }Portal;
@@ -55,7 +58,7 @@ void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 void colisionEnemigo(Enemigo *e);
 void actualizar(Enemigo *e);
 
-void inicSpawn(Portal portales[], int cantPortales);
+int inicSpawn(Portal portales[], int cantPortales);
 void spawnEnemigos(Portal portales[],int cantPortales, Enemigo enemigos[], int cantmaxima);
 bool enemigoMeta(Enemigo *e);
 

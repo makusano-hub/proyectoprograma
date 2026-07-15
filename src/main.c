@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
 #include <allegro5/allegro.h>
@@ -25,6 +26,8 @@ int main() {
 	HUD hud;
 	Camino caminoEnemigos;
 	Torre castillo;
+
+	int cantidadPortales = 0;
 
 	srand(time(NULL));
 	
@@ -64,7 +67,9 @@ int main() {
 
 	al_start_timer(timer);
 
-	cargarMapa();	
+	cargarMapa();
+	
+	cantidadPortales = inicSpawn(spawn,MaxPortales);
 	
 	if(!calcularCamino(mapa,'e','f',&caminoEnemigos));
 
@@ -73,7 +78,7 @@ int main() {
 	inicTorre(&castillo);
 	
 	inicioEnemigos(enemigos, MAxEnemigos);
-	inicSpawn(&spawn, MAxEnemigos);
+	inicSpawn(spawn, cantidadPortales);
 
 	while (running){
 		
@@ -94,7 +99,7 @@ int main() {
 		}
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{	
-			spawnEnemigos(&spawn,enemigos,MAxEnemigos);
+			spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
 				if(!enemigos[i].vivo){

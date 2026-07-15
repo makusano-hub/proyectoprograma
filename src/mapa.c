@@ -16,11 +16,9 @@ Portal spawn[10];
 
 void cargarMapa(void){
     char aux;
-    int cantSpawn;
-    int portalFil;
-    int portalCol;
+    int cantSpawn;   
     
-    FILE *nivel = fopen("matriz.txt", "r");
+    FILE *nivel = fopen("matriz2.txt", "r");
     if(nivel == NULL){
         printf("Error al abrir el archivo\n");
         return;
@@ -35,9 +33,7 @@ void cargarMapa(void){
         for(int j = 0; j < COL; j++){
             fscanf(nivel, "%c", &mapa[i][j]);
             
-            if(mapa[i][j]== 'e'){
-                portalFil = i;
-                portalCol = j;
+            if(mapa[i][j]== 'e'){               
                 cantSpawn++;
             }
         }
