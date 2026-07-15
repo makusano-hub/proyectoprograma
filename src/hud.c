@@ -22,6 +22,7 @@ void dibuMenu(HUD *hud, Jugador *j){
     al_draw_textf(hud->fuente,al_map_rgb(255,80,80), xMenu+20,60,0,"Vida: %d",j->vida);
 
     al_draw_textf(hud->fuente,al_map_rgb(255,80,80), xMenu+20,90,0,"Oro: %d",j->oro);
+       
 
     al_draw_textf(hud->fuente,al_map_rgb(255,80,80), xMenu+20,120,0,"Madera: %d",j->madera);
 

@@ -13,7 +13,7 @@ typedef struct
     bool s;
     bool d;
     bool a;
-
+    bool enter;
 } teclado;
 
 

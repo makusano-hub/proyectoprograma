@@ -6,7 +6,7 @@
 #include "mapa.h"
 #include <stdbool.h>
 
-#define MaxTorres 5
+#define MaxTorres 50
 
 #define costoOro 10
 #define costoMadera 10

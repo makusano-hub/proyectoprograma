@@ -23,10 +23,16 @@ int main() {
 	Jugador Jugador;
 	Enemigo enemigos[MAxEnemigos];
 	Portal spawn[MaxPortales];
+	Arbol arboles[MaxArboles];
+	Oro oros[MaxOro];
 	HUD hud;
 	Camino caminoEnemigos;
 	Torre castillo;
+	//Torre torres[MaxTorres];
 
+	int cantidadArboles =0;
+	int cantidadOros =0;
+	int cantidadEnemigos =0;
 	int cantidadPortales = 0 ;	
 
 	srand(time(NULL));
@@ -68,6 +74,8 @@ int main() {
 	al_start_timer(timer);
 
 	cargarMapa();
+
+	contarRecursos(arboles,&cantidadArboles,oros,&cantidadOros);
 	
 	cantidadPortales = inicSpawn(spawn,MaxPortales);
 	
@@ -104,14 +112,12 @@ int main() {
    					 spawn[i].tiempo++;
 					}
 
-			spawnEnemigos(spawn,cantidadPortales,enemigos,cantidadEnemigos);
+			spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
 				if(!enemigos[i].vivo){
 					continue;
-				}
-				
-				
+				}							
 			
 				moverEnemigoCamino(&enemigos[i],&caminoEnemigos);
 				colisionMetaEnemigo(&enemigos[i], &Jugador);
@@ -123,7 +129,7 @@ int main() {
 			if(colisionJugEn(Jugador, enemigos[MAxEnemigos])) {
 	        	printf("Hubo colision\n");				
     		}
-			colisionRecursos(&Jugador);
+			colisionRecursos(&Jugador,arboles,cantidadArboles,oros,cantidadOros);
 			if(Jugador.vida <=0){
 				running = false;
 			}				
@@ -133,6 +139,12 @@ int main() {
 		if(redraw && al_is_event_queue_empty(queue)){
 			al_clear_to_color(al_map_rgb(255,255,255));
 			dibujarMapa(terreno,pasto,camino,agua,oro,arbol,portal);
+			for(int i=0; i<cantidadArboles;i++){
+				diArbol(&arboles[i]);
+			}
+			for(int i=0; i<cantidadOros;i++){
+				diOro(&oros[i]);	
+			}						
 			dibuJugador(&Jugador,pasto,camino);
 			dibuTorre(&castillo);
 

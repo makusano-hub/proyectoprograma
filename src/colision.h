@@ -9,5 +9,5 @@
 bool colisionJugEn(Jugador j,Enemigo e);
 bool colisionObsJug(Jugador j,Obstaculo o);
 bool colisionMetaEnemigo(Enemigo *e, Jugador *j);
-void colisionRecursos(Jugador *j);
+void colisionRecursos(Jugador *j, Arbol arboles[],int cantArboles,Oro oros[],int cantOros);
 #endif

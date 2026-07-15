@@ -138,8 +138,10 @@ void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], 
 
     for (int p = 0; p < cantidadPortales; p++) {
 
-        if (portales[p].tiempo < tiempo_spawn)
+        if (portales[p].tiempo < tiempo_spawn){
             continue;
+        }
+            
 
             portales[p].tiempo = 0;
 

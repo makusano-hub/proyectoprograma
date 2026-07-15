@@ -50,24 +50,35 @@ bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
     }
      return false;
 }
-void colisionRecursos(Jugador *j){
-    int colInicio = j->ejex  /  cuadrado;
-    int filInicio = j->ejey / cuadrado;
+void colisionRecursos(Jugador *j, Arbol arboles[],int cantArboles,Oro oros[],int cantOros){
+    for(int i = 0 ; i<cantArboles;i++){
+        if(arboles[i].vivo == true){
+            if (j->ejex <= arboles[i].ejex + arboles[i].ancho &&
+                j->ejex + j->ancho >= arboles[i].ejex &&
+                j->ejey <= arboles[i].ejey + arboles[i].alto  &&
+                j->ejey + j->alto >= arboles[i].ejey)
+            {
+                j->madera += arboles[i].valor;
 
-    int colFin = (j->ejex + j->ancho - 1) / cuadrado;
-    int filFin = (j->ejey + j->alto -1) /cuadrado;
-        for(int fila = filInicio; fila<= filFin; fila++){
-            for(int cola = colInicio; cola<=colFin; cola++){
-                if(mapa[fila][cola] == 'o'){
-                    j->oro += 1;
-
-                    printf("oro");
-                }
-                if(mapa[fila][cola] == 'a'){
-                    j->madera += 1;
-
-                    printf("madera");
-                }
+                arboles[i].valor = 0;
+                arboles[i].vivo = false;
             }
+            
         }
+    }
+    for(int i = 0 ; i<cantOros;i++){
+        if(oros[i].vivo == true){
+            if (j->ejex <= oros[i].ejex + oros[i].ancho &&
+                j->ejex + j->ancho >= oros[i].ejex &&
+                j->ejey <= oros[i].ejey + oros[i].alto  &&
+                j->ejey + j->alto >= oros[i].ejey)
+            {
+                j->oro += oros[i].valor;
+
+                oros[i].valor = 0;
+                oros[i].vivo = false;
+            }
+            
+        }
+    }
 }

@@ -24,6 +24,7 @@ void dibuTorre(Torre *T){
 
 void inicTorres(Torre torres[],int cantidad){
     al_load_bitmap("../imagenes/torre.png");
+    
 
     
 }

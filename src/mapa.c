@@ -53,7 +53,7 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno ,
     for (int i =0 ; i<FIL; i++){        
         for(int j = 0 ; j<COL;j++){
            
-            if(mapa[i][j]== 't' || mapa[i][j]=='j')/*tierra*/
+            if(mapa[i][j]== 't' || mapa[i][j]=='j' || 'o'|| 'a')/*tierra*/
             {
                 //al_draw_bitmap_region(pasto, 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
@@ -68,17 +68,7 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno ,
                  //al_draw_rectangle(j*cuadrado, i*cuadrado, j*cuadrado+cuadrado, i*cuadrado+cuadrado, al_map_rgb(255, 255, 0), 1);
                  //al_draw_bitmap_region(camino, 32, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(camino, j*cuadrado, i*cuadrado, 0);
-            }
-            if(mapa[i][j]== 'o'){
-               // al_draw_rectangle(j*cuadrado, i*cuadrado, j*cuadrado+cuadrado, i*cuadrado+cuadrado, al_map_rgb(255, 255, 255), 1);
-               al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-               al_draw_bitmap(oro,j*cuadrado,i*cuadrado,0);
-            }
-            if(mapa[i][j]== 'a'){
-                //al_draw_rectangle(j*cuadrado, i*cuadrado, j*cuadrado+cuadrado, i*cuadrado+cuadrado, al_map_rgb(255, 0, 255), 1);
-                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-                al_draw_bitmap(arbol,j*cuadrado,i*cuadrado,0);
-            }
+            }                    
             if(mapa[i][j]== 'f'){
                 al_draw_bitmap(pasto, j*cuadrado,i*cuadrado,0);
                 al_draw_rectangle(j*cuadrado,i*cuadrado, j*cuadrado + cuadrado, i*cuadrado+cuadrado,al_map_rgb(255,0,0),1);
@@ -105,4 +95,27 @@ bool buscarPosicion(char CharBusca,float *x, float *y){
         }
     }
     return false;
+}
+
+void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cantidadOros){
+    *cantidadArboles =0;
+    *cantidadOros =0;
+
+    for(int i = 0; i<FIL ; i++){
+        for(int j = 0; j<COL ;j++){
+            if(mapa[i][j]== 'a'){
+                if(*cantidadArboles<MaxArboles){
+                    iniArbol(&arboles[*cantidadArboles],j*cuadrado, i*cuadrado);
+                    (*cantidadArboles++);
+                }         
+            }
+
+            else if(mapa[i][j]== 'o'){
+                if(*cantidadOros<MaxOro){
+                    iniOro(&oros[*cantidadOros], j*cuadrado, i*cuadrado);
+                    (*cantidadOros++);
+                }
+            }
+        }
+    }
 }
