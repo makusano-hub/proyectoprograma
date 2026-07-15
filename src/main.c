@@ -27,7 +27,7 @@ int main() {
 	Camino caminoEnemigos;
 	Torre castillo;
 
-	int cantidadPortales = 0;
+	int cantidadPortales = 0 ;	
 
 	srand(time(NULL));
 	
@@ -78,7 +78,7 @@ int main() {
 	inicTorre(&castillo);
 	
 	inicioEnemigos(enemigos, MAxEnemigos);
-	inicSpawn(spawn, cantidadPortales);
+	//inicSpawn(spawn, cantidadPortales);
 
 	while (running){
 		
@@ -99,12 +99,18 @@ int main() {
 		}
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{	
-			spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos);
+
+			for (int i = 0; i < cantidadPortales; i++) {
+   					 spawn[i].tiempo++;
+					}
+
+			spawnEnemigos(spawn,cantidadPortales,enemigos,cantidadEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
 				if(!enemigos[i].vivo){
 					continue;
 				}
+				
 				
 			
 				moverEnemigoCamino(&enemigos[i],&caminoEnemigos);

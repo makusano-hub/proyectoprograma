@@ -18,7 +18,7 @@ void cargarMapa(void){
     char aux;
     int cantSpawn;   
     
-    FILE *nivel = fopen("matriz2.txt", "r");
+    FILE *nivel = fopen("matriz.txt", "r");
     if(nivel == NULL){
         printf("Error al abrir el archivo\n");
         return;

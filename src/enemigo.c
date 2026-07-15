@@ -8,6 +8,9 @@ void inicioEnemigo(Enemigo *e);
 void moverEnemigo(Enemigo *e);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
+
+int enemigosSpawneados = 0;
+
 void inicioEnemigo(Enemigo *e){
 
     
@@ -83,26 +86,34 @@ void actualizarEnemigo(Enemigo *e){
     }
 }
 
-int inicSpawn(Portal portales[], int cantPortales){
-   //buscarPosicion('e',&P->ejex,&P->ejey);
-    int cantidadPortales = 0;
-     for(int i=0;i<FIL;i++){
-        for(int j=0;j<COL;j++){
-            if(mapa[i][j] == 'e'){
-                portales[cantidadPortales].ejex = j * cuadrado;
-                portales[cantidadPortales].ejey = i * cuadrado;
+int inicSpawn(Portal portales[], int cantidadMaxima)
+{
+    int cantPortales = 0;
 
-                cantidadPortales++;
+    for (int i = 0; i < FIL; i++) {
+        for (int j = 0; j < COL; j++) {
+
+            if (mapa[i][j] == 'e') {
+
+                portales[cantPortales].ejex = j * cuadrado;
+                portales[cantPortales].ejey = i * cuadrado;
+
+                portales[cantPortales].tiempo = 0;
+                portales[cantPortales].enemigosCreados = 0;
+                portales[cantPortales].cantidadMaxima = 20;
+
+                cantPortales++;
             }
         }
     }
-    return cantidadPortales;    
+
+    return cantPortales;
 }
-void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantmaxima){
+/*void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantmaxima){
 
     int turnoPortal = rand() % cantidadPortales;
-
-        for(int i = 0; i<cantmaxima;i++){
+    int enemigoscreados = 0;
+        for(int i = 0; i < cantmaxima;i++){
          
             if(enemigos[i].vivo == false){           
 
@@ -111,11 +122,43 @@ void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], i
                 enemigos[i].vida = 20;
                 enemigos[i].vivo = true;
                 enemigos[i].indiceCamino = 1;
-                //enemigos[i].portalOrigen = turnoPortal;                 
-                //P->enemigoscreado++;
-                return;
-            }
+                enemigos[i].portalOrigen = turnoPortal;                 
+                enemigoscreados++;
+                portales[turnoPortal].tiempo = 0 ;
+                break;
+            }           
         }    
+}   */
+void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], int cantMaxima)/*camiar cantMaxima a cantidadEnemigos para que no mesiga confundiendo*/
+{
+
+    if (enemigosSpawneados >= cantidadEnemigos){
+        return;
+    }   
+
+    for (int p = 0; p < cantidadPortales; p++) {
+
+        if (portales[p].tiempo < tiempo_spawn)
+            continue;
+
+            portales[p].tiempo = 0;
+
+        for (int i = 0; i < cantMaxima; i++) {
+
+            if (!enemigos[i].vivo) {
+
+                enemigos[i].ejex = portales[p].ejex;
+                enemigos[i].ejey = portales[p].ejey;
+                enemigos[i].vida = 20;
+                enemigos[i].vivo = true;
+                enemigos[i].indiceCamino = 1;
+                enemigos[i].portalOrigen = p;
+                enemigosSpawneados++;
+
+                break;
+            }
+        }
+    }
 }
 
 
@@ -131,6 +174,7 @@ bool enemigoMeta(Enemigo *e){
     }
   }
 }
+
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
     if(!e->vivo){
         return false;
@@ -164,13 +208,13 @@ bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
         if(diferenciaX > 0){
             e->ejex += e->velocidad;
         }
-        if(diferenciaX < 0){
+        else if(diferenciaX < 0){
             e->ejex -= e->velocidad;
         }
-        if(diferenciaY > 0){
+        else if(diferenciaY > 0){
             e->ejey += e->velocidad;
         }
-        if(diferenciaY < 0){
+        else if(diferenciaY < 0){
             e->ejey -= e->velocidad;
         }
         return false;

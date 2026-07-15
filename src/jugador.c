@@ -14,7 +14,7 @@ void inicJugador(Jugador *j){
     j->sprite = al_load_bitmap("../imagenes/jugplaceholder.png");
     j->ancho = 32;
     j->alto = 32;
-    j->vida = 20;
+    j->vida = 100;
 	j->oro = 0;
 	j->madera=0;
     j->ejex = 0;

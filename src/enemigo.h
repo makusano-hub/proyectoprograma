@@ -8,9 +8,9 @@
 #include "movimiento.h"
 #include "camino.h"
 
-#define MAxEnemigos 40
+#define MAxEnemigos 100
 #define MaxPortales 10
-#define tiempo_spawn 60
+#define tiempo_spawn 120
 
 typedef struct 
 {
@@ -58,11 +58,12 @@ void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 void colisionEnemigo(Enemigo *e);
 void actualizar(Enemigo *e);
 
-int inicSpawn(Portal portales[], int cantPortales);
-void spawnEnemigos(Portal portales[],int cantPortales, Enemigo enemigos[], int cantmaxima);
+int inicSpawn(Portal portales[], int cantidadPortales);
+void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantMaxima);
 bool enemigoMeta(Enemigo *e);
 
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino);
 
 //void crearEnemigosPortal(Portal *P,Enemigo enemigos[]);
+
 #endif
