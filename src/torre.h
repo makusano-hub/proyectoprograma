@@ -19,6 +19,7 @@ typedef struct
     int Tconstru;
     float ejex;
     float ejey;
+
     float ancho;
     float alto;
 
@@ -27,14 +28,14 @@ typedef struct
         
 }Torre;
 
-
-
-void inicTorre(Torre *torre);
-void actTorre(Torre *torre);
+void crearTorreInicial(Torre *torre);
+bool EnRango(Torre *torre, Enemigo *e);
 void dibuTorre(Torre *torre);
+
+/*void actTorre(Torre *torre);
 void inicTorres(Torre torres[], int cantidad);
 void dibuTorres(Torre torres[]);
-/*
+
 void disparoTorre(Torre torres[], Enemigo *e);
 void TorreInicial(Torre);*/
 

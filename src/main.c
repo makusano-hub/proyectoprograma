@@ -59,7 +59,7 @@ int main() {
 	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/arbol.png");
 	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/torre.png");
-	//ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
+	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
 	
 
 	bool redraw = true;

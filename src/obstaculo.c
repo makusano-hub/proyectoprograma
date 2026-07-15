@@ -7,12 +7,13 @@ void iniObstaculo(Obstaculo *o,float x, float y){
 
     o->alto = 32;
     o->ancho =32;
-    o->ejex;
-    o->ejey;
+    o->ejex = x;
+    o->ejey = y;
     o->valor=100;
     o->vida = 100;
     o->vivo = true;
     o->sprite = al_load_bitmap("../imagenes/roca.png");
+    //buscarPosicion('r',&o->ejex,&o->ejey);
 }
 void actObstaculo(Obstaculo *o){
     if(o->vida<=100){
@@ -29,11 +30,11 @@ void iniArbol(Arbol *Ar, float x, float y){
     Ar->alto = 32;
     Ar->ancho = 32;
     Ar->valor=100;
-    Ar->ejex;
-    Ar->ejey;
-    Ar->valor;
+    Ar->ejex=x;
+    Ar->ejey=y;    
     Ar->vivo = true;
     Ar->sprite = al_load_bitmap("../imagenes/arbol.png");
+    //buscarPosicion('a',&Ar->ejex,&Ar->ejey);
 }
 
 void actArbol(Arbol *Ar){
@@ -53,12 +54,12 @@ void iniOro(Oro *au,float x, float y){
 
     au->alto = 32;
     au->ancho =32;
-    au->ejex;
-    au->ejey;
+    au->ejex=x;
+    au->ejey=y;
     au->valor=100;    
     au->vivo = true;
     au->sprite = al_load_bitmap("../imagenes/oro.png");
-    buscarPosicion('o',&au->ejex,&au->ejey);
+    //buscarPosicion('o',&au->ejex,&au->ejey);
 }
 
 

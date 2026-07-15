@@ -4,12 +4,16 @@
 #include <stdbool.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_image.h>
 
 #include "jugador.h"
 #include "pantalla.h"
 
 typedef struct{
     ALLEGRO_FONT *fuente;
+    ALLEGRO_BITMAP *iconoOro; 
+    ALLEGRO_BITMAP *iconoMadera; 
+    ALLEGRO_BITMAP *iconoVida;
 }HUD;
 
 bool initMenu(HUD *hud);
