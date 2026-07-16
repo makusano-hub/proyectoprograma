@@ -8,7 +8,7 @@ extern char mapa[FIL][COL];
 //void dibuTorres(Torre torre[MaxTorres]);
 //void disparoTorre(Torre *T, Enemigo *e);
 
-void CrearTorreInicial(Torre *T){
+void crearTorreInicial(Torre *T){
     T->ejex = 0;
     T->ejey = 0;
     T->ancho = cuadrado;

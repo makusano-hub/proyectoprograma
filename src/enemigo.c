@@ -165,16 +165,19 @@ void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], 
 
 
 bool enemigoMeta(Enemigo *e){
-    for(int i =0; i<MAxEnemigos;i++){    
-        if(e->vivo== true){
+       
+        if(!e->vivo){
+            return false;
+        }
+
             int posColumna = e->ejex/cuadrado;
             int posFila = e->ejey/cuadrado;
+
         if(posFila<0 || posFila >= FIL || posColumna < 0 || posColumna >= COL){
             return false;
          }
-    return mapa[posFila][posColumna] == 'f';
-    }
-  }
+
+    return mapa[posFila][posColumna] == 'f';     
 }
 
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino){

@@ -43,7 +43,7 @@ int main() {
 	al_init_font_addon();
 	al_install_keyboard();	
 	iniciarteclado(&teclado);
-	initMenu(&hud);
+	
 	
 	
 	ALLEGRO_DISPLAY *display = crear_pantalla();
@@ -74,16 +74,20 @@ int main() {
 	al_start_timer(timer);
 
 	cargarMapa();
+	initMenu(&hud);
 
 	contarRecursos(arboles,&cantidadArboles,oros,&cantidadOros);
 	
 	cantidadPortales = inicSpawn(spawn,MaxPortales);
 	
-	if(!calcularCamino(mapa,'e','f',&caminoEnemigos));
+	if(!calcularCamino(mapa,'e','f',&caminoEnemigos)){
+		printf("no se calculo camino de enemigo");
+		return 1;
+	}
 
 	inicJugador(&Jugador);
 
-	inicTorre(&castillo);
+	crearTorreInicial(&castillo);
 	
 	inicioEnemigos(enemigos, MAxEnemigos);
 	//inicSpawn(spawn, cantidadPortales);
@@ -126,9 +130,6 @@ int main() {
 			//moverEnemigo(&enemigo,&teclado);
 			movJugador(&Jugador,&teclado);
 			actJugador(&Jugador);				
-			if(colisionJugEn(Jugador, enemigos[MAxEnemigos])) {
-	        	printf("Hubo colision\n");				
-    		}
 			colisionRecursos(&Jugador,arboles,cantidadArboles,oros,cantidadOros);
 			if(Jugador.vida <=0){
 				running = false;

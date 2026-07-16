@@ -38,6 +38,15 @@ bool calcularCamino( char mapa[FIL][COL], char inicio, char meta, Camino * Camin
 
         }
     }
+    if (inicioPos.posFila == -1 || inicioPos.posColumna == -1 ){
+        printf("no se encontro %c \n",inicio);
+        return false;
+    }
+    if(metaPos.posFila == -1 || metaPos.posColumna == -1){
+        printf("no se encontro %c \n",meta);
+        return false;
+    }
+
     cola[final] = inicioPos;
     final++;
 
@@ -99,6 +108,12 @@ bool calcularCamino( char mapa[FIL][COL], char inicio, char meta, Camino * Camin
 
     for(int i =0; i< cantidad; i++){
         Camino->celdas[i] = caminoInvertido[cantidad -1 - i];
+    }
+
+    
+    if(!encontrado){
+        Camino->longitud = 0;
+        return false; 
     }
     return true;
 }

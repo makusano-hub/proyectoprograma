@@ -34,6 +34,10 @@ bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
     {
         for(int cola = colInicio; cola<=colFin; cola++)
             {
+                if(fila < 0 || fila>=FIL ||
+                    cola<0||cola >=COL){
+                    continue;
+                }
                 if(mapa[fila][cola]=='f')
                 {
                     j->vida -= e->dano;
