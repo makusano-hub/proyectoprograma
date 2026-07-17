@@ -57,11 +57,11 @@ bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
 void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
     for(int i = 0 ; i<cantRecursos;i++){
         Recursos *r = &recursos[i];
-        if(recursos->vivo == false){
+        if(r->vivo == false){
             continue;
         }
 
-        if(recursos->tipo == 'a'){
+        if(r->tipo == 'a'){
             if (j->ejex <= r->x + r->ancho &&
                 j->ejex + j->ancho >= r->x &&
                 j->ejey <= r->y + r->alto  &&
@@ -75,7 +75,7 @@ void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
             }
             
         }       
-        if(recursos->tipo == 'o'){
+        if(r->tipo == 'o'){
             if (j->ejex <= r->x + r->ancho &&
                 j->ejex + j->ancho >= r->x &&
                 j->ejey <= r->y + r->alto  &&

@@ -58,7 +58,7 @@ void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,
         }
         fscanf(nivel, "%c", &aux); 
     }
-     (*cantRecursos)++;
+     //(*cantRecursos)++;
     fclose(nivel);    
 }
 

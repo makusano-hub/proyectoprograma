@@ -24,7 +24,7 @@ int main() {
 	Jugador Jugador;
 	Enemigo enemigos[MAxEnemigos];
 	Portal spawn[MaxPortales];
-	Recursos recursos[MaxRecursos];
+	Recursos recursos[MaxRecursos] = {0};
 
 	/*Arbol arboles[MaxArboles];
 	Oro oros[MaxOro];*/
@@ -121,7 +121,7 @@ int main() {
    					 spawn[i].tiempo++;
 					}
 
-			spawnEnemigos(spawn,cantidadPortales,enemigos,cantidadEnemigos);
+			spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
 				if(!enemigos[i].vivo){
