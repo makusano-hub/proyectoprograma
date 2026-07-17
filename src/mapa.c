@@ -7,6 +7,7 @@
 #include "mapa.h"
 #include "jugador.h"
 #include "enemigo.h"
+#include "obstaculo.h"
 
 char mapa[FIL][COL];
 int cantidadEnemigos = 0;
@@ -14,9 +15,10 @@ Portal spawn[10];
 
 
 
-void cargarMapa(void){
+void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,int *cantRecursos){
     char aux;
-    int cantSpawn;   
+    int cantSpawn = 0;
+    *cantRecursos  = 0; 
     
     FILE *nivel = fopen("matriz.txt", "r");
     if(nivel == NULL){
@@ -27,18 +29,36 @@ void cargarMapa(void){
     //fscanf(nivel,"%c",&aux); // soluciona problema de corrido al generar la matriz
     //leer matriz
 
-    cantSpawn =0;
+    
 
     for(int i = 0; i < FIL; i++){
         for(int j = 0; j < COL; j++){
             fscanf(nivel, "%c", &mapa[i][j]);
+            //ALLEGRO_BITMAP *sprite = NULL;
             
             if(mapa[i][j]== 'e'){               
                 cantSpawn++;
             }
+            else if (mapa[i][j]=='a')
+            {
+                iniRecursos(&recursos[*cantRecursos], 'a',
+                j * cuadrado, i * cuadrado,
+                arbol);
+                cantRecursos++;
+            }
+            else if (mapa[i][j] == 'o')
+            {
+                iniRecursos(&recursos[*cantRecursos], 'o',
+                j * cuadrado, i * cuadrado,
+                oro);
+                 cantRecursos++;
+            }     
+           
+            //else if (... == 'o')
         }
         fscanf(nivel, "%c", &aux); 
     }
+     (*cantRecursos)++;
     fclose(nivel);    
 }
 
@@ -97,7 +117,7 @@ bool buscarPosicion(char CharBusca,float *x, float *y){
     return false;
 }
 
-void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cantidadOros){
+/*void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cantidadOros){
     *cantidadArboles =0;
     *cantidadOros =0;
 
@@ -118,4 +138,4 @@ void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cant
             }
         }
     }
-}
+}*/

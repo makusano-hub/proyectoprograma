@@ -14,12 +14,12 @@ bool colisionJugEn(Jugador j,Enemigo e){
             j.ejey + j.alto >= e.ejey);
     
 }
-bool colisionObsJug(Jugador j, Obstaculo o){
-    return( j.ejex <= o.ejex + o.ancho &&
-            j.ejex + j.ancho >= o.ejex &&
-            j.ejey <= o.ejey + o.alto  &&
-            j.ejey + j.alto >= o.ejey);
-}
+/*bool colisionObsJug(Jugador j, Recursos recursos){
+    return( j.ejex <= recursos.x + recursos.ancho &&
+            j.ejex + j.ancho >= recursos.x &&
+            j.ejey <= recursos.y + recursos.alto  &&
+            j.ejey + j.alto >= recursos.y);
+}*/
 bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
     if(e->vivo == false){
         return false;
@@ -54,33 +54,39 @@ bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
     }
      return false;
 }
-void colisionRecursos(Jugador *j, Arbol arboles[],int cantArboles,Oro oros[],int cantOros){
-    for(int i = 0 ; i<cantArboles;i++){
-        if(arboles[i].vivo == true){
-            if (j->ejex <= arboles[i].ejex + arboles[i].ancho &&
-                j->ejex + j->ancho >= arboles[i].ejex &&
-                j->ejey <= arboles[i].ejey + arboles[i].alto  &&
-                j->ejey + j->alto >= arboles[i].ejey)
-            {
-                j->madera += arboles[i].valor;
+void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
+    for(int i = 0 ; i<cantRecursos;i++){
+        Recursos *r = &recursos[i];
+        if(recursos->vivo == false){
+            continue;
+        }
 
-                arboles[i].valor = 0;
-                arboles[i].vivo = false;
+        if(recursos->tipo == 'a'){
+            if (j->ejex <= r->x + r->ancho &&
+                j->ejex + j->ancho >= r->x &&
+                j->ejey <= r->y + r->alto  &&
+                j->ejey + j->alto >= r->y)
+            {
+                    //aca el jugador saca el recurso instantaneamente
+                j->madera += r->valor;
+
+                r->valor = 0;
+                r->vivo = false;
             }
             
-        }
-    }
-    for(int i = 0 ; i<cantOros;i++){
-        if(oros[i].vivo == true){
-            if (j->ejex <= oros[i].ejex + oros[i].ancho &&
-                j->ejex + j->ancho >= oros[i].ejex &&
-                j->ejey <= oros[i].ejey + oros[i].alto  &&
-                j->ejey + j->alto >= oros[i].ejey)
+        }       
+        if(recursos->tipo == 'o'){
+            if (j->ejex <= r->x + r->ancho &&
+                j->ejex + j->ancho >= r->x &&
+                j->ejey <= r->y + r->alto  &&
+                j->ejey + j->alto >= r->y)
             {
-                j->oro += oros[i].valor;
 
-                oros[i].valor = 0;
-                oros[i].vivo = false;
+                //aca saca el recurso el jugador instantaneamente
+                j->oro += r->valor;
+
+                r->valor = 0;
+                r->vivo = false;
             }
             
         }

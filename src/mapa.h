@@ -13,11 +13,11 @@
 extern char mapa[FIL][COL];
 extern int cantidadEnemigos;
 
-void cargarMapa(void);
+void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro, int *cantRecursos);
 void dibujarMapa(ALLEGRO_BITMAP *terreno, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino, ALLEGRO_BITMAP *agua, ALLEGRO_BITMAP *oro, ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *portal);
 bool buscarPosicion(char CharBusca, float *x,float *y);
 
-void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cantidadOros);
+//void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cantidadOros);
 
 //char otenerCel(int fila, int col);
 #endif

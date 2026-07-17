@@ -5,53 +5,32 @@
 #include <allegro5/allegro_primitives.h>
 #include <stdbool.h>
 
-#define MaxOro  100
-#define MaxArboles  100
+#define MaxRecursos 100
 
-typedef struct 
-{
-    int valor;
-    float ejex;
-    float ejey;
-    int ancho;
-    int alto;
-    int vida;
-    bool vivo;
-    ALLEGRO_BITMAP *sprite;
-}Obstaculo;
+// deberia ser solo una estructura... recurso... con tipo_rec 0, 1, 2 ....
 
 typedef struct
-{   
-    int valor;
-    float ejex;
-    float ejey;
-    int ancho;
-    int alto;
-    bool vivo;
-    ALLEGRO_BITMAP *sprite;
-}Arbol;
+{
+    float x;
+    float y;
 
-typedef struct{
-    int valor;
-    float ejex;
-    float ejey;
+    char tipo;
+
     int ancho;
     int alto;
+
+    int valor;
+    int estado;// este estado es para comparar con cantidad y alli camiar el sprite
+    int intervalo;
     bool vivo;
     ALLEGRO_BITMAP *sprite;
 
-}Oro;
+    /* data */
+}Recursos;
 
-void iniObstaculo(Obstaculo *o,float x, float y);
-void dibObstaculo(Obstaculo *o);
-void actObstaculo(Obstaculo *o);
 
-void iniOro(Oro *gu, float x, float y);
-void diOro(Oro *gu);
-void actOro(Oro *gu);
-
-void iniArbol(Arbol *Ar,float x, float y);
-void diArbol(Arbol *Ar);
-void actArbol(Arbol *Ar);
+void iniRecursos(Recursos *recursos,char tipo, float x, float y, ALLEGRO_BITMAP *sprite);
+void dibRecursos(Recursos *recursos);
+void actRecursos(Recursos *recursos);
 
 #endif

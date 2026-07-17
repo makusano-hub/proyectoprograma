@@ -7,7 +7,7 @@
 #include "mapa.h"
 
 bool colisionJugEn(Jugador j,Enemigo e);
-bool colisionObsJug(Jugador j,Obstaculo o);
+//sin usar bool colisionObsJug(Jugador j,Obstaculo o);
 bool colisionMetaEnemigo(Enemigo *e, Jugador *j);
-void colisionRecursos(Jugador *j, Arbol arboles[],int cantArboles,Oro oros[],int cantOros);
+void colisionRecursos(Jugador *j, Recursos recursos[],int cantRecursos);
 #endif
