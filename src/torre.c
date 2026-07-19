@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "torre.h"
 
 #define maxTorres 20
@@ -15,6 +16,7 @@ void crearTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     castillo->alto = cuadrado;
     castillo->activo = true;
     castillo->sprite = al_load_bitmap("../imagenes/castelo.png");
+    castillo->alcance = sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
     buscarPosicion('k',&castillo->ejex,&castillo->ejey);
     
 }
@@ -24,6 +26,9 @@ void dibuTorreInicial(Torre *castillo){
 
 void inicTorres(Torre torres[],int cantidadTorres){
     for(int i =0; i<cantidadTorres;i++){
+
+        torres[i].dano;
+        torres[i].alcance;
         
         torres[i].ejex;
         torres[i].ejey;
@@ -60,6 +65,7 @@ bool crearTorreJugador(Torre torres[], int cantidadTorres, Jugador *jugador, ALL
 
     }
 
+    //ver si es int o bool porque si es pitagoras true o que retorne el rango unicamente
  bool rango(Torre *torre, Enemigo *e){
     if(e->vivo == false){
         return false;
@@ -84,11 +90,29 @@ bool crearTorreJugador(Torre torres[], int cantidadTorres, Jugador *jugador, ALL
 
     //pitagoras para calcular las distancias 
     
-    float pitagorasDistancia = (DistanciaX * DistanciaX) + (DistanciaY * DistanciaY);
+    float pitagorasDistancia = sqrt(DistanciaX +  DistanciaY);
 
     //debo implementar cual es el rango de la torre, ejemplo la distancia de pitagoras es >= rangoTorre entonces torre puede disparar
-    //return pitagorasDistancia;
+    return pitagorasDistancia;
     
  }   
-    
+
+ /*bool disparo(Torre *torre){
+    if(torre->alcance>= pitagorasDistancia){
+        return false;
+    }
+ }*/
+
+ 
+  void dibuTorre(Torre *torres){
+    if(torres->activo){
+        return;
+    }
+    al_draw_scaled_bitmap(torres->sprite,0,0,al_get_bitmap_width(torres->sprite),al_get_bitmap_height(torres->sprite),torres->ejex,torres->ejey,torres->ancho,torres->alto,0);
+  }  
+void dibuTorreS(Torre torres[],int cantidadTorres){
+    for(int i =0; i<cantidadTorres;i++){
+        dibuTorre(&torres[i]);
+    }
+}
 
