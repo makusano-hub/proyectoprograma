@@ -34,8 +34,7 @@ int main() {
 	Torre castillo;
 	//Torre torres[MaxTorres];
 
-	//int cantidadArboles =0;
-	//int cantidadOros =0;
+	//int canidadTorres =0;
 	//int cantidadEnemigos =0;
 	int cantidadPortales = 0;
 	int cantRecursos =0;	
@@ -92,7 +91,7 @@ int main() {
 
 	inicJugador(&Jugador);
 
-	crearTorreInicial(&castillo);
+	crearTorreInicial(&castillo,castelo);
 	
 	inicioEnemigos(enemigos, MAxEnemigos);
 	//inicSpawn(spawn, cantidadPortales);
@@ -109,6 +108,9 @@ int main() {
 		if(event.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
 			teclapresionada(&teclado, event.keyboard.keycode);
+				/*if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+					crearTorreJugador(torre,&jugador)
+				}*/
 		}
 		if(event.type == ALLEGRO_EVENT_KEY_UP)
 		{

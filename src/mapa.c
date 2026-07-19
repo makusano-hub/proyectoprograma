@@ -19,6 +19,8 @@ void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,
     char aux;
     int cantSpawn = 0;
     *cantRecursos  = 0; 
+
+    //AGREGAR un int para poder cargar siguiente matriz / nivel ejemplo base es matriz.txt, si es 1, matriz2.txt, y etc etc.
     
     FILE *nivel = fopen("matriz.txt", "r");
     if(nivel == NULL){
@@ -44,14 +46,14 @@ void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,
                 iniRecursos(&recursos[*cantRecursos], 'a',
                 j * cuadrado, i * cuadrado,
                 arbol);
-                cantRecursos++;
+                (*cantRecursos)++;
             }
             else if (mapa[i][j] == 'o')
             {
                 iniRecursos(&recursos[*cantRecursos], 'o',
                 j * cuadrado, i * cuadrado,
                 oro);
-                 cantRecursos++;
+                 (*cantRecursos)++;
             }     
            
             //else if (... == 'o')
@@ -89,10 +91,10 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno ,
                  //al_draw_bitmap_region(camino, 32, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(camino, j*cuadrado, i*cuadrado, 0);
             }                    
-            if(mapa[i][j]== 'f'){
+           /* if(mapa[i][j]== 'f'){
                 al_draw_bitmap(pasto, j*cuadrado,i*cuadrado,0);
                 al_draw_rectangle(j*cuadrado,i*cuadrado, j*cuadrado + cuadrado, i*cuadrado+cuadrado,al_map_rgb(255,0,0),1);
-            }
+            }*/
             if(mapa[i][j]== 'e'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 al_draw_bitmap(portal,j*cuadrado, i*cuadrado,0);                

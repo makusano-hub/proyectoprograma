@@ -28,15 +28,19 @@ typedef struct
         
 }Torre;
 
-void crearTorreInicial(Torre *torre);
-bool EnRango(Torre *torre, Enemigo *e);
+void crearTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite);
+bool EnRango(Torre *torre, Enemigo *e);//no implementado aun
 void dibuTorre(Torre *torre);
 
-/*void actTorre(Torre *torre);
-void inicTorres(Torre torres[], int cantidad);
-void dibuTorres(Torre torres[]);
 
-void disparoTorre(Torre torres[], Enemigo *e);
-void TorreInicial(Torre);*/
+void inicTorres(Torre torres[], int cantidadTorres);
+bool crearTorreJugador(Torre torres[], int cantidadTorres, Jugador *jugador, ALLEGRO_BITMAP *sprite);
+
+//void actTorre(Torre *torre);
+//void inicTorres(Torre torres[], int cantidad);
+//void dibuTorres(Torre torres[]);
+bool rango(Torre *torre, Enemigo *e);
+//void disparoTorre(Torre torres[], Enemigo *e);
+//void TorreInicial(Torre);
 
 #endif

@@ -20,7 +20,7 @@ typedef struct
     int alto;
 
     int valor;
-    int estado;// este estado es para comparar con cantidad y alli camiar el sprite
+//    int estado;// este estado es para comparar con cantidad y alli camiar el sprite
     int intervalo;
     bool vivo;
     ALLEGRO_BITMAP *sprite;

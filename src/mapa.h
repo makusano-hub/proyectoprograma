@@ -9,7 +9,6 @@
 #define COL 41
 #define cuadrado 32
 
-
 extern char mapa[FIL][COL];
 extern int cantidadEnemigos;
 
