@@ -30,7 +30,7 @@ int main() {
 	Oro oros[MaxOro];*/
 
 	HUD hud;
-	Camino caminoEnemigos;
+	Camino caminoEnemigos[MaxPortales];
 	Torre castillo;
 	Torre torres[MaxTorres];
 
@@ -141,7 +141,7 @@ int main() {
 					continue;
 				}							
 			
-				moverEnemigoCamino(&enemigos[i],&caminoEnemigos);//cambiar que cada enemigo calcule su camino
+				moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
 				colisionMetaEnemigo(&enemigos[i], &Jugador);
 			}
 			

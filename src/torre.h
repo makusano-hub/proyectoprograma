@@ -8,8 +8,8 @@
 
 #define MaxTorres 50
 
-#define costoOro 10
-#define costoMadera 10
+#define costoOro 1
+#define costoMadera 1
 
 typedef struct 
 {

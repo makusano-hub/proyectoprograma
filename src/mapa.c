@@ -91,10 +91,10 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno ,
                  //al_draw_bitmap_region(camino, 32, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(camino, j*cuadrado, i*cuadrado, 0);
             }                    
-           /* if(mapa[i][j]== 'f'){
+           if(mapa[i][j]== 'f'){
                 al_draw_bitmap(pasto, j*cuadrado,i*cuadrado,0);
                 al_draw_rectangle(j*cuadrado,i*cuadrado, j*cuadrado + cuadrado, i*cuadrado+cuadrado,al_map_rgb(255,0,0),1);
-            }*/
+            }
             if(mapa[i][j]== 'e'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 al_draw_bitmap(portal,j*cuadrado, i*cuadrado,0);                

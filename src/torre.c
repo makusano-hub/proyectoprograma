@@ -3,7 +3,6 @@
 #include <math.h>
 #include "torre.h"
 
-#define maxTorres 20
 extern char mapa[FIL][COL];
 
 //void dibuTorres(Torre torre[MaxTorres]);
@@ -15,8 +14,9 @@ void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     castillo->ancho = cuadrado;
     castillo->alto = cuadrado;
     castillo->activo = true;
-    castillo->sprite = al_load_bitmap("../imagenes/castelo.png");
+    castillo->sprite = sprite; //al_load_bitmap("../imagenes/castelo.png");
     castillo->alcance = sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
+    castillo->dano = 30;
     buscarPosicion('k',&castillo->ejex,&castillo->ejey);
     
 }
@@ -46,8 +46,13 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
 
     //posicionamiento jugador
 
-    int poscolumna = (int)((jugador->ejex + jugador->ancho) / 2.0f)/cuadrado;
-    int posfila = (int)((jugador->ejey + jugador->alto) / 2.0f)/cuadrado;
+    int poscolumna = (int)(((jugador->ejex + jugador->ancho) / 2.0f) /cuadrado);
+    int posfila = (int)(((jugador->ejey + jugador->alto) / 2.0f) /cuadrado);
+
+        if(posfila< 0 || posfila >= FIL || poscolumna<0 || poscolumna >=COL)
+        {
+            return false;
+        }
 
         if(jugador->oro < costoOro || jugador->madera < costoMadera){
             printf("no hay suficientes recursos oro %d, madera %d\n",jugador->oro,jugador->madera);
@@ -55,7 +60,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
         }
         else
         {   
-            if(*cantidadTorres < maxTorres){
+            if(*cantidadTorres < MaxTorres){
 
             Torre *nueva = &torres[*cantidadTorres];
 
@@ -73,12 +78,20 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
 
             jugador->oro -= costoOro;
             jugador->madera -=costoMadera;
-            mapa[posfila][poscolumna] = 'T';
+            if(mapa[posfila][poscolumna] =='t'){
+
+                mapa[posfila][poscolumna] = 'T';
 
             (*cantidadTorres)++;
-            return true; 
+            return true;  
             }
-            else if(*cantidadTorres >= maxTorres){
+            if(mapa[posfila][poscolumna] == 'c' || mapa[posfila][poscolumna] == 'T' || mapa[posfila][poscolumna] == 'e' || mapa[posfila][poscolumna] == 'k' || mapa[posfila][poscolumna] == 'f')
+            {
+            printf("no se puede construir en esta casiila");
+                return false;
+            }
+            
+            else if(*cantidadTorres >= MaxTorres){
                 return false;
             }                   
         }
@@ -86,7 +99,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
             if(mapa[i][j] == 'T' || mapa[i][j] == 'c' || mapa[i][j] == 'e' || mapa ) o una funcion que verifique y recorra si existe una torre en esa casilla
         */
         
-
+        }
     }
 
     //ver si es int o bool porque si es pitagoras true o que retorne el rango unicamente
