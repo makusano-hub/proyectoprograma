@@ -32,9 +32,9 @@ int main() {
 	HUD hud;
 	Camino caminoEnemigos;
 	Torre castillo;
-	//Torre torres[MaxTorres];
+	Torre torres[MaxTorres];
 
-	//int canidadTorres =0;
+	int cantidadTorres =0;
 	//int cantidadEnemigos =0;
 	int cantidadPortales = 0;
 	int cantRecursos =0;	
@@ -64,6 +64,16 @@ int main() {
 	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/torre.png");
 	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
+
+	//spritesheet para "animacion"
+	/*
+	ALLEGRO_BITMAP *enemigobasico = al_load_bitmap(../imagenes/enemigobasico.png);
+	ALLEGRO_BITMAP *enemigofuerte = al_load_bitmap(../imagenes/enemigofuerte.png);
+	
+
+	al_draw_scaled_bitmap(enemigobasico,)
+	*/
+
 	
 
 	bool redraw = true;
@@ -90,6 +100,7 @@ int main() {
 	}
 
 	inicJugador(&Jugador);
+	inicTorres(torres,MaxTorres);
 
 	crearTorreInicial(&castillo,castelo);
 	
@@ -108,9 +119,9 @@ int main() {
 		if(event.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
 			teclapresionada(&teclado, event.keyboard.keycode);
-				/*if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
-					crearTorreJugador(torre,&jugador)
-				}*/
+				if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+					crearTorreJugador(torres,&cantidadTorres,&Jugador,torre);
+				}
 		}
 		if(event.type == ALLEGRO_EVENT_KEY_UP)
 		{
@@ -161,6 +172,7 @@ int main() {
 
 			dibuJugador(&Jugador,pasto,camino);
 			dibuTorre(&castillo);
+			dibuTorreS(torres,cantidadTorres);
 
 			for(int i =0; i<MAxEnemigos;i++)
 			{

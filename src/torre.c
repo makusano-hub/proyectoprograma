@@ -9,7 +9,7 @@ extern char mapa[FIL][COL];
 //void dibuTorres(Torre torre[MaxTorres]);
 //void disparoTorre(Torre *T, Enemigo *e);
 
-void crearTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
+void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     castillo->ejex = 0;
     castillo->ejey = 0;
     castillo->ancho = cuadrado;
@@ -20,21 +20,21 @@ void crearTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     buscarPosicion('k',&castillo->ejex,&castillo->ejey);
     
 }
-void dibuTorreInicial(Torre *castillo){
+void dibuTorre(Torre *castillo){
      al_draw_scaled_bitmap(castillo->sprite,0,0,al_get_bitmap_width(castillo->sprite),al_get_bitmap_height(castillo->sprite),castillo->ejex,castillo->ejey,castillo->ancho,castillo->alto,0);
 }
 
 void inicTorres(Torre torres[],int cantidadTorres){
     for(int i =0; i<cantidadTorres;i++){
 
-        torres[i].dano;
-        torres[i].alcance;
+        torres[i].dano = 0;
+        torres[i].alcance = 0 ;
         
-        torres[i].ejex;
-        torres[i].ejey;
+        torres[i].ejex = 0;
+        torres[i].ejey = 0;
 
-        torres[i].ancho;
-        torres[i].alto;
+        torres[i].ancho = cuadrado;
+        torres[i].alto = cuadrado;
 
         torres[i].activo = false;
         torres[i].sprite = NULL;
@@ -42,24 +42,41 @@ void inicTorres(Torre torres[],int cantidadTorres){
 }
    // al_load_bitmap("../imagenes/torre.png");
     
-bool crearTorreJugador(Torre torres[], int cantidadTorres, Jugador *jugador, ALLEGRO_BITMAP *sprite){
+bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, ALLEGRO_BITMAP *sprite){
+
+    //posicionamiento jugador
+
+    int poscolumna = (int)((jugador->ejex + jugador->ancho) / 2.0)/cuadrado;
+    int posfila = (int)((jugador->ejey + jugador->alto) / 2.0)/cuadrado;
+
         if(jugador->oro < costoOro || jugador->madera < costoMadera){
             printf("no hay suficientes recursos oro %d%d, madera %d%d\n",jugador->oro,jugador->madera);
             //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
         }
         else
         {
-            for(int i =0;i<cantidadTorres;i++){
+            Torre *nueva = &torres[*cantidadTorres];
 
-            int fila= torres[i].ejey / cuadrado;
-            int columna = torres[i].ejex / cuadrado;
+            //pos jugador nueva->ejex = ;
+            //pos jugador nueva->ejey = ;
 
-            
+            nueva->ancho=cuadrado;
+            nueva->alto=cuadrado;
 
-            }
+            nueva ->dano = 1;
+            nueva->alcance = 192;
+
+            nueva->activo = true;
+            nueva->sprite= sprite;
+
+            jugador->oro -= costoOro;
+            jugador->madera -=costoMadera;
+            mapa[posfila][poscolumna] = 'T';
+
+            (*cantidadTorres)++;                    
         }
         /*ver que no hayan tores en la misma casilla de matriz
-            if(mapa[i][j] == 't') o una funcion que verifique y recorra si existe una torre en esa casilla
+            if(mapa[i][j] == 'T' || mapa[i][j] == 'c' || mapa[i][j] == 'e' || mapa ) o una funcion que verifique y recorra si existe una torre en esa casilla
         */
         
 
@@ -71,17 +88,17 @@ bool crearTorreJugador(Torre torres[], int cantidadTorres, Jugador *jugador, ALL
         return false;
     }
     //calcular posiciones y centro de torres y enemigos
-    float torreAncho = torre->ejex + torre->ancho;
-    float torreAlto = torre->ejey + torre->alto;
+    float torreAncho = torre->ejex + torre->ancho /2;
+    float torreAlto = torre->ejey + torre->alto /2;
 
-    float torreCentroAncho = torreAncho /2;
-    float torreCentroAlto = torreAlto /2;
+    float torreCentroAncho = torreAncho ;
+    float torreCentroAlto = torreAlto ;
 
-    float EnemigoAncho = e->ejex + e->ancho;
-    float EnemigoAlto = e->ejey + e->alto;
+    float EnemigoAncho = e->ejex + e->ancho /2;
+    float EnemigoAlto = e->ejey + e->alto /2;
 
-    float EnemigoCentroAncho = EnemigoAncho /2;
-    float EnemigoCentroAlto = EnemigoAlto /2;
+    float EnemigoCentroAncho = EnemigoAncho ;
+    float EnemigoCentroAlto = EnemigoAlto ;
 
     //calcular distancias entre enemigo y torre
 
@@ -90,10 +107,10 @@ bool crearTorreJugador(Torre torres[], int cantidadTorres, Jugador *jugador, ALL
 
     //pitagoras para calcular las distancias 
     
-    float pitagorasDistancia = sqrt(DistanciaX +  DistanciaY);
+    float pitagorasDistancia = sqrt(pow(DistanciaX,2) +  pow(DistanciaY,2));
 
     //debo implementar cual es el rango de la torre, ejemplo la distancia de pitagoras es >= rangoTorre entonces torre puede disparar
-    return pitagorasDistancia;
+    return pitagorasDistancia<=torre->alcance;
     
  }   
 
