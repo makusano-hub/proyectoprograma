@@ -20,9 +20,9 @@ void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     buscarPosicion('k',&castillo->ejex,&castillo->ejey);
     
 }
-void dibuTorre(Torre *castillo){
+/*void dibu(Torre *castillo){
      al_draw_scaled_bitmap(castillo->sprite,0,0,al_get_bitmap_width(castillo->sprite),al_get_bitmap_height(castillo->sprite),castillo->ejex,castillo->ejey,castillo->ancho,castillo->alto,0);
-}
+}*/
 
 void inicTorres(Torre torres[],int cantidadTorres){
     for(int i =0; i<cantidadTorres;i++){
@@ -46,19 +46,21 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
 
     //posicionamiento jugador
 
-    int poscolumna = (int)((jugador->ejex + jugador->ancho) / 2.0)/cuadrado;
-    int posfila = (int)((jugador->ejey + jugador->alto) / 2.0)/cuadrado;
+    int poscolumna = (int)((jugador->ejex + jugador->ancho) / 2.0f)/cuadrado;
+    int posfila = (int)((jugador->ejey + jugador->alto) / 2.0f)/cuadrado;
 
         if(jugador->oro < costoOro || jugador->madera < costoMadera){
-            printf("no hay suficientes recursos oro %d%d, madera %d%d\n",jugador->oro,jugador->madera);
+            printf("no hay suficientes recursos oro %d, madera %d\n",jugador->oro,jugador->madera);
             //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
         }
         else
-        {
+        {   
+            if(*cantidadTorres < maxTorres){
+
             Torre *nueva = &torres[*cantidadTorres];
 
-            //pos jugador nueva->ejex = ;
-            //pos jugador nueva->ejey = ;
+            nueva->ejex = poscolumna * cuadrado;
+            nueva->ejey = posfila *cuadrado;
 
             nueva->ancho=cuadrado;
             nueva->alto=cuadrado;
@@ -73,7 +75,12 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
             jugador->madera -=costoMadera;
             mapa[posfila][poscolumna] = 'T';
 
-            (*cantidadTorres)++;                    
+            (*cantidadTorres)++;
+            return true; 
+            }
+            else if(*cantidadTorres >= maxTorres){
+                return false;
+            }                   
         }
         /*ver que no hayan tores en la misma casilla de matriz
             if(mapa[i][j] == 'T' || mapa[i][j] == 'c' || mapa[i][j] == 'e' || mapa ) o una funcion que verifique y recorra si existe una torre en esa casilla
@@ -122,7 +129,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
 
  
   void dibuTorre(Torre *torres){
-    if(torres->activo){
+    if(!torres->activo){
         return;
     }
     al_draw_scaled_bitmap(torres->sprite,0,0,al_get_bitmap_width(torres->sprite),al_get_bitmap_height(torres->sprite),torres->ejex,torres->ejey,torres->ancho,torres->alto,0);

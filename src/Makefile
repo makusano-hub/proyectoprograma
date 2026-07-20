@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -g
 
 # Librerías de Allegro
-LIBS = -lallegro -lallegro_main -lallegro_image -lallegro_font -lallegro_ttf -lallegro_primitives
+LIBS = -lallegro -lallegro_main -lallegro_image -lallegro_font -lallegro_ttf -lallegro_primitives -lm
 
 # Nombre del ejecutable final
 TARGET = juego

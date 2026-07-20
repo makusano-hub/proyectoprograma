@@ -102,7 +102,7 @@ int main() {
 	inicJugador(&Jugador);
 	inicTorres(torres,MaxTorres);
 
-	crearTorreInicial(&castillo,castelo);
+	inicTorreInicial(&castillo,castelo);
 	
 	inicioEnemigos(enemigos, MAxEnemigos);
 	//inicSpawn(spawn, cantidadPortales);

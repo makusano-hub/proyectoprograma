@@ -75,7 +75,7 @@ void dibujarMapa(ALLEGRO_BITMAP *terreno ,
     for (int i =0 ; i<FIL; i++){        
         for(int j = 0 ; j<COL;j++){
            
-            if(mapa[i][j]== 't' || mapa[i][j]== 'j' || mapa[i][j]== 'o' || mapa[i][j]== 'a' )/*tierra*/
+            if(mapa[i][j]== 't' || mapa[i][j]== 'j' || mapa[i][j]== 'o' || mapa[i][j]== 'a' || mapa[i][j]=='T' )/*tierra*/
             {
                 //al_draw_bitmap_region(pasto, 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
