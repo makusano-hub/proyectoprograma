@@ -93,7 +93,7 @@ int inicSpawn(Portal portales[], int cantidadMaxima)
     for (int i = 0; i < FIL; i++) {
         for (int j = 0; j < COL; j++) {
 
-            if (mapa[i][j] == 'e') {
+            if (mapa[i][j] == 'e' && cantPortales<cantidadMaxima) {
 
                 portales[cantPortales].ejex = j * cuadrado;
                 portales[cantPortales].ejey = i * cuadrado;

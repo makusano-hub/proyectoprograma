@@ -93,11 +93,24 @@ int main() {
 	//contarRecursos(arboles,&cantidadArboles,oros,&cantidadOros);
 	
 	cantidadPortales = inicSpawn(spawn,MaxPortales);
-	
+	/*
 	if(!calcularCamino(mapa,'e','f',&caminoEnemigos)){
 		printf("no se calculo camino de enemigo");
 		return 1;
+	}*/
+	for(int i = 0; i< cantidadPortales;i++){
+		int filaPortal = (int)(spawn[i].ejey / cuadrado);
+		int columnaPortal = (int)(spawn[i].ejex / cuadrado);
+
+		if(!calcularCamino(mapa,filaPortal,columnaPortal,&caminoEnemigos[i])){
+			printf("no se calculca el camino del portal %d\n",i);
+			return 1;
+		}
+		printf("portal %d calculado con %d casilla\n",i,caminoEnemigos[i].longitud);
+		
 	}
+
+
 
 	inicJugador(&Jugador);
 	inicTorres(torres,MaxTorres);
@@ -143,7 +156,12 @@ int main() {
 			
 				moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
 				colisionMetaEnemigo(&enemigos[i], &Jugador);
+				if(rango(&castillo,&enemigos[i])){
+				printf("enemigo%d en rango\n",i);
+				}
+
 			}
+
 			
 			//moverEnemigo(&enemigo,&teclado);
 			movJugador(&Jugador,&teclado);
