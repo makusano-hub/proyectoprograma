@@ -26,7 +26,7 @@ void iniRecursos(Recursos *recursos,char tipo, float x, float y, ALLEGRO_BITMAP 
         recursos->valor = 100;
         recursos->vivo = true;
     }
-    if(tipo == 'o'){
+    else if(tipo == 'o'){
         recursos->valor =200;
         recursos->vivo = true;
     }
@@ -57,9 +57,9 @@ void actRecursos(Recursos *recursos){
 void dibRecursos(Recursos *recursos){
     if(recursos->vivo == true){
          
-        int origen = recursos->estado *64;
+        int origen = recursos->estado * 724;
 
-        al_draw_scaled_bitmap(recursos->sprite,origen,0,64,64,recursos->x,recursos->y,recursos->ancho,recursos->alto,0);
+        al_draw_scaled_bitmap(recursos->sprite,origen,0,724,724,recursos->x,recursos->y,recursos->ancho,recursos->alto,0);
     
         //al_draw_scaled_bitmap(recursos->sprite,0,0,al_get_bitmap_width(recursos->sprite),al_get_bitmap_height(recursos->sprite),recursos->x,recursos->y,recursos->ancho,recursos->alto,0);
     }
