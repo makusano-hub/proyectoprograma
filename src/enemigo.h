@@ -11,6 +11,8 @@
 #define MAxEnemigos 100
 #define MaxPortales 10
 #define tiempo_spawn 120
+#define frameTicks 8
+#define animsprite 6
 
 typedef struct 
 {
@@ -33,7 +35,9 @@ typedef struct
     int vida;
     int dano;
     ALLEGRO_BITMAP *sprite;
-    
+
+    int frame;
+    int contadorAnim;
 }Enemigo;
 
 typedef struct 
@@ -49,14 +53,15 @@ typedef struct
 }Portal;
 
 
-void inicioEnemigo(Enemigo *e);
-void inicioEnemigos(Enemigo enemigos[], int cantidad);
+void inicioEnemigo(Enemigo *e, ALLEGRO_BITMAP *sprite);
+void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *sprite);
 
 void moverEnemigo(Enemigo *e);
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 void colisionEnemigo(Enemigo *e);
 void actualizar(Enemigo *e);
+void animacion(Enemigo *e);
 
 int inicSpawn(Portal portales[], int cantidadPortales);
 void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantMaxima);

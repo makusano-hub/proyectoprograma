@@ -65,9 +65,10 @@ int main() {
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/torre.png");
 	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
 
+	ALLEGRO_BITMAP *enemigobasico = al_load_bitmap("../imagenes/enemigofuerte.png");
 	//spritesheet para "animacion"
 	/*
-	ALLEGRO_BITMAP *enemigobasico = al_load_bitmap(../imagenes/enemigobasico.png);
+	
 	ALLEGRO_BITMAP *enemigofuerte = al_load_bitmap(../imagenes/enemigofuerte.png);
 	
 
@@ -117,7 +118,7 @@ int main() {
 
 	inicTorreInicial(&castillo,castelo);
 	
-	inicioEnemigos(enemigos, MAxEnemigos);
+	inicioEnemigos(enemigos, MAxEnemigos,enemigobasico);
 	//inicSpawn(spawn, cantidadPortales);
 
 	while (running){
@@ -155,6 +156,7 @@ int main() {
 				}							
 			
 				moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
+				animacion(&enemigos[i]);
 				colisionMetaEnemigo(&enemigos[i], &Jugador);
 				if(rango(&castillo,&enemigos[i])){
 				printf("enemigo%d en rango\n",i);

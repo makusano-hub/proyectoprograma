@@ -20,6 +20,8 @@ void inicJugador(Jugador *j){
     j->ejex = 0;
     j->ejey = 0;
 
+	
+
     buscarPosicion('j',&j->ejex,&j->ejey);
    /* for(int i=0;i< FIL; i++){
         for(int k=0; k<COL;k++){

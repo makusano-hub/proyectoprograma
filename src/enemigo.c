@@ -4,18 +4,18 @@
 #include <stdio.h>
 #include <math.h>
 #include "mapa.h"
-void inicioEnemigo(Enemigo *e);
+void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *sprite);
 void moverEnemigo(Enemigo *e);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 
 int enemigosSpawneados = 0;
 
-void inicioEnemigo(Enemigo *e){
+void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *sprite){
 
     
     e->velocidad = 1.0f; 
-    e->sprite = al_load_bitmap("../imagenes/zombie.png");
+    e->sprite = sprite;//al_load_bitmap("../imagenes/zombie.png");
     e->ancho = 32;
     e->alto = 32;
 
@@ -30,13 +30,15 @@ void inicioEnemigo(Enemigo *e){
     e->indiceCamino = 1;
 
     e->portalOrigen = -1;
+    e->frame = 0;
+    e->contadorAnim =0;
      
     
     
 }
-void inicioEnemigos(Enemigo enemigos[], int cantidad){
+void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *sprite){
     for(int i = 0 ; i<cantidad; i++){
-        inicioEnemigo(&enemigos[i]);
+        inicioEnemigo(&enemigos[i],sprite);
     }
 }
 
@@ -65,12 +67,30 @@ void inicioEnemigos(Enemigo enemigos[], int cantidad){
         }
 }*/
 
+void animacion(Enemigo *e){
+    if(!e->vivo){
+        return;
+    }
+    e->contadorAnim++;
+
+    if(e->contadorAnim >= frameTicks){
+        e->contadorAnim =0;
+
+        e->frame++;
+        if(e->frame >= animsprite){
+            e->frame = 0;
+        }
+    }
+}
+
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 //al_draw_filled_circle(e->ejex,e->ejey,e->radio,al_map_rgb(0,255,0));
     if(e->vivo == false){
         return;
     }    
-    al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0);     
+    int origen = e->frame * 64;
+    al_draw_scaled_bitmap(e->sprite,origen,0,64,64,e->ejex,e->ejey,e->ancho,e->alto,0); 
+    //al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0);     
 }
 
 

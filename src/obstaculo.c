@@ -33,6 +33,8 @@ void actRecursos(Recursos *recursos){
         recursos->valor = 0;
         recursos->vivo =false;
     }
+
+    
 }
 void dibRecursos(Recursos *recursos){
     if(recursos->vivo == true){
