@@ -70,7 +70,8 @@ int main() {
 	/*
 	
 	ALLEGRO_BITMAP *enemigofuerte = al_load_bitmap(../imagenes/enemigofuerte.png);
-	
+	ALLEGRO_BITMAP *sheetoro = al_load_bitmap(../imagenes/sheetoro.png);
+	ALLEGRO_BITMAP *sheetmadera = al_load_bitmap(../imagenes/sheetarbol.png);
 
 	al_draw_scaled_bitmap(enemigobasico,)
 	*/
