@@ -59,8 +59,8 @@ int main() {
 	ALLEGRO_BITMAP *pasto = al_load_bitmap("../imagenes/GrassCenter.png");
 	ALLEGRO_BITMAP *camino = al_load_bitmap("../imagenes/muro.png");
 	ALLEGRO_BITMAP *agua = al_load_bitmap("../imagenes/agua.png");
-	ALLEGRO_BITMAP *oro = al_load_bitmap("../imagenes/oro.png");
-	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/arbol.png");
+	ALLEGRO_BITMAP *oro = al_load_bitmap("../imagenes/sheetoro.png");//("../imagenes/oro.png");
+	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/sheetarbol.png");//("../imagenes/arbol.png");
 	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/torre.png");
 	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");

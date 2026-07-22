@@ -55,19 +55,55 @@ bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
      return false;
 }
 void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
+
+    int auxExtraccion = 60;
     for(int i = 0 ; i<cantRecursos;i++){
         Recursos *r = &recursos[i];
         if(r->vivo == false){
             continue;
         }
 
+        bool choque = j->ejex <= r->x + r->ancho &&
+                j->ejex + j->ancho >= r->x &&
+                j->ejey <= r->y + r->alto  &&
+                j->ejey + j->alto >= r->y;
+
+        if(!choque){
+            r->intervalo = 0;
+        }            
+        if(r->valor <=0)
+        {
+            continue;
+        }
+        r->intervalo++;
+
+
+        if(r->intervalo >= auxExtraccion ){
+            int extraidOro = 10;
+            int extraidoMadera = 20;
+
+            if(extraidOro > r->valor || extraidoMadera > r->valor){
+                extraidoMadera = r->valor;
+                extraidOro = r->valor;
+            }
+            r->valor -= 10;
+            r->intervalo = 0;
+            if(r->tipo == 'a'){
+                j->madera += extraidoMadera;
+            }
+            if(r->tipo == 'o'){
+                j->oro += extraidOro;
+            }
+            actRecursos(r);
+        }
+        /*
         if(r->tipo == 'a'){
             if (j->ejex <= r->x + r->ancho &&
                 j->ejex + j->ancho >= r->x &&
                 j->ejey <= r->y + r->alto  &&
                 j->ejey + j->alto >= r->y)
             {
-                    //aca el jugador saca el recurso instantaneamente
+                    aca el jugador saca el recurso instantaneamente
                 j->madera += r->valor;
 
                 r->valor = 0;
@@ -82,13 +118,13 @@ void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
                 j->ejey + j->alto >= r->y)
             {
 
-                //aca saca el recurso el jugador instantaneamente
+                aca saca el recurso el jugador instantaneamente
                 j->oro += r->valor;
 
                 r->valor = 0;
                 r->vivo = false;
             }
             
-        }
+        }*/
     }
 }

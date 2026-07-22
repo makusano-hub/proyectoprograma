@@ -16,6 +16,10 @@ void iniRecursos(Recursos *recursos,char tipo, float x, float y, ALLEGRO_BITMAP 
     recursos->vivo = true;
 
     recursos->sprite = sprite;
+
+    recursos->intervalo =0;
+    recursos->estado=0;
+
     //buscarPosicion('r',&o->ejex,&o->ejey);
 
     if(tipo == 'a'){
@@ -26,19 +30,38 @@ void iniRecursos(Recursos *recursos,char tipo, float x, float y, ALLEGRO_BITMAP 
         recursos->valor =200;
         recursos->vivo = true;
     }
-    
+    else{
+        recursos->valor = 0;
+        recursos->vivo = false;
+    }
+    recursos->valorinic = recursos->valor;
 }
 void actRecursos(Recursos *recursos){
     if(recursos->valor<=0){
-        recursos->valor = 0;
+        recursos->valor = 0;        
         recursos->vivo =false;
     }
+    else if(recursos->valor <=10)
+    {   recursos->valor =10;
+        recursos->estado = 2;
+    }
+    else if(recursos->valor <= recursos->valorinic /2)
+    {
+        recursos->estado = 1;
+    }
+    else{
+        recursos->estado = 0;
+    }
 
-    
 }
 void dibRecursos(Recursos *recursos){
     if(recursos->vivo == true){
-        al_draw_scaled_bitmap(recursos->sprite,0,0,al_get_bitmap_width(recursos->sprite),al_get_bitmap_height(recursos->sprite),recursos->x,recursos->y,recursos->ancho,recursos->alto,0);
+         
+        int origen = recursos->estado *64;
+
+        al_draw_scaled_bitmap(recursos->sprite,origen,0,64,64,recursos->x,recursos->y,recursos->ancho,recursos->alto,0);
+    
+        //al_draw_scaled_bitmap(recursos->sprite,0,0,al_get_bitmap_width(recursos->sprite),al_get_bitmap_height(recursos->sprite),recursos->x,recursos->y,recursos->ancho,recursos->alto,0);
     }
     else return;
 }
