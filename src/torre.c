@@ -190,7 +190,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
     int anchoFrame = anchoImagen / torres-> cantidadFase;
 
     int origenX = torres->faseConstruccion * anchoFrame;
-    al_draw_scaled_bitmap(torres->sprite,origenX,0,anchoImagen,altoImagen,torres->ejex,torres->ejey,torres->ancho,torres->alto,0);
+    al_draw_scaled_bitmap(torres->sprite,origenX,0,anchoFrame,altoImagen,torres->ejex,torres->ejey,torres->ancho,torres->alto,0);
   }  
 void dibuTorreS(Torre torres[],int cantidadTorres){
     for(int i =0; i<cantidadTorres;i++){
