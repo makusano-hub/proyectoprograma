@@ -38,6 +38,8 @@ typedef struct
 
     int frame;
     int contadorAnim;
+    int enemigoTipo;
+
 }Enemigo;
 
 typedef struct 
@@ -53,14 +55,17 @@ typedef struct
 }Portal;
 
 
-void inicioEnemigo(Enemigo *e, ALLEGRO_BITMAP *sprite);
+void inicioEnemigo(Enemigo *e, ALLEGRO_BITMAP *sprite); //agregar tipo de enemigo 1 basico 2rapido 3 fuerte
 void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *sprite);
+
+void crearTipoEnemigo(Enemigo *e, int enemigoTipo);//quedo en funcion aparte para no sobrecargar la funcion de inicio enemgiso
+
 
 void moverEnemigo(Enemigo *e);
 void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 void colisionEnemigo(Enemigo *e);
-void actualizar(Enemigo *e);
+void actualizarEnemigo(Enemigo *e);
 void animacion(Enemigo *e);
 
 int inicSpawn(Portal portales[], int cantidadPortales);

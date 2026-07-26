@@ -3,6 +3,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 #include "mapa.h"
 void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *sprite);
 void moverEnemigo(Enemigo *e);
@@ -13,29 +14,73 @@ int enemigosSpawneados = 0;
 
 void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *sprite){
 
-    
-    e->velocidad = 1.0f; 
+   // e->enemigoTipo = enemigoTipo; 
+    //e->velocidad = 1.0f; 
     e->sprite = sprite;//al_load_bitmap("../imagenes/zombie.png");
-    e->ancho = 32;
-    e->alto = 32;
+    //e->ancho = 32;
+    //e->alto = 32;
 
     e->ejex = 0;
     e->ejey = 0;
 
     e->vivo = false;
 
-    e->vida = 1;
-    e->dano = 1;
+    //e->vida = 1;
+    //e->dano = 1;
 
     e->indiceCamino = 1;
 
     e->portalOrigen = -1;
-    e->frame = 0;
-    e->contadorAnim =0;
      
-    
+    crearTipoEnemigo(e,0);
     
 }
+void crearTipoEnemigo(Enemigo *e, int enemigoTipo){
+    e->enemigoTipo = enemigoTipo;
+
+    e->ancho = cuadrado;
+    e->alto = cuadrado;
+    /*e->anchoDibujo = cuadrado;
+    e->altoDibujo = cuadrado;
+    e->tinte= al_map_rgb(170,220,255);*/
+    //e->dano = 1;
+
+    if(enemigoTipo == 0){ //basico
+
+        e->velocidad = 1.0f;
+        e->vida = 20;
+        e->dano = 1;
+        //e->tinte = al_map_rgb(255,255,255);
+    }
+    else if(enemigoTipo == 1){//rapido
+        e->velocidad = 1.65f;
+        e->vida = 12;
+        e->dano = 5;
+        //e->tinte = al_map_rgb()        
+
+    }
+    else if(enemigoTipo == 2){//tanque
+    
+    e->velocidad = 0.5f;
+    e->vida = 200;
+    e->dano = 10;
+    /*e->anchoDibujo = 48;
+           e->altoDibujo = 48;
+           e->tinte = al_map_rgb(255,0,0); 
+        */
+
+    }
+    else{
+        e->enemigoTipo = 0;
+        e->velocidad=1.0f;
+        e->vida = 20;
+    }
+
+    e->frame = 0;
+    e->contadorAnim =0;   
+
+}
+
 void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *sprite){
     for(int i = 0 ; i<cantidad; i++){
         inicioEnemigo(&enemigos[i],sprite);
@@ -89,13 +134,13 @@ void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
         return;
     }    
     int origen = e->frame * 64;
-    al_draw_scaled_bitmap(e->sprite,origen,0,64,64,e->ejex,e->ejey,e->ancho,e->alto,0); 
+    al_draw_scaled_bitmap(e->sprite,origen,0,64,64,e->ejex,e->ejey,e->ancho,e->alto,0); //alto y ancho cambia el tamano del sprite
     //al_draw_scaled_bitmap(e->sprite,0,0,al_get_bitmap_width(e->sprite),al_get_bitmap_height(e->sprite),e->ejex,e->ejey,e->ancho,e->alto,0);     
 }
 
 
 void actualizarEnemigo(Enemigo *e){
-    for(int i=0; i <MAxEnemigos; i++){   
+    //for(int i=0; i <MAxEnemigos; i++){   
         if(e->vivo == false)
         {
               return;
@@ -103,7 +148,7 @@ void actualizarEnemigo(Enemigo *e){
         if(e->vida <= 0){
             e->vivo = false;
         }
-    }
+    //}
 }
 
 int inicSpawn(Portal portales[], int cantidadMaxima)
@@ -151,6 +196,7 @@ int inicSpawn(Portal portales[], int cantidadMaxima)
 }   */
 void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], int cantMaxima)/*camiar cantMaxima a cantidadEnemigos para que no mesiga confundiendo*/
 {
+   // int enemigoTipoAleatorio = rand() %3 ; //sea 1 el basico, 2 el fuerte y 3 el rapido
 
     if (enemigosSpawneados >= cantidadEnemigos){
         return;
@@ -167,11 +213,26 @@ void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], 
 
         for (int i = 0; i < cantMaxima; i++) {
 
-            if (!enemigos[i].vivo) {
+            if (!enemigos[i].vivo) { //aca a futuro hay que hacer la diferencia entre el enemigo basico/fuerte/rapido(enojado)
+                int azar = rand ()% 100;
+                int tiponuevo;
+
+                if(azar<50)
+                {
+                    tiponuevo = 0;
+                }
+                else if (azar < 80)
+                {
+                    tiponuevo = 1;
+                }
+                else{
+                    tiponuevo = 2;
+                }
+                crearTipoEnemigo(&enemigos[i],tiponuevo);                
 
                 enemigos[i].ejex = portales[p].ejex;
                 enemigos[i].ejey = portales[p].ejey;
-                enemigos[i].vida = 20;
+               // enemigos[i].vida = 20;
                 enemigos[i].vivo = true;
                 enemigos[i].indiceCamino = 1;
                 enemigos[i].portalOrigen = p;

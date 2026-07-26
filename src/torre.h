@@ -17,6 +17,10 @@ typedef struct
     float alcance;
     
     int Tconstru;
+    //int fases el spritesheet tiene 5
+    // si funciona ataca o sea bool funciona
+    //
+
     float ejex;
     float ejey;
 
@@ -27,6 +31,11 @@ typedef struct
     ALLEGRO_BITMAP *sprite;
         
 }Torre;
+
+/*
+typedef struct{
+    
+}bala*/
 
 
 

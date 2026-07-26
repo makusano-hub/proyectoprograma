@@ -14,6 +14,7 @@ typedef struct
     bool d;
     bool a;
     bool enter;
+    bool tab;
 } teclado;
 
 

@@ -56,6 +56,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
 
         if(jugador->oro < costoOro || jugador->madera < costoMadera){
             printf("no hay suficientes recursos oro %d, madera %d\n",jugador->oro,jugador->madera);
+            return false;
             //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
         }
         else
@@ -70,7 +71,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
             nueva->ancho=cuadrado;
             nueva->alto=cuadrado;
 
-            nueva ->dano = 1;
+            nueva->dano = 1;
             nueva->alcance = 192;
 
             nueva->activo = true;
@@ -152,4 +153,6 @@ void dibuTorreS(Torre torres[],int cantidadTorres){
         dibuTorre(&torres[i]);
     }
 }
+
+//anadir disparo o sea balas
 
