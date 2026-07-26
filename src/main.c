@@ -161,7 +161,7 @@ int main() {
 				if(!enemigos[i].vivo){
 					continue;
 				}							
-			
+				
 				moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
 				animacion(&enemigos[i]);
 				colisionMetaEnemigo(&enemigos[i], &Jugador);
@@ -171,7 +171,7 @@ int main() {
 
 			}
 
-			
+			construirTorres(torres,cantidadTorres);
 			//moverEnemigo(&enemigo,&teclado);
 			movJugador(&Jugador,&teclado);
 			actJugador(&Jugador);				
