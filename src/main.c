@@ -62,14 +62,20 @@ int main() {
 	ALLEGRO_BITMAP *oro = al_load_bitmap("../imagenes/sheetoro.png");//("../imagenes/oro.png");
 	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/sheetarbol.png");//("../imagenes/arbol.png");
 	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
-	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/torre.png");
+	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/sheettorre.png");
 	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
 
-	ALLEGRO_BITMAP *enemigobasico = al_load_bitmap("../imagenes/enemigofuerte.png");
+
+	ALLEGRO_BITMAP *spriteEnemigos[3];
+	spriteEnemigos[0] = al_load_bitmap("../imagenes/enemigofuerte.png");	//fuerte en nombre
+	spriteEnemigos[1] = al_load_bitmap("../imagenes/enemigorapido.png");
+	spriteEnemigos[2] = al_load_bitmap("../imagenes/enemigotanque.png");
+	//ALLEGRO_BITMAP *shettTorre = al_load_bitmap("../imagenes/sheettorre.png");
+	ALLEGRO_BITMAP *sheetJug = al_load_bitmap("../imagenes/sheetjugador.png");
 	//spritesheet para "animacion"
 	/*
 	
-	ALLEGRO_BITMAP *enemigofuerte = al_load_bitmap(../imagenes/enemigofuerte.png);
+	
 	ALLEGRO_BITMAP *sheetoro = al_load_bitmap(../imagenes/sheetoro.png);
 	ALLEGRO_BITMAP *sheetmadera = al_load_bitmap(../imagenes/sheetarbol.png);
 
@@ -119,7 +125,7 @@ int main() {
 
 	inicTorreInicial(&castillo,castelo);
 	
-	inicioEnemigos(enemigos, MAxEnemigos,enemigobasico);
+	inicioEnemigos(enemigos, MAxEnemigos,spriteEnemigos);
 	//inicSpawn(spawn, cantidadPortales);
 
 	while (running){
@@ -149,7 +155,7 @@ int main() {
    					 spawn[i].tiempo++;
 					}
 
-			spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos);
+			spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos,spriteEnemigos);
 
 			for(int i =0; i< MAxEnemigos; i++){
 				if(!enemigos[i].vivo){
@@ -209,8 +215,12 @@ int main() {
 	al_destroy_bitmap(pasto);	
 	al_destroy_bitmap(oro);
 	al_destroy_bitmap(arbol);
+	//al_destroy_bitmap(enemigobasico);
+	al_destroy_bitmap(camino);
+	al_destroy_bitmap(agua);
+	al_destroy_bitmap(castelo);
 	
-	
+
 	destruMenu(&hud);
 	destruir_pantalla(display);
 	al_destroy_timer(timer);   

@@ -5,18 +5,18 @@
 #include <math.h>
 #include <time.h>
 #include "mapa.h"
-void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *sprite);
+void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *spritesEnemigos[]);
 void moverEnemigo(Enemigo *e);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 
 int enemigosSpawneados = 0;
 
-void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *sprite){
+void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *spritesEnemigos[]){
 
    // e->enemigoTipo = enemigoTipo; 
     //e->velocidad = 1.0f; 
-    e->sprite = sprite;//al_load_bitmap("../imagenes/zombie.png");
+    //e->sprite = sprite;//al_load_bitmap("../imagenes/zombie.png");
     //e->ancho = 32;
     //e->alto = 32;
 
@@ -32,10 +32,10 @@ void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *sprite){
 
     e->portalOrigen = -1;
      
-    crearTipoEnemigo(e,0);
+    crearTipoEnemigo(e,0,spritesEnemigos);
     
 }
-void crearTipoEnemigo(Enemigo *e, int enemigoTipo){
+void crearTipoEnemigo(Enemigo *e, int enemigoTipo, ALLEGRO_BITMAP *spritesEnemigos[]){
     e->enemigoTipo = enemigoTipo;
 
     e->ancho = cuadrado;
@@ -70,20 +70,21 @@ void crearTipoEnemigo(Enemigo *e, int enemigoTipo){
         */
 
     }
-    else{
+    e->sprite = spritesEnemigos[enemigoTipo];
+  /*  else{
         e->enemigoTipo = 0;
         e->velocidad=1.0f;
         e->vida = 20;
-    }
+    }*/
 
     e->frame = 0;
     e->contadorAnim =0;   
 
 }
 
-void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *sprite){
+void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *spritesEnemigos[]){
     for(int i = 0 ; i<cantidad; i++){
-        inicioEnemigo(&enemigos[i],sprite);
+        inicioEnemigo(&enemigos[i],spritesEnemigos);
     }
 }
 
@@ -194,7 +195,7 @@ int inicSpawn(Portal portales[], int cantidadMaxima)
             }           
         }    
 }   */
-void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], int cantMaxima)/*camiar cantMaxima a cantidadEnemigos para que no mesiga confundiendo*/
+void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[])/*camiar cantMaxima a cantidadEnemigos para que no mesiga confundiendo*/
 {
    // int enemigoTipoAleatorio = rand() %3 ; //sea 1 el basico, 2 el fuerte y 3 el rapido
 
@@ -228,7 +229,7 @@ void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], 
                 else{
                     tiponuevo = 2;
                 }
-                crearTipoEnemigo(&enemigos[i],tiponuevo);                
+                crearTipoEnemigo(&enemigos[i],tiponuevo,spritesEnemigos);                
 
                 enemigos[i].ejex = portales[p].ejex;
                 enemigos[i].ejey = portales[p].ejey;

@@ -55,10 +55,10 @@ typedef struct
 }Portal;
 
 
-void inicioEnemigo(Enemigo *e, ALLEGRO_BITMAP *sprite); //agregar tipo de enemigo 1 basico 2rapido 3 fuerte
-void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *sprite);
+void inicioEnemigo(Enemigo *e, ALLEGRO_BITMAP *spritesEnemigos[]); //agregar tipo de enemigo 1 basico 2rapido 3 fuerte
+void inicioEnemigos(Enemigo enemigos[], int cantidad,ALLEGRO_BITMAP *spritesEnemigos[]);
 
-void crearTipoEnemigo(Enemigo *e, int enemigoTipo);//quedo en funcion aparte para no sobrecargar la funcion de inicio enemgiso
+void crearTipoEnemigo(Enemigo *e, int enemigoTipo,ALLEGRO_BITMAP *spritesEnemigos[]);//quedo en funcion aparte para no sobrecargar la funcion de inicio enemgiso
 
 
 void moverEnemigo(Enemigo *e);
@@ -69,7 +69,7 @@ void actualizarEnemigo(Enemigo *e);
 void animacion(Enemigo *e);
 
 int inicSpawn(Portal portales[], int cantidadPortales);
-void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantMaxima);
+void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[]);
 bool enemigoMeta(Enemigo *e);
 
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino);

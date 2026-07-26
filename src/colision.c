@@ -70,6 +70,7 @@ void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
 
         if(!choque){
             r->intervalo = 0;
+            continue;
         }            
         if(r->valor <=0)
         {
