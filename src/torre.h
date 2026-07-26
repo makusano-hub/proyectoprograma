@@ -16,7 +16,10 @@ typedef struct
     int dano;
     float alcance;
     
-    int Tconstru;
+    int faseConstruccion;
+    int auxConstruccion;//cuantas fases
+    int cantidadFase; //contador fase
+    bool construida;
     //int fases el spritesheet tiene 5
     // si funciona ataca o sea bool funciona
     //
@@ -44,6 +47,8 @@ void inicTorres(Torre torres[], int cantidadTorres);
 
 bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, ALLEGRO_BITMAP *sprite);
 
+void construirTorre(Torre *torre);
+void construirTorres(Torre torres[], int cantidadTorres);
 
 void dibuTorre(Torre *torre);
 void dibuTorreS(Torre torres[],int cantidadTorres);

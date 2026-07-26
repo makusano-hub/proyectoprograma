@@ -17,6 +17,11 @@ void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     castillo->sprite = sprite; //al_load_bitmap("../imagenes/castelo.png");
     castillo->alcance = 192 ; //sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
     castillo->dano = 30;
+
+    castillo->faseConstruccion=0;
+    castillo->auxConstruccion =0;
+    castillo->cantidadFase =1;
+    castillo->construida = true;
     buscarPosicion('k',&castillo->ejex,&castillo->ejey);
     
 }
@@ -38,6 +43,11 @@ void inicTorres(Torre torres[],int cantidadTorres){
 
         torres[i].activo = false;
         torres[i].sprite = NULL;
+
+        torres[i].faseConstruccion =0;
+        torres[i].auxConstruccion =0;
+        torres[i].cantidadFase = 5; //segun la spritesheet
+        torres[i].construida = false;
     }
 }
    // al_load_bitmap("../imagenes/torre.png");
@@ -77,6 +87,11 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
             nueva->activo = true;
             nueva->sprite= sprite;
 
+            nueva->faseConstruccion =0;
+            nueva->auxConstruccion=0;
+            nueva->cantidadFase = 5;
+            nueva->construida = false;
+
             jugador->oro -= costoOro;
             jugador->madera -=costoMadera;
             if(mapa[posfila][poscolumna] =='t'){
@@ -102,6 +117,29 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
         
         }
     }
+
+    void construirTorre(Torre *torre){
+        if(!torre->activo || torre->construida){
+            return;
+        }
+        torre->auxConstruccion++;
+        if(torre->auxConstruccion<5){
+            return;
+        }
+        torre->auxConstruccion = 0;
+        if(torre->faseConstruccion < torre->cantidadFase - 1){
+            torre->faseConstruccion++;
+        }
+        if(torre->faseConstruccion >= torre->cantidadFase -1){
+            torre->construida = true;
+        }
+    }
+    void construirTorres(Torre torres[],int cantidadTorres){
+        for(int i =0;i<cantidadTorres;i++){
+            construirTorre(&torres[i]);
+        }
+    }
+
 
     //ver si es int o bool porque si es pitagoras true o que retorne el rango unicamente
  bool rango(Torre *torre, Enemigo *e){
