@@ -13,10 +13,10 @@ bool inicMenuP(Menu *menu){
     }
     return true;
 }
-void seleccionMEnu(Menu *menu, int direccion){
+void seleccionMenu(Menu *menu, int direccion){
     menu->opcion += direccion;
     if(menu->opcion < 0){
-        menu->opcion = 3 -1;
+        menu->opcion = 2;
     }   
     if(menu->opcion >= 3){
         menu->opcion = 0;

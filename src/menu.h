@@ -18,7 +18,7 @@ typedef struct
 
 }Menu;
 
-bool inicmenuP(Menu *menu);
+bool inicMenuP(Menu *menu);
 void seleccionMenu(Menu *menu, int direccion);
 void dibuMenuP(Menu *menu);
 void destruMenuP(Menu *menu);

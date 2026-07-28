@@ -111,7 +111,7 @@ int main() {
 	cargarMapa(recursos,arbol,oro,&cantRecursos);
 	initMenu(&hud);
 
-	inicmenuP(&menu);
+	inicMenuP(&menu);
 
 	//contarRecursos(arboles,&cantidadArboles,oros,&cantidadOros);
 	
@@ -166,10 +166,10 @@ int main() {
 				else if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
 					Opciones opcion = obtenerOpcionMenu(&menu);
 					if(opcion == Jugar){
-						estado == EstadoJugando;
+						estado = EstadoJugando;
 					}
 					else if(opcion == Ranking){
-						estado == EstadoRanking;
+						estado = EstadoRanking;
 					}
 					else if(opcion == salir){
 						running = false;
@@ -178,11 +178,15 @@ int main() {
 			}
 			else if(estado == EstadoJugando){
 				teclapresionada(&teclado, event.keyboard.keycode);
+
 				if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+
 					crearTorreJugador(torres,&cantidadTorres,&Jugador,torre);
+
 				}
 			}
 			else if(estado == EstadoRanking){
+
 				if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
 					estado = EstadoMenu;
 				}
@@ -239,29 +243,41 @@ int main() {
 		}
 		if(redraw && al_is_event_queue_empty(queue)){
 			al_clear_to_color(al_map_rgb(255,255,255));
-			dibujarMapa(terreno,pasto,camino,agua,oro,arbol,portal);
 
-			for(int i =0; i<cantRecursos; i++){
-				dibRecursos(&recursos[i]);
+			if(estado == EstadoMenu){
+				dibuMenuP(&menu);
 			}
+			else if(estado == EstadoJugando){
 
-			/*for(int i=0; i<cantidadArboles;i++){
-				diArbol(&arboles[i]);
-			}
-			for(int i=0; i<cantidadOros;i++){
-				diOro(&oros[i]);	
-			}		*/				
+				dibujarMapa(terreno,pasto,camino,agua,oro,arbol,portal);
 
-			dibuJugador(&Jugador,pasto,camino);
-			dibuTorre(&castillo);
-			dibuTorreS(torres,cantidadTorres);
-			dibuBala(balas,MaxBalas);
+				for(int i =0; i<cantRecursos; i++){
+					dibRecursos(&recursos[i]);
+				}
 
-			for(int i =0; i<MAxEnemigos;i++)
-			{
+				/*for(int i=0; i<cantidadArboles;i++){
+					diArbol(&arboles[i]);
+				}
+				for(int i=0; i<cantidadOros;i++){
+					diOro(&oros[i]);	
+				}		*/				
+
+				dibuJugador(&Jugador,pasto,camino);
+				dibuTorre(&castillo);
+				dibuTorreS(torres,cantidadTorres);
+				dibuBala(balas,MaxBalas);
+
+				for(int i =0; i<MAxEnemigos;i++)
+				{
 				dibujoEnemigo(&enemigos[i],pasto,camino);
-			}		
-			dibuMenu(&hud,&Jugador);
+				}		
+				dibuMenu(&hud,&Jugador);
+			}
+			else if(estado == EstadoRanking){
+				//aca sveo el ranking
+			}	
+
+			
 			al_flip_display();			
 			
 			redraw = false;
@@ -278,6 +294,7 @@ int main() {
 	
 
 	destruMenu(&hud);
+	destruMenuP(&menu);
 	destruir_pantalla(display);
 	al_destroy_timer(timer);   
 	al_destroy_event_queue(queue);
