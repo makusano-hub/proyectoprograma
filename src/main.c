@@ -49,6 +49,7 @@ int main() {
 	Torre torres[MaxTorres];
 
 	Bala balas[MaxBalas];
+	DatoRanking datosranking;
 
 
 	char nombreTemporal[4] ="";
@@ -120,6 +121,8 @@ int main() {
 	initMenu(&hud);
 
 	inicMenuP(&menu);
+	inicRanking(&datosranking);
+	
 
 	//contarRecursos(arboles,&cantidadArboles,oros,&cantidadOros);
 	
@@ -180,6 +183,7 @@ int main() {
 						//estado = EstadoJugando;
 					}
 					else if(opcion == Ranking){
+						cargarRanking(&datosranking);
 						estado = EstadoRanking;
 					}
 					else if(opcion == salir){
@@ -197,7 +201,7 @@ int main() {
 				}
 			}
 			else if(estado == EstadoRanking){
-
+				
 				if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
 					estado = EstadoMenu;
 				}
@@ -231,6 +235,16 @@ int main() {
 
 						if(registrarPuntaje(Jugador.nombre,Jugador.puntajeRank)){
 							estado = EstadoJugando;
+						}
+					}
+					else if(cantidadLetras<3){
+						if(caracter>= 'a' && caracter <= 'z'){
+							caracter = caracter - 'a' + 'A';
+						}
+						if(caracter>= 'A' && caracter <= 'Z'){
+							nombreTemporal[cantidadLetras] = (char)caracter;
+							cantidadLetras++;
+							nombreTemporal[cantidadLetras] = '\0';
 						}
 					}
 				}
@@ -279,6 +293,8 @@ int main() {
 				actJugador(&Jugador);				
 				colisionRecursos(&Jugador, recursos, cantRecursos);
 				if(Jugador.vida <=0){
+					registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
+
 					running = false;
 				}	
 			}						
@@ -318,7 +334,7 @@ int main() {
 				dibuMenu(&hud,&Jugador);
 			}
 			else if(estado == EstadoRanking){
-				//aca sveo el ranking
+				dibuRanking(&datosranking);
 			}	
 
 			
@@ -336,7 +352,7 @@ int main() {
 	al_destroy_bitmap(agua);
 	al_destroy_bitmap(castelo);
 	
-
+	destruRanking(&datosranking);
 	destruMenu(&hud);
 	destruMenuP(&menu);
 	destruir_pantalla(display);

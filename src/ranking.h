@@ -13,8 +13,8 @@ typedef struct{
     int puntuacion;
 }UserRanking;
 
-bool registro(const char nombre[], int puntuacion);
-/*
+bool registrarPuntaje(const char nombre[], int puntuacion);
+
  typedef struct{
     UserRanking usuarios[10];
     int cantidad;
@@ -22,9 +22,13 @@ bool registro(const char nombre[], int puntuacion);
  }DatoRanking;
 
  bool inicRanking(DatoRanking *datoranking);
- void cargarRanking(DatoRanking *datoranking);
- void guardarRanking(char nombre[], int puntuacion);
  void dibuRanking(DatoRanking *datoranking);
  void destruRanking(DatoRanking *datoranking);
+
+/*
+
+ void cargarRanking(DatoRanking *datoranking);
+ void guardarRanking(char nombre[], int puntuacion);
+ 
 */
  #endif

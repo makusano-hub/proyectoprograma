@@ -9,20 +9,24 @@
 
 
 
-/*bool inicRanking(UserRanking ranking[],int maximo){
-    datoranking->cantidad = 0;
-    datoranking->fuente = al_create_builtin_font();
+bool inicRanking(DatoRanking *datos){
+    datos->cantidad = 0;
+    datos->fuente = al_create_builtin_font();
 
-    if(datoranking->fuente == NULL)
+    if(datos->fuente == NULL)
     {
         return false;
     }
-    cargarRanking(datoranking);
+    cargarRanking(datos);
     return true;
-}*/
+}
+
+void cargarRanking(DatoRanking *datos){
+    datos->cantidad = leerRanking(datos->usuarios,MaxRanker);
+}
 
 //iniciar
- static int cargarRanking(UserRanking ranking[],int maximo){
+ static int leerRanking(UserRanking ranking[],int maximo){
 
     FILE *archivo = fopen("ranking.txt","r");
     int cantidad = 0;
@@ -59,9 +63,9 @@
 
 //registrarpuntaje
 bool registrarPuntaje(const char nombre[],int puntuacion){
-    UserRanking ranking[MaxRanker];
+    UserRanking ranking[MaxRanker + 1];
 
-    int cantidad = cargarRanking(ranking,MaxRanker);
+    int cantidad = leerRanking(ranking,MaxRanker);
     snprintf(ranking[cantidad].nombre,sizeof(ranking[cantidad].nombre),"%.3s",nombre);
     ranking[cantidad].puntuacion = puntuacion;
     cantidad++;
@@ -87,6 +91,29 @@ bool registrarPuntaje(const char nombre[],int puntuacion){
         while(cantidad < 11)
     }
  }
- int comparar()
- void dibuRanking(DatoRanking *datoranking);
- void destruRanking(DatoRanking *datoranking);*/
+ int comparar()*/
+ void dibuRanking(DatoRanking *datos){
+    int centroX = anchoP /2;
+    int inicioY = 100;
+
+    al_draw_text(datos->fuente,al_map_rgb(0,0,0),centroX,40,ALLEGRO_ALIGN_CENTRE,"RANKING");
+
+    if(datos->cantidad == 0){
+        al_draw_text(datos->fuente,al_map_rgb(80,80,80),centroX,inicioY,ALLEGRO_ALIGN_CENTRE,"no hay puntajes registrados");
+    }
+    for(int i =0; i< datos->cantidad; i++){
+        al_draw_textf(datos->fuente,al_map_rgb(0,0,0),centroX,inicioY + i * 35, ALLEGRO_ALIGN_CENTRE," %d. %s - %d",i+1,
+        datos->usuarios[i].nombre,
+    datos->usuarios[i].puntuacion);
+    }
+
+    al_draw_text(datos->fuente,al_map_rgb(80,80,80),centroX,altoP-50,ALLEGRO_ALIGN_CENTRE,"ESC para salir");
+ }
+ void destruRanking(DatoRanking *datos)
+ {
+    if(datos->fuente != NULL ){
+        al_destroy_font(datos->fuente);
+        datos->fuente = NULL;
+    }
+    datos->cantidad =0;
+ }
