@@ -19,6 +19,9 @@ void inicJugador(Jugador *j){
 	j->madera=0;
     j->ejex = 0;
     j->ejey = 0;
+	
+	j->nombre[0] = '\0'; 
+	j->puntajeRank = 1000;
 
 	
 

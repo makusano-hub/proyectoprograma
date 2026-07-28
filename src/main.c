@@ -19,11 +19,13 @@
 #include "obstaculo.h"
 #include "bala.h"
 #include "menu.h"
+#include "ranking.h"
 
 typedef enum{
 	EstadoMenu,
 	EstadoJugando,
-	EstadoRanking
+	EstadoRanking,
+	EstadoIngresarNombre
 }EstadoJuego;
 
 int main() {
@@ -46,8 +48,12 @@ int main() {
 
 	Bala balas[MaxBalas];
 
+
+	char nombreTemporal[4] ="";
+	int cantidadLetras =0;
+
 	int cantidadTorres =0;
-	//int cantidadEnemigos =0;
+	int cantidadEnemigos =0;
 	int cantidadPortales = 0;
 	int cantRecursos =0;	
 
@@ -166,7 +172,10 @@ int main() {
 				else if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
 					Opciones opcion = obtenerOpcionMenu(&menu);
 					if(opcion == Jugar){
-						estado = EstadoJugando;
+						nombreTemporal[0]='\0';
+						cantidadLetras = 0;
+						estado = EstadoIngresarNombre;
+						//estado = EstadoJugando;
 					}
 					else if(opcion == Ranking){
 						estado = EstadoRanking;
@@ -194,6 +203,38 @@ int main() {
 
 			
 		}
+		if(event.type == ALLEGRO_EVENT_KEY_CHAR){
+			if(estado==EstadoIngresarNombre){
+				int tecla = event.keyboard.keycode;
+				int caracter = event.keyboard.unichar;
+
+				if(tecla == ALLEGRO_KEY_BACKSPACE){
+					if(cantidadLetras>0){
+						cantidadLetras--;
+						nombreTemporal[cantidadLetras] = '\0';
+					}
+				}
+				else if(tecla == ALLEGRO_KEY_ESCAPE){
+					nombreTemporal[0]= '\0';
+					cantidadLetras =0;
+					estado = EstadoMenu;
+				}
+				else if (tecla == ALLEGRO_KEY_ENTER){
+					if(cantidadLetras == 3){
+						strcpy(Jugador.nombre,nombreTemporal);
+
+						//esto esta de momento. debe actualizarse
+
+						Jugador.puntajeRank = 1000;
+
+						if(registrarPuntaje(Jugador.nombre,Jugador.puntajeRank)){
+							estado = EstadoJugando;
+						}
+					}
+				}
+			}
+		}
+
 		if(event.type == ALLEGRO_EVENT_KEY_UP)
 		{
 			teclasoltada(&teclado, event.keyboard.keycode);

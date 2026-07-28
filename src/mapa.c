@@ -10,8 +10,8 @@
 #include "obstaculo.h"
 
 char mapa[FIL][COL];
-int cantidadEnemigos = 0;
-Portal spawn[10];
+//int cantidadEnemigos = 0;
+//Portal spawn[10];//variable globales
 
 
 
