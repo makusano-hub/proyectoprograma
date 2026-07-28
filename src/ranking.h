@@ -9,7 +9,7 @@
 #define LargoNombre 3
 
 typedef struct{
-    char nombre[3];
+    char nombre[LargoNombre + 1];
     int puntuacion;
 }UserRanking;
 

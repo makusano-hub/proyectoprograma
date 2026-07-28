@@ -59,15 +59,15 @@
 
 //registrarpuntaje
 bool registrarPuntaje(const char nombre[],int puntuacion){
-    UserRanking ranking[11];
+    UserRanking ranking[MaxRanker];
 
-    int cantidad = cargarRanking(ranking,11);
+    int cantidad = cargarRanking(ranking,MaxRanker);
     snprintf(ranking[cantidad].nombre,sizeof(ranking[cantidad].nombre),"%.3s",nombre);
     ranking[cantidad].puntuacion = puntuacion;
     cantidad++;
     OrdenarPuntaje(ranking,cantidad);
-    if(cantidad>11){
-        cantidad = 11;
+    if(cantidad>MaxRanker){
+        cantidad = MaxRanker;
     }
 
     FILE *archivo =fopen("ranking.txt","w");
