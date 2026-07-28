@@ -18,6 +18,13 @@
 #include "torre.h"
 #include "obstaculo.h"
 #include "bala.h"
+#include "menu.h"
+
+typedef enum{
+	EstadoMenu,
+	EstadoJugando,
+	EstadoRanking
+}EstadoJuego;
 
 int main() {
 
@@ -26,6 +33,8 @@ int main() {
 	Enemigo enemigos[MAxEnemigos];
 	Portal spawn[MaxPortales];
 	Recursos recursos[MaxRecursos] = {0};
+	Menu menu;
+	EstadoJuego estado = EstadoMenu;
 
 	/*Arbol arboles[MaxArboles];
 	Oro oros[MaxOro];*/
