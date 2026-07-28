@@ -111,6 +111,8 @@ int main() {
 	cargarMapa(recursos,arbol,oro,&cantRecursos);
 	initMenu(&hud);
 
+	inicmenuP(&menu);
+
 	//contarRecursos(arboles,&cantidadArboles,oros,&cantidadOros);
 	
 	cantidadPortales = inicSpawn(spawn,MaxPortales);
@@ -152,10 +154,41 @@ int main() {
 		}
 		if(event.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
-			teclapresionada(&teclado, event.keyboard.keycode);
+
+			if(estado == EstadoMenu)
+			{
+				if(event.keyboard.keycode == ALLEGRO_KEY_UP){
+					seleccionMenu(&menu,-1);
+				}
+				else if(event.keyboard.keycode == ALLEGRO_KEY_DOWN){
+					seleccionMenu(&menu,1);
+				}
+				else if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+					Opciones opcion = obtenerOpcionMenu(&menu);
+					if(opcion == Jugar){
+						estado == EstadoJugando;
+					}
+					else if(opcion == Ranking){
+						estado == EstadoRanking;
+					}
+					else if(opcion == salir){
+						running = false;
+					}
+				}
+			}
+			else if(estado == EstadoJugando){
+				teclapresionada(&teclado, event.keyboard.keycode);
 				if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
 					crearTorreJugador(torres,&cantidadTorres,&Jugador,torre);
 				}
+			}
+			else if(estado == EstadoRanking){
+				if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
+					estado = EstadoMenu;
+				}
+			}
+
+			
 		}
 		if(event.type == ALLEGRO_EVENT_KEY_UP)
 		{
@@ -164,40 +197,43 @@ int main() {
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{	
 
-			for (int i = 0; i < cantidadPortales; i++) {
+			if(estado == EstadoJugando)
+			{
+				for (int i = 0; i < cantidadPortales; i++) {
    					 spawn[i].tiempo++;
 					}
 
-			spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos,spriteEnemigos);
+					spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos,spriteEnemigos);
 
-			for(int i =0; i< MAxEnemigos; i++){
-				if(!enemigos[i].vivo){
+				for(int i =0; i< MAxEnemigos; i++){	
+					if(!enemigos[i].vivo){
 					continue;
-				}							
+				     }							
 				
-				moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
-				animacion(&enemigos[i]);
-				colisionMetaEnemigo(&enemigos[i], &Jugador);
+					moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
+					animacion(&enemigos[i]);
+					colisionMetaEnemigo(&enemigos[i], &Jugador);
 				/*if(rango(&castillo,&enemigos[i])){
 				printf("enemigo%d en rango\n",i);
 				}*/
-				actDisparoTorre(&castillo,balas,MaxBalas,enemigos,MAxEnemigos);
+					actDisparoTorre(&castillo,balas,MaxBalas,enemigos,MAxEnemigos);
 
 				for(int i =0;i<cantidadTorres;i++){
 					actDisparoTorre(&torres[i],balas,MaxBalas,enemigos,MAxEnemigos);
 				}
 				actBala(balas,MaxBalas,enemigos,MAxEnemigos);
 
-			}
+				}
 
-			construirTorres(torres,cantidadTorres);
-			//moverEnemigo(&enemigo,&teclado);
-			movJugador(&Jugador,&teclado);
-			actJugador(&Jugador);				
-			colisionRecursos(&Jugador, recursos, cantRecursos);
-			if(Jugador.vida <=0){
-				running = false;
-			}				
+				construirTorres(torres,cantidadTorres);
+				//moverEnemigo(&enemigo,&teclado);
+				movJugador(&Jugador,&teclado);
+				actJugador(&Jugador);				
+				colisionRecursos(&Jugador, recursos, cantRecursos);
+				if(Jugador.vida <=0){
+					running = false;
+				}	
+			}						
 					
 			redraw = true;
 		}

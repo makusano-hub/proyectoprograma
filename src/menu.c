@@ -1,9 +1,10 @@
 #include "menu.h"
 #include "pantalla.h"
-
+#include <stdio.h>
+#include<string.h>
 #include <allegro5/allegro_primitives.h>
 
-bool inicMenu(Menu *menu){
+bool inicMenuP(Menu *menu){
     menu->fuente = al_create_builtin_font();
     menu->opcion = 0;
 
@@ -24,7 +25,7 @@ void seleccionMEnu(Menu *menu, int direccion){
 Opciones obtenerOpcionMenu(Menu *menu){
     return (Opciones) menu->opcion;
 }
-void dibuMenu(Menu *menu){
+void dibuMenuP(Menu *menu){
     char *opciones[3] = { "Jugar","Ranking","Salir"};
 
     int centroX = anchoP /2;
@@ -50,7 +51,7 @@ void dibuMenu(Menu *menu){
    //al_draw_text(menu->fuente,al_map_rgb(180,180,180),centroX,altoP-60,ALLEGRO_ALIGN_CENTRE,"flechas y enter para seleccionar");
 }
 
-void destruMenu(Menu *menu){
+void destruMenuP(Menu *menu){
     if(menu->fuente !=NULL){
         al_destroy_font(menu->fuente);
         menu->fuente=NULL;

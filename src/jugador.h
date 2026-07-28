@@ -13,6 +13,10 @@
 
 typedef struct 
 {
+
+  char nombre[4];
+  int puntajeRank;
+
   float ejex;
   float ejey;
   float velocidad;

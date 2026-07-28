@@ -18,10 +18,10 @@ typedef struct
 
 }Menu;
 
-bool inicmenu(Menu *menu);
+bool inicmenuP(Menu *menu);
 void seleccionMenu(Menu *menu, int direccion);
-void dibuMenu(Menu *menu);
-void destruMenu(Menu *menu);
+void dibuMenuP(Menu *menu);
+void destruMenuP(Menu *menu);
 Opciones obtenerOpcionMenu(Menu *menu);
 
 #endif
