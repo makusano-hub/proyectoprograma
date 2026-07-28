@@ -20,14 +20,14 @@ bool registrarPuntaje(const char nombre[], int puntuacion);
     int cantidad;
     ALLEGRO_FONT *fuente;
  }DatoRanking;
-
+void cargarRanking(DatoRanking *datoranking);
  bool inicRanking(DatoRanking *datoranking);
  void dibuRanking(DatoRanking *datoranking);
  void destruRanking(DatoRanking *datoranking);
 
 /*
 
- void cargarRanking(DatoRanking *datoranking);
+ 
  void guardarRanking(char nombre[], int puntuacion);
  
 */

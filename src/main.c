@@ -56,7 +56,7 @@ int main() {
 	int cantidadLetras =0;
 
 	int cantidadTorres =0;
-	int cantidadEnemigos =0;
+	//int cantidadEnemigos =0;
 	int cantidadPortales = 0;
 	int cantRecursos =0;	
 
@@ -236,8 +236,9 @@ int main() {
 						if(registrarPuntaje(Jugador.nombre,Jugador.puntajeRank)){
 							estado = EstadoJugando;
 						}
-					}
-					else if(cantidadLetras<3){
+					}					
+				}
+				else if(cantidadLetras<3){
 						if(caracter>= 'a' && caracter <= 'z'){
 							caracter = caracter - 'a' + 'A';
 						}
@@ -247,7 +248,6 @@ int main() {
 							nombreTemporal[cantidadLetras] = '\0';
 						}
 					}
-				}
 			}
 		}
 

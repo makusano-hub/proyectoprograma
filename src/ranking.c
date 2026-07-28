@@ -6,8 +6,8 @@
 #include <string.h>
 #include<allegro5/allegro_primitives.h>
 
-
-
+static int leerRanking(UserRanking ranking[], int maximo);
+static void OrdenarPuntaje(UserRanking ranking[],int cantidad);
 
 bool inicRanking(DatoRanking *datos){
     datos->cantidad = 0;
