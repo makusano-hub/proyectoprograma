@@ -47,6 +47,8 @@ void inicTorres(Torre torres[],int cantidadTorres){
         torres[i].faseConstruccion =0;
         torres[i].auxConstruccion =0;
         torres[i].cantidadFase = 5; //segun la spritesheet
+        torres[i].disparo = 0;
+        torres[i].intervaloDisparo = 60; //cada segundo
         torres[i].construida = false;
     }
 }
@@ -91,6 +93,8 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
              nueva->auxConstruccion=0;
              nueva->cantidadFase = 5;
              nueva->construida = false;
+             nueva->disparo=0;
+             nueva->intervaloDisparo = 60;
 
              jugador->oro -= costoOro;
              jugador->madera -=costoMadera;

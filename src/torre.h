@@ -30,6 +30,9 @@ typedef struct
     float ancho;
     float alto;
 
+    int disparo;
+    int intervaloDisparo;
+
     bool activo;
     ALLEGRO_BITMAP *sprite;
         

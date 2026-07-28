@@ -55,16 +55,15 @@ void crearTipoEnemigo(Enemigo *e, int enemigoTipo, ALLEGRO_BITMAP *spritesEnemig
     else if(enemigoTipo == 1){//rapido
         e->velocidad = 1.65f;
         e->vida = 12;
-        e->dano = 5;
-        //e->tinte = al_map_rgb()        
+        e->dano = 1;
+               
 
     }
-    else if(enemigoTipo == 2){//tanque
-    
-    e->velocidad = 0.5f;
-    e->vida = 200;
-    e->dano = 10;
-    /*e->anchoDibujo = 48;
+    else if(enemigoTipo == 2){//tanque    
+        e->velocidad = 0.5f;
+        e->vida = 200;
+        e->dano = 10;
+        /*e->anchoDibujo = 48;
            e->altoDibujo = 48;
            e->tinte = al_map_rgb(255,0,0); 
         */
