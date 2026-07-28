@@ -16,12 +16,14 @@ void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     castillo->activo = true;
     castillo->sprite = sprite; //al_load_bitmap("../imagenes/castelo.png");
     castillo->alcance = 192 ; //sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
-    castillo->dano = 30;
+    castillo->dano = 20;
 
     castillo->faseConstruccion=0;
     castillo->auxConstruccion =0;
     castillo->cantidadFase =1;
     castillo->construida = true;
+    castillo->disparo=0;
+    castillo->intervaloDisparo=240;
     buscarPosicion('k',&castillo->ejex,&castillo->ejey);
     
 }
@@ -48,7 +50,7 @@ void inicTorres(Torre torres[],int cantidadTorres){
         torres[i].auxConstruccion =0;
         torres[i].cantidadFase = 5; //segun la spritesheet
         torres[i].disparo = 0;
-        torres[i].intervaloDisparo = 60; //cada segundo
+        torres[i].intervaloDisparo = 180; //cada segundo
         torres[i].construida = false;
     }
 }
@@ -94,7 +96,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
              nueva->cantidadFase = 5;
              nueva->construida = false;
              nueva->disparo=0;
-             nueva->intervaloDisparo = 60;
+             nueva->intervaloDisparo = 240;
 
              jugador->oro -= costoOro;
              jugador->madera -=costoMadera;

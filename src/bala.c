@@ -95,6 +95,7 @@ void actDisparoTorre(Torre *torre, Bala balas[],int cantidadBalas, Enemigo enemi
         if(rango(torre,&enemigos[i])){
             if(dispararBala(balas,cantidadBalas,torre,enemigos,i)){
                 torre->disparo = 0;
+                return;
             }
         }
     }

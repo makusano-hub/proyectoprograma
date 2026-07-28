@@ -76,7 +76,7 @@ int main() {
 	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/sheettorre.png");
 	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
-	ALLEGRO_BITMAP *bala = al_load_bitmap("../bala.png");
+	ALLEGRO_BITMAP *bala = al_load_bitmap("../imagenes/bala.png");
 
 
 	ALLEGRO_BITMAP *spriteEnemigos[3];
@@ -220,14 +220,15 @@ int main() {
 				/*if(rango(&castillo,&enemigos[i])){
 				printf("enemigo%d en rango\n",i);
 				}*/
-					actDisparoTorre(&castillo,balas,MaxBalas,enemigos,MAxEnemigos);
+				}	 
+				actDisparoTorre(&castillo,balas,MaxBalas,enemigos,MAxEnemigos);
 
 				for(int i =0;i<cantidadTorres;i++){
 					actDisparoTorre(&torres[i],balas,MaxBalas,enemigos,MAxEnemigos);
 				}
 				actBala(balas,MaxBalas,enemigos,MAxEnemigos);
 
-				}
+				
 
 				construirTorres(torres,cantidadTorres);
 				//moverEnemigo(&enemigo,&teclado);
