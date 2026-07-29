@@ -306,3 +306,23 @@ bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
         return false;
 }
 
+bool quedanEnemigosVivos(Enemigo enemigos[],int cantidad){
+    for(int i =0; i< cantidad ; i++){
+        if(enemigos[i].vivo){
+            return true;
+        }
+    }
+    return false;
+}
+bool nivelTerminado(Enemigo enemigos[],int cantidad){
+    if(enemigosSpawneados < cantidadEnemigos){
+        return false;
+    }
+    if(quedanEnemigosVivos(enemigos,cantidad)){
+        return false;
+    }
+    return true;
+}
+void reiniciarConteo(void){
+    enemigosSpawneados = 0;
+}

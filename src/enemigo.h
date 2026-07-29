@@ -74,6 +74,10 @@ bool enemigoMeta(Enemigo *e);
 
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino);
 
+
+bool quedanEnemigosVivos(Enemigo enemigos[],int cantidad);
+bool nivelTerminado(Enemigo enemigos[],int cantidad);
+void reiniciarConteo(void);
 //void crearEnemigosPortal(Portal *P,Enemigo enemigos[]);
 
 #endif

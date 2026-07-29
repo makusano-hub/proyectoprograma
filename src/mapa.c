@@ -14,6 +14,49 @@ int cantidadEnemigos = 0;
 //Portal spawn[10];//variable globales
 
 
+bool cargarMapa(const char *nombreArchivo,Recursos recursos[],ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro, int *cantRecursos){
+    FILE *nivel = fopen(nombreArchivo,"r");
+    if(nivel == NULL){
+        printf("error al abrir el archivo\n");
+        return;
+    }
+    *cantRecursos =0;
+    if(fscanf(nivel,"%d",&cantidadEnemigos)!= 1){
+        printf("cantidad de enemigos inconclusa",nombreArchivo);
+         fclose(nivel);
+        return false;
+    }
+    for(int i = 0; i < FIL; i++){
+        for(int j = 0; j < COL; j++){
+            fscanf(nivel, "%c", &mapa[i][j]);
+            //ALLEGRO_BITMAP *sprite = NULL;
+            
+            if(mapa[i][j]== 'e'){               
+                cantSpawn++;
+            }
+            else if (mapa[i][j]=='a')
+            {
+                iniRecursos(&recursos[*cantRecursos], 'a',
+                j * cuadrado, i * cuadrado,
+                arbol);
+                (*cantRecursos)++;
+            }
+            else if (mapa[i][j] == 'o')
+            {
+                iniRecursos(&recursos[*cantRecursos], 'o',
+                j * cuadrado, i * cuadrado,
+                oro);
+                 (*cantRecursos)++;
+            }     
+           
+            //else if (... == 'o')
+        }
+        fscanf(nivel, "%c", &aux); 
+    }
+   
+    
+}
+
 
 void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,int *cantRecursos){
     char aux;

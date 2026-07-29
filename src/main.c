@@ -60,6 +60,10 @@ int main() {
 	int cantidadPortales = 0;
 	int cantRecursos =0;	
 
+	char *niveles[]={"matriz.txt","matriz2.txt","matriz3.txt","matriz4.txt"};
+	int nivelActual =0;
+
+
 	srand(time(NULL));
 	
 	al_init(); 
