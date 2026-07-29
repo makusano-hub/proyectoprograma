@@ -21,7 +21,7 @@ void inicJugador(Jugador *j){
     j->ejey = 0;
 	
 	j->nombre[0] = '\0'; 
-	j->puntajeRank = 1000;
+	j->puntajeRank = 500;
 
 	
 
@@ -65,7 +65,7 @@ void dibuJugador(Jugador *j, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 //aca se dibuja el sprite 
  //al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+anchoJugador, j->ejey+altoJugador,al_map_rgb(255,0,0));
   
-   
+   //al_draw_bitmap_region(j->sprite,0,0,al_get)
     al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
   
 }

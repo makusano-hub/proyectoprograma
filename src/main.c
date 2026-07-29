@@ -7,6 +7,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
+//#include <allegro5/allegro_audio.h>
 
 
 #include "movimiento.h"
@@ -71,6 +72,8 @@ int main() {
 	al_init_image_addon();
 	al_init_primitives_addon();
 	al_init_font_addon();
+	//al_install_audio();
+
 	al_install_keyboard();	
 	iniciarteclado(&teclado);
 	
@@ -80,7 +83,7 @@ int main() {
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/ 60.0);
 	ALLEGRO_EVENT_QUEUE * queue = al_create_event_queue();
 
-	//ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondo1280x720.png");	
+	ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondodepantallam.png");	
 	ALLEGRO_BITMAP *terreno = al_load_bitmap("../imagenes/terreno.png");
 	ALLEGRO_BITMAP *pasto = al_load_bitmap("../imagenes/GrassCenter.png");
 	ALLEGRO_BITMAP *camino = al_load_bitmap("../imagenes/muro.png");
@@ -238,7 +241,7 @@ int main() {
 
 						//esto esta de momento. debe actualizarse
 
-						Jugador.puntajeRank = 1000;
+						//Jugador.puntajeRank = 1000;
 
 						if(registrarPuntaje(Jugador.nombre,Jugador.puntajeRank)){
 							estado = EstadoJugando;

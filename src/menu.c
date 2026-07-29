@@ -54,8 +54,8 @@ void dibuMenuP(Menu *menu){
 void dibuMenuRanking(Menu *menu, const char nombreTemporal[]){
     int centroX = anchoP/2;
     int centroY = altoP/2;
-    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese 3 letras");
-    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY,ALLEGRO_ALIGN_CENTRE,nombreTemporal);
+    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese 3letras");
+    al_draw_text(menu->fuente,al_map_rgb(0,0,0),centroX,centroY,ALLEGRO_ALIGN_CENTRE,nombreTemporal);
     al_draw_textf(menu->fuente,al_map_rgb(80,80,80),centroX,centroY+50,ALLEGRO_ALIGN_CENTRE,"Enter para continuar");
 }
 

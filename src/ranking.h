@@ -6,7 +6,7 @@
 #include <allegro5/allegro_font.h>
 
 #define MaxRanker 10
-#define LargoNombre 3
+#define LargoNombre 10
 
 typedef struct{
     char nombre[LargoNombre + 1];

@@ -5,7 +5,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <stdbool.h>
 
-#define MaxRecursos 100
+#define MaxRecursos 150
 
 // deberia ser solo una estructura... recurso... con tipo_rec 0, 1, 2 ....
 
