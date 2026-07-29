@@ -5,7 +5,7 @@
 
 bool initMenu(HUD *hud){
     hud->fuente= al_create_builtin_font();
-    hud->iconoMadera = al_load_bitmap("../imagenes/iconomadera(1).png");
+    hud->iconoMadera = al_load_bitmap("../imagenes/wood_5.png");
     hud->iconoOro = al_load_bitmap("../imagenes/iconoOro(1).png");
     hud->iconoVida = al_load_bitmap("../imagenes/iconoVida(1).png");
     if(hud->fuente == NULL){
