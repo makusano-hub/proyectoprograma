@@ -31,7 +31,7 @@ void dibuMenuP(Menu *menu){
     int centroX = anchoP /2;
     int centroY = altoP /2 -60;
 
-    al_draw_text(menu->fuente,al_map_rgb(255,255,255),centroX,centroY -80,ALLEGRO_ALIGN_CENTRE,"DEFENSILLA");
+    al_draw_text(menu->fuente,al_map_rgb(255,255,255),centroX,centroY -80,ALLEGRO_ALIGN_CENTRE,"defensa");
     for(int i =0; i<3;i++){
         int y = centroY +i *50;
 
@@ -49,6 +49,14 @@ void dibuMenuP(Menu *menu){
             al_draw_text(menu->fuente,color,centroX,y,ALLEGRO_ALIGN_CENTRE,opciones[i]);
     }
    //al_draw_text(menu->fuente,al_map_rgb(180,180,180),centroX,altoP-60,ALLEGRO_ALIGN_CENTRE,"flechas y enter para seleccionar");
+}
+
+void dibuMenuRanking(Menu *menu, const char nombreTemporal[]){
+    int centroX = anchoP/2;
+    int centroY = altoP/2;
+    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese 3 letras");
+    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY,ALLEGRO_ALIGN_CENTRE,nombreTemporal);
+    al_draw_textf(menu->fuente,al_map_rgb(80,80,80),centroX,centroY+50,ALLEGRO_ALIGN_CENTRE,"Enter para continuar");
 }
 
 void destruMenuP(Menu *menu){

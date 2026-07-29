@@ -46,6 +46,8 @@ void dibuMenu(HUD *hud, Jugador *j){
     al_draw_textf(hud->fuente,al_map_rgb(255,80,80), xMenu+20,120,0,"Madera: %d",j->madera);
     al_draw_scaled_bitmap(hud->iconoMadera,0,0,al_get_bitmap_width(hud->iconoMadera),al_get_bitmap_height(hud->iconoMadera),xMenu+100,115,32,32,0);
 
+    al_draw_textf(hud->fuente,al_map_rgb(255,255,0), xMenu + 20,160,0,"puntaje: %d",j->puntajeRank);
+
 
 }
 void destruMenu(HUD *hud){

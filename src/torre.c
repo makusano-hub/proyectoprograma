@@ -15,8 +15,8 @@ void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     castillo->alto = cuadrado;
     castillo->activo = true;
     castillo->sprite = sprite; //al_load_bitmap("../imagenes/castelo.png");
-    castillo->alcance = 192 ; //sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
-    castillo->dano = 20;
+    castillo->alcance = 320 ; //sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
+    castillo->dano = 40;
 
     castillo->faseConstruccion=0;
     castillo->auxConstruccion =0;
@@ -85,7 +85,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
              nueva->ancho=cuadrado;
              nueva->alto=cuadrado;
 
-             nueva->dano = 1;
+             nueva->dano = 10;
              nueva->alcance = 192;
 
              nueva->activo = true;

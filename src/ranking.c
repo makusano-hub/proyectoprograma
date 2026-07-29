@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include<allegro5/allegro_primitives.h>
+#include "jugador.h"
+
 
 static int leerRanking(UserRanking ranking[], int maximo);
 static void OrdenarPuntaje(UserRanking ranking[],int cantidad);
@@ -81,6 +83,7 @@ bool registrarPuntaje(const char nombre[],int puntuacion){
     fclose(archivo);
     return true;
 }
+
  /*
  void guardarRanking(char nombre[], int puntuacion){
     UserRanking user[11];

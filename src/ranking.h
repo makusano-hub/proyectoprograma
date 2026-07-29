@@ -24,6 +24,7 @@ void cargarRanking(DatoRanking *datoranking);
  bool inicRanking(DatoRanking *datoranking);
  void dibuRanking(DatoRanking *datoranking);
  void destruRanking(DatoRanking *datoranking);
+ //void dibuMenuRanking(DatoRanking *datos);
 
 /*
 

@@ -21,6 +21,7 @@ typedef struct
 bool inicMenuP(Menu *menu);
 void seleccionMenu(Menu *menu, int direccion);
 void dibuMenuP(Menu *menu);
+void dibuMenuRanking(Menu *menu, const char nombreTemporal[]);
 void destruMenuP(Menu *menu);
 Opciones obtenerOpcionMenu(Menu *menu);
 

@@ -207,6 +207,7 @@ int main() {
 				}
 			}
 			else if(estado == EstadoRanking){
+				cargarRanking(&datosranking);
 				
 				if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
 					estado = EstadoMenu;
@@ -300,7 +301,6 @@ int main() {
 				colisionRecursos(&Jugador, recursos, cantRecursos);
 				if(Jugador.vida <=0){
 					registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
-
 					running = false;
 				}	
 				else if(nivelTerminado(enemigos,MAxEnemigos)){
@@ -312,8 +312,8 @@ int main() {
 						cantidadPortales=inicSpawn(spawn,MaxPortales);
 
 						for(int i =0; i<cantidadPortales;i++){
-							int filaPortal = (int)(spawn[i].ejex /cuadrado);
-							int columnaPortal = (int)(spawn[i].ejey / cuadrado);
+							int filaPortal = (int)(spawn[i].ejey /cuadrado);
+							int columnaPortal = (int)(spawn[i].ejex / cuadrado);
 							calcularCamino(mapa,filaPortal,columnaPortal,&caminoEnemigos[i]);
 						}
 						inicBala(balas,MaxBalas,bala);
@@ -338,6 +338,9 @@ int main() {
 
 			if(estado == EstadoMenu){
 				dibuMenuP(&menu);
+			}
+			else if(estado == EstadoIngresarNombre){
+				dibuMenuRanking(&menu,nombreTemporal);
 			}
 			else if(estado == EstadoJugando){
 
@@ -365,7 +368,7 @@ int main() {
 				}		
 				dibuMenu(&hud,&Jugador);
 			}
-			else if(estado == EstadoRanking){
+			else if(estado == EstadoRanking){				
 				dibuRanking(&datosranking);
 			}	
 
