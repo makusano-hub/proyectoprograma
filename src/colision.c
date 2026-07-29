@@ -20,7 +20,7 @@ bool colisionJugEn(Jugador j,Enemigo e){
             j.ejey <= recursos.y + recursos.alto  &&
             j.ejey + j.alto >= recursos.y);
 }*/
-bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
+bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j){
     if(e->vivo == false){
         return false;
     }
@@ -38,7 +38,7 @@ bool colisionMetaEnemigo(Enemigo *e, Jugador *j){
                     cola<0||cola >=COL){
                     continue;
                 }
-                if(mapa[fila][cola]=='f')
+                if(configuracion-> mapa[fila][cola]=='f')
                 {
                     j->vida -= e->dano;
                     printf("enemigo llego a meta %d\n", j->vida);

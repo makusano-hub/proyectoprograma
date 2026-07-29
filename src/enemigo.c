@@ -10,7 +10,7 @@ void moverEnemigo(Enemigo *e);
 void diujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 
 
-static int enemigosSpawneados = 0;
+//static int enemigosSpawneados = 0;
 
 void inicioEnemigo(Enemigo *e,ALLEGRO_BITMAP *spritesEnemigos[]){
 
@@ -151,14 +151,14 @@ void actualizarEnemigo(Enemigo *e){
     //}
 }
 
-int inicSpawn(Portal portales[], int cantidadMaxima)
+int inicSpawn(ConfigMap *configuracion, Portal portales[], int cantidadMaxima)
 {
     int cantPortales = 0;
 
     for (int i = 0; i < FIL; i++) {
         for (int j = 0; j < COL; j++) {
 
-            if (mapa[i][j] == 'e' && cantPortales<cantidadMaxima) {
+            if (configuracion-> mapa[i][j] == 'e' && cantPortales<cantidadMaxima) {
 
                 portales[cantPortales].ejex = j * cuadrado;
                 portales[cantPortales].ejey = i * cuadrado;
@@ -194,12 +194,12 @@ int inicSpawn(Portal portales[], int cantidadMaxima)
             }           
         }    
 }   */
-void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[])/*camiar cantMaxima a cantidadEnemigos para que no mesiga confundiendo*/
+void spawnEnemigos(ConfigMap * configuracion, Portal portales[], int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[])/*camiar cantMaxima a cantidadEnemigos para que no mesiga confundiendo*/
 {
     
    // int enemigoTipoAleatorio = rand() %3 ; //sea 1 el basico, 2 el fuerte y 3 el rapido
 
-    if (enemigosSpawneados >= cantidadEnemigos){
+    if (configuracion-> enemigosSpawneados >= configuracion-> cantidadEnemigos){
         return;
     }   
 
@@ -237,7 +237,7 @@ void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], 
                 enemigos[i].vivo = true;
                 enemigos[i].indiceCamino = 1;
                 enemigos[i].portalOrigen = p;
-                enemigosSpawneados++;
+                configuracion->  enemigosSpawneados++;
 
                 break;
             }
@@ -246,7 +246,7 @@ void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], 
 }
 
 
-bool enemigoMeta(Enemigo *e){
+bool enemigoMeta(ConfigMap * configuracion,Enemigo *e){
        
         if(!e->vivo){
             return false;
@@ -259,7 +259,7 @@ bool enemigoMeta(Enemigo *e){
             return false;
          }
 
-    return mapa[posFila][posColumna] == 'f';     
+    return configuracion->  mapa[posFila][posColumna] == 'f';     
 }
 
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
@@ -315,8 +315,8 @@ bool quedanEnemigosVivos(Enemigo enemigos[],int cantidad){
     }
     return false;
 }
-bool nivelTerminado(Enemigo enemigos[],int cantidad){
-    if(enemigosSpawneados < cantidadEnemigos){
+bool nivelTerminado(ConfigMap *configuracion,Enemigo enemigos[],int cantidad){
+    if(configuracion-> enemigosSpawneados < configuracion-> cantidadEnemigos){
         return false;
     }
     if(quedanEnemigosVivos(enemigos,cantidad)){
@@ -324,6 +324,6 @@ bool nivelTerminado(Enemigo enemigos[],int cantidad){
     }
     return true;
 }
-void reiniciarConteo(void){
-    enemigosSpawneados = 0;
+void reiniciarConteo(ConfigMap *configuracion){
+    configuracion-> enemigosSpawneados = 0;
 }

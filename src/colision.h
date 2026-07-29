@@ -8,6 +8,6 @@
 
 bool colisionJugEn(Jugador j,Enemigo e);
 //sin usar bool colisionObsJug(Jugador j,Obstaculo o);
-bool colisionMetaEnemigo(Enemigo *e, Jugador *j);
+bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j);
 void colisionRecursos(Jugador *j, Recursos recursos[],int cantRecursos);
 #endif

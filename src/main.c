@@ -40,7 +40,7 @@ int main() {
 	Recursos recursos[MaxRecursos] = {0};
 	Menu menu;
 	EstadoJuego estado = EstadoMenu;
-
+	ConfigMap configuracion;
 	/*Arbol arboles[MaxArboles];
 	Oro oros[MaxOro];*/
 
@@ -126,7 +126,7 @@ int main() {
 	al_start_timer(timer);
 
 	//cargarMapa(recursos,arbol,oro,&cantRecursos);
-	cargarMapa(niveles[nivelActual],recursos,arbol,oro,&cantRecursos);
+	cargarMapa(niveles[nivelActual],&configuracion,recursos,arbol,oro,&cantRecursos);
 	initMenu(&hud);
 
 	inicMenuP(&menu);
@@ -135,7 +135,7 @@ int main() {
 
 	//contarRecursos(arboles,&cantidadArboles,oros,&cantidadOros);
 	
-	cantidadPortales = inicSpawn(spawn,MaxPortales);
+	cantidadPortales = inicSpawn(&configuracion,spawn,MaxPortales);
 	/*
 	if(!calcularCamino(mapa,'e','f',&caminoEnemigos)){
 		printf("no se calculo camino de enemigo");
@@ -145,7 +145,7 @@ int main() {
 		int filaPortal = (int)(spawn[i].ejey / cuadrado);
 		int columnaPortal = (int)(spawn[i].ejex / cuadrado);
 
-		if(!calcularCamino(mapa,filaPortal,columnaPortal,&caminoEnemigos[i])){
+		if(!calcularCamino(configuracion.mapa,filaPortal,columnaPortal,&caminoEnemigos[i])){
 			printf("no se calculca el camino del portal %d\n",i);
 			return 1;
 		}
@@ -274,7 +274,7 @@ int main() {
    					 spawn[i].tiempo++;
 					}
 
-					spawnEnemigos(spawn,cantidadPortales,enemigos,MAxEnemigos,spriteEnemigos);
+					spawnEnemigos(&configuracion,spawn,cantidadPortales,enemigos,MAxEnemigos,spriteEnemigos);
 
 				for(int i =0; i< MAxEnemigos; i++){	
 					if(!enemigos[i].vivo){
@@ -283,7 +283,7 @@ int main() {
 				
 					moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
 					animacion(&enemigos[i]);
-					colisionMetaEnemigo(&enemigos[i], &Jugador);
+					colisionMetaEnemigo(&configuracion,&enemigos[i], &Jugador);
 				/*if(rango(&castillo,&enemigos[i])){
 				printf("enemigo%d en rango\n",i);
 				}*/
@@ -306,24 +306,24 @@ int main() {
 					registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
 					running = false;
 				}	
-				else if(nivelTerminado(enemigos,MAxEnemigos)){
+				else if(nivelTerminado(&configuracion,enemigos,MAxEnemigos)){
 					if(nivelActual+1<cantidadNiveles){
 						nivelActual++;
-						cargarMapa(niveles[nivelActual],recursos,arbol,oro,&cantRecursos);
-						reiniciarConteo();
+						cargarMapa(niveles[nivelActual],&configuracion,recursos,arbol,oro,&cantRecursos);
+						reiniciarConteo(&configuracion);
 						inicioEnemigos(enemigos,MAxEnemigos,spriteEnemigos);
-						cantidadPortales=inicSpawn(spawn,MaxPortales);
+						cantidadPortales=inicSpawn(&configuracion,spawn,MaxPortales);
 
 						for(int i =0; i<cantidadPortales;i++){
 							int filaPortal = (int)(spawn[i].ejey /cuadrado);
 							int columnaPortal = (int)(spawn[i].ejex / cuadrado);
-							calcularCamino(mapa,filaPortal,columnaPortal,&caminoEnemigos[i]);
+							calcularCamino(&configuracion.mapa,filaPortal,columnaPortal,&caminoEnemigos[i]);
 						}
 						inicBala(balas,MaxBalas,bala);
 						inicTorres(torres,MaxTorres);
 						cantidadTorres =0;
 
-						buscarPosicion('j',&Jugador.ejex,&Jugador.ejey);
+						buscarPosicion(&configuracion,'j',&Jugador.ejex,&Jugador.ejey);
 						inicTorreInicial(&castillo,castelo);
 						Jugador.puntajeRank += 500;
 					}
@@ -347,7 +347,7 @@ int main() {
 			}
 			else if(estado == EstadoJugando){
 
-				dibujarMapa(terreno,pasto,camino,agua,oro,arbol,portal);
+				dibujarMapa(configuracion.mapa,terreno,pasto,camino,agua,oro,arbol,portal);
 
 				for(int i =0; i<cantRecursos; i++){
 					dibRecursos(&recursos[i]);

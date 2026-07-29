@@ -119,7 +119,7 @@ bool celdaDisponible(char caracter){
 }*/
 
 
-bool calcularCamino(char mapa[FIL][COL], int filaInicio, int columnaInicio, Camino * Camino){
+bool calcularCamino(ConfigMap *configuracion, int filaInicio, int columnaInicio, Camino * Camino){
     
     bool visitado[FIL][COL] = {false};
 
@@ -138,7 +138,7 @@ bool calcularCamino(char mapa[FIL][COL], int filaInicio, int columnaInicio, Cami
     if(filaInicio < 0 || filaInicio >= FIL || columnaInicio<0 || columnaInicio>=COL){
         return false;
     }
-    if(mapa[filaInicio][columnaInicio] != 'e'){
+    if(configuracion-> mapa[filaInicio][columnaInicio] != 'e'){
         printf("no existe portal ni en fila ni columna");
         return false;
     }
@@ -188,7 +188,7 @@ bool calcularCamino(char mapa[FIL][COL], int filaInicio, int columnaInicio, Cami
         Celda actual = cola[frente];
         frente++;
 
-        if(mapa[actual.posFila][actual.posColumna] == 'f'){
+        if(configuracion-> mapa[actual.posFila][actual.posColumna] == 'f'){
             meta = actual;
             encontrado = true;
             break;
@@ -207,7 +207,7 @@ bool calcularCamino(char mapa[FIL][COL], int filaInicio, int columnaInicio, Cami
                     continue;
                 }
 
-                if(!celdaDisponible(mapa[nuevaFila][nuevaColumna])){
+                if(!celdaDisponible(configuracion-> mapa[nuevaFila][nuevaColumna])){
                     continue;
                 }
 

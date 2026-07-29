@@ -68,16 +68,16 @@ void colisionEnemigo(Enemigo *e);
 void actualizarEnemigo(Enemigo *e);
 void animacion(Enemigo *e);
 
-int inicSpawn(Portal portales[], int cantidadPortales);
-void spawnEnemigos(Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[]);
+int inicSpawn(ConfigMap *configuracion, Portal portales[], int cantidadPortales);
+void spawnEnemigos(ConfigMap *configuracion, Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[]);
 bool enemigoMeta(Enemigo *e);
 
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino);
 
 
 bool quedanEnemigosVivos(Enemigo enemigos[],int cantidad);
-bool nivelTerminado(Enemigo enemigos[],int cantidad);
-void reiniciarConteo(void);
+bool nivelTerminado(ConfigMap *configuracion,Enemigo enemigos[],int cantidad);
+void reiniciarConteo(ConfigMap *configuracion);
 //void crearEnemigosPortal(Portal *P,Enemigo enemigos[]);
 
 #endif
