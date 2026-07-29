@@ -196,6 +196,7 @@ int inicSpawn(Portal portales[], int cantidadMaxima)
 }   */
 void spawnEnemigos(Portal portales[], int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[])/*camiar cantMaxima a cantidadEnemigos para que no mesiga confundiendo*/
 {
+    int enemigosSpawneados=0;
    // int enemigoTipoAleatorio = rand() %3 ; //sea 1 el basico, 2 el fuerte y 3 el rapido
 
     if (enemigosSpawneados >= cantidadEnemigos){

@@ -62,6 +62,7 @@ int main() {
 
 	char *niveles[]={"matriz.txt","matriz2.txt","matriz3.txt","matriz4.txt"};
 	int nivelActual =0;
+	int cantidadNiveles = 4;
 
 
 	srand(time(NULL));
@@ -121,7 +122,8 @@ int main() {
 
 	al_start_timer(timer);
 
-	cargarMapa(recursos,arbol,oro,&cantRecursos);
+	//cargarMapa(recursos,arbol,oro,&cantRecursos);
+	cargarMapa(niveles[nivelActual],recursos,arbol,oro,&cantRecursos);
 	initMenu(&hud);
 
 	inicMenuP(&menu);
@@ -262,7 +264,7 @@ int main() {
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{	
 
-			if(estado == EstadoJugando)
+			if(estado == EstadoJugando)//estado juego
 			{
 				for (int i = 0; i < cantidadPortales; i++) {
    					 spawn[i].tiempo++;
@@ -301,6 +303,30 @@ int main() {
 
 					running = false;
 				}	
+				else if(nivelTerminado(enemigos,MAxEnemigos)){
+					if(nivelActual+1<cantidadNiveles){
+						nivelActual++;
+						cargarMapa(niveles[nivelActual],recursos,arbol,oro,&cantRecursos);
+						reiniciarConteo();
+						inicioEnemigos(enemigos,MAxEnemigos,spriteEnemigos);
+						cantidadPortales=inicSpawn(spawn,MaxPortales);
+
+						for(int i =0; i<cantidadPortales;i++){
+
+						}
+						inicBala(balas,MaxBalas,bala);
+						inicTorres(torres,MaxTorres);
+						cantidadTorres =0;
+
+						buscarPosicion('j',&Jugador.ejex,&Jugador.ejey);
+						inicTorreInicial(&castillo,castelo);
+						Jugador.puntajeRank += 500;
+					}
+					else{
+						registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
+						running = false;
+					}
+				}
 			}						
 					
 			redraw = true;

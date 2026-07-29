@@ -18,7 +18,7 @@ bool cargarMapa(const char *nombreArchivo,Recursos recursos[],ALLEGRO_BITMAP *ar
     FILE *nivel = fopen(nombreArchivo,"r");
     if(nivel == NULL){
         printf("error al abrir el archivo\n");
-        return;
+        return false;
     }
     *cantRecursos =0;
     if(fscanf(nivel,"%d",&cantidadEnemigos)!= 1){
@@ -29,12 +29,9 @@ bool cargarMapa(const char *nombreArchivo,Recursos recursos[],ALLEGRO_BITMAP *ar
     for(int i = 0; i < FIL; i++){
         for(int j = 0; j < COL; j++){
             fscanf(nivel, "%c", &mapa[i][j]);
-            //ALLEGRO_BITMAP *sprite = NULL;
-            
-            if(mapa[i][j]== 'e'){               
-                cantSpawn++;
-            }
-            else if (mapa[i][j]=='a')
+            //ALLEGRO_BITMAP *sprite = NULL;          
+           
+            if (mapa[i][j]=='a')
             {
                 iniRecursos(&recursos[*cantRecursos], 'a',
                 j * cuadrado, i * cuadrado,
@@ -51,14 +48,14 @@ bool cargarMapa(const char *nombreArchivo,Recursos recursos[],ALLEGRO_BITMAP *ar
            
             //else if (... == 'o')
         }
-        fscanf(nivel, "%c", &aux); 
+        //fscanf(nivel, "%c", &aux); 
     }
-   
+   return true;
     
 }
 
 
-void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,int *cantRecursos){
+/*void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,int *cantRecursos){
     char aux;
     int cantSpawn = 0;
     *cantRecursos  = 0; 
@@ -105,7 +102,7 @@ void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro,
     }
      //(*cantRecursos)++;
     fclose(nivel);    
-}
+}*/
 
 void dibujarMapa(ALLEGRO_BITMAP *terreno , 
                     ALLEGRO_BITMAP *pasto, 
