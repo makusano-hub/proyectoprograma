@@ -312,7 +312,9 @@ int main() {
 						cantidadPortales=inicSpawn(spawn,MaxPortales);
 
 						for(int i =0; i<cantidadPortales;i++){
-
+							int filaPortal = (int)(spawn[i].ejex /cuadrado);
+							int columnaPortal = (int)(spawn[i].ejey / cuadrado);
+							calcularCamino(mapa,filaPortal,columnaPortal,&caminoEnemigos[i]);
 						}
 						inicBala(balas,MaxBalas,bala);
 						inicTorres(torres,MaxTorres);

@@ -28,7 +28,7 @@ bool cargarMapa(const char *nombreArchivo,Recursos recursos[],ALLEGRO_BITMAP *ar
     }
     for(int i = 0; i < FIL; i++){
         for(int j = 0; j < COL; j++){
-            fscanf(nivel, "%c", &mapa[i][j]);
+            fscanf(nivel, " %c", &mapa[i][j]);
             //ALLEGRO_BITMAP *sprite = NULL;          
            
             if (mapa[i][j]=='a')
@@ -50,6 +50,7 @@ bool cargarMapa(const char *nombreArchivo,Recursos recursos[],ALLEGRO_BITMAP *ar
         }
         //fscanf(nivel, "%c", &aux); 
     }
+    fclose(nivel);
    return true;
     
 }
