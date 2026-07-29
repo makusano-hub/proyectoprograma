@@ -45,10 +45,10 @@ typedef struct{
 
 
 
-void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite);
+void inicTorreInicial(Torre *castillo,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite);
 void inicTorres(Torre torres[], int cantidadTorres);
 
-bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, ALLEGRO_BITMAP *sprite);
+bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite);
 
 void construirTorre(Torre *torre);
 void construirTorres(Torre torres[], int cantidadTorres);

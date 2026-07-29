@@ -6,6 +6,7 @@
 #include <allegro5/allegro_image.h>
 
 #include "movimiento.h"
+#include "mapa.h"
 
 #define anchoJugador 32
 #define altoJugador 32
@@ -28,7 +29,7 @@ typedef struct
   ALLEGRO_BITMAP *sprite;
 }Jugador;
 
-void inicJugador(Jugador *j);
+void inicJugador(Jugador *j,ConfigMap *configuracion);
 void actJugador(Jugador *j);
 void dibuJugador(Jugador *j,ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
 void movJugador(Jugador *j, teclado *t);

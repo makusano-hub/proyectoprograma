@@ -5,11 +5,10 @@
 
 #include "jugador.h"
 #include "movimiento.h"
-#include "mapa.h"
 #include "pantalla.h"
 
 
-void inicJugador(Jugador *j){ 
+void inicJugador(Jugador *j,ConfigMap *configuracion){ 
     j->velocidad= 5;
     j->sprite = al_load_bitmap("../imagenes/jugplaceholder.png");
     j->ancho = 32;
@@ -25,7 +24,7 @@ void inicJugador(Jugador *j){
 
 	
 
-    buscarPosicion('j',&j->ejex,&j->ejey);
+    buscarPosicion(configuracion,'j',&j->ejex,&j->ejey);
    /* for(int i=0;i< FIL; i++){
         for(int k=0; k<COL;k++){
             if (mapa[i][k] == 'j')

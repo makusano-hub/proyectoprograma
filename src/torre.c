@@ -3,12 +3,12 @@
 #include <math.h>
 #include "torre.h"
 
-extern char mapa[FIL][COL];
+//extern char mapa[FIL][COL];
 
 //void dibuTorres(Torre torre[MaxTorres]);
 //void disparoTorre(Torre *T, Enemigo *e);
 
-void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
+void inicTorreInicial(Torre *castillo,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite){
     castillo->ejex = 0;
     castillo->ejey = 0;
     castillo->ancho = cuadrado;
@@ -24,7 +24,7 @@ void inicTorreInicial(Torre *castillo,ALLEGRO_BITMAP *sprite){
     castillo->construida = true;
     castillo->disparo=0;
     castillo->intervaloDisparo=240;
-    buscarPosicion('k',&castillo->ejex,&castillo->ejey);
+    buscarPosicion(configuracion,'k',&castillo->ejex,&castillo->ejey);
     
 }
 /*void dibu(Torre *castillo){
@@ -56,7 +56,7 @@ void inicTorres(Torre torres[],int cantidadTorres){
 }
    // al_load_bitmap("../imagenes/torre.png");
     
-bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, ALLEGRO_BITMAP *sprite){
+bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite){
 
     //posicionamiento jugador
 
@@ -100,14 +100,18 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador, AL
 
              jugador->oro -= costoOro;
              jugador->madera -=costoMadera;
-            if(mapa[posfila][poscolumna] =='t'){
+            if(configuracion->mapa[posfila][poscolumna] =='t'){
 
-                mapa[posfila][poscolumna] = 'T';
+                configuracion-> mapa[posfila][poscolumna] = 'T';
 
             (*cantidadTorres)++;
             return true;  
             }
-            if(mapa[posfila][poscolumna] == 'c' || mapa[posfila][poscolumna] == 'T' || mapa[posfila][poscolumna] == 'e' || mapa[posfila][poscolumna] == 'k' || mapa[posfila][poscolumna] == 'f')
+            if(configuracion->mapa[posfila][poscolumna] == 'c' ||
+                 configuracion-> mapa[posfila][poscolumna] == 'T' ||
+                  configuracion-> mapa[posfila][poscolumna] == 'e' ||
+                  configuracion-> mapa[posfila][poscolumna] == 'k' ||
+                  configuracion-> mapa[posfila][poscolumna] == 'f')
             {
                 printf("no se puede construir en esta casiila");
                 return false;

@@ -70,7 +70,7 @@ void animacion(Enemigo *e);
 
 int inicSpawn(ConfigMap *configuracion, Portal portales[], int cantidadPortales);
 void spawnEnemigos(ConfigMap *configuracion, Portal portales[],int cantidadPortales, Enemigo enemigos[], int cantMaxima,ALLEGRO_BITMAP *spritesEnemigos[]);
-bool enemigoMeta(Enemigo *e);
+bool enemigoMeta(ConfigMap *configuracion,Enemigo *e);
 
 bool moverEnemigoCamino(Enemigo *e, Camino *Camino);
 

@@ -145,7 +145,7 @@ int main() {
 		int filaPortal = (int)(spawn[i].ejey / cuadrado);
 		int columnaPortal = (int)(spawn[i].ejex / cuadrado);
 
-		if(!calcularCamino(configuracion.mapa,filaPortal,columnaPortal,&caminoEnemigos[i])){
+		if(!calcularCamino(&configuracion,filaPortal,columnaPortal,&caminoEnemigos[i])){
 			printf("no se calculca el camino del portal %d\n",i);
 			return 1;
 		}
@@ -155,10 +155,10 @@ int main() {
 
 
 
-	inicJugador(&Jugador);
+	inicJugador(&Jugador,&configuracion);
 	inicTorres(torres,MaxTorres);
 	inicBala(balas,MaxBalas,bala);
-	inicTorreInicial(&castillo,castelo);
+	inicTorreInicial(&castillo,&configuracion,castelo);
 	
 	inicioEnemigos(enemigos, MAxEnemigos,spriteEnemigos);
 	//inicSpawn(spawn, cantidadPortales);
@@ -205,7 +205,7 @@ int main() {
 
 				if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
 
-					crearTorreJugador(torres,&cantidadTorres,&Jugador,torre);
+					crearTorreJugador(torres,&cantidadTorres,&Jugador,&configuracion,torre);
 
 				}
 			}
@@ -307,24 +307,29 @@ int main() {
 					running = false;
 				}	
 				else if(nivelTerminado(&configuracion,enemigos,MAxEnemigos)){
+
 					if(nivelActual+1<cantidadNiveles){
 						nivelActual++;
+
 						cargarMapa(niveles[nivelActual],&configuracion,recursos,arbol,oro,&cantRecursos);
+
 						reiniciarConteo(&configuracion);
+
 						inicioEnemigos(enemigos,MAxEnemigos,spriteEnemigos);
+
 						cantidadPortales=inicSpawn(&configuracion,spawn,MaxPortales);
 
 						for(int i =0; i<cantidadPortales;i++){
 							int filaPortal = (int)(spawn[i].ejey /cuadrado);
 							int columnaPortal = (int)(spawn[i].ejex / cuadrado);
-							calcularCamino(&configuracion.mapa,filaPortal,columnaPortal,&caminoEnemigos[i]);
+							calcularCamino(&configuracion,filaPortal,columnaPortal,&caminoEnemigos[i]);
 						}
 						inicBala(balas,MaxBalas,bala);
 						inicTorres(torres,MaxTorres);
 						cantidadTorres =0;
 
 						buscarPosicion(&configuracion,'j',&Jugador.ejex,&Jugador.ejey);
-						inicTorreInicial(&castillo,castelo);
+						inicTorreInicial(&castillo,&configuracion,castelo);
 						Jugador.puntajeRank += 500;
 					}
 					else{
@@ -347,7 +352,7 @@ int main() {
 			}
 			else if(estado == EstadoJugando){
 
-				dibujarMapa(configuracion.mapa,terreno,pasto,camino,agua,oro,arbol,portal);
+				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,portal);
 
 				for(int i =0; i<cantRecursos; i++){
 					dibRecursos(&recursos[i]);
