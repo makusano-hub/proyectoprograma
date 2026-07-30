@@ -29,8 +29,8 @@ Opciones obtenerOpcionMenu(Menu *menu){
 void dibuMenuP(Menu *menu){
     char *opciones[3] = { "Jugar","Ranking","Salir"};
 
-    int centroX = anchoP /2;
-    int centroY = altoP /2 -60;
+    int centroX = anchoMap /2;
+    int centroY = altoMap /2 -60;
 
     al_draw_filled_rectangle(centroX-180,centroY-100,centroX+100,centroY+100,al_map_rgb(0,0,255));
 
@@ -56,8 +56,8 @@ void dibuMenuP(Menu *menu){
 }
 
 void dibuMenuRanking(Menu *menu, const char nombreTemporal[]){
-    int centroX = anchoP/2;
-    int centroY = altoP/2;
+    int centroX = anchoMap/2;
+    int centroY = altoMap/2;
     al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese 3letras");
     al_draw_text(menu->fuente,al_map_rgb(0,0,0),centroX,centroY,ALLEGRO_ALIGN_CENTRE,nombreTemporal);
     al_draw_textf(menu->fuente,al_map_rgb(80,80,80),centroX,centroY+50,ALLEGRO_ALIGN_CENTRE,"Enter para continuar");

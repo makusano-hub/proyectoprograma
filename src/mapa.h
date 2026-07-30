@@ -8,6 +8,11 @@
 #define FIL 23
 #define COL 41
 #define cuadrado 32
+
+#define anchoFramePortal 64
+#define altoFramePortal 64 
+#define framTickPortal 8
+#define cantFramePortal 8
 typedef struct 
 {
     char mapa[FIL][COL];
@@ -21,7 +26,8 @@ typedef struct
 
 //void cargarMapa(Recursos recursos[], ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro, int *cantRecursos);
 bool cargarMapa(const char *nombreArchivo,ConfigMap *configuracion, Recursos recursos[],ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *oro, int *cantRecursos);
-void dibujarMapa(ConfigMap *configuracion,ALLEGRO_BITMAP *terreno, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino, ALLEGRO_BITMAP *agua, ALLEGRO_BITMAP *oro, ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *portal);
+void dibujarMapa(ConfigMap *configuracion,ALLEGRO_BITMAP *terreno, ALLEGRO_BITMAP *pasto, 
+    ALLEGRO_BITMAP *camino, ALLEGRO_BITMAP *agua, ALLEGRO_BITMAP *oro, ALLEGRO_BITMAP *arbol, ALLEGRO_BITMAP *sheetPortal,int framePortal);
 bool buscarPosicion(ConfigMap *configuracion, char CharBusca, float *x,float *y);
 
 //void contarRecursos(Arbol arboles[], int *cantidadArboles, Oro oros[], int *cantidadOros);

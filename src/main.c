@@ -59,7 +59,10 @@ int main() {
 	int cantidadTorres =0;
 	//int cantidadEnemigos =0;
 	int cantidadPortales = 0;
-	int cantRecursos =0;	
+	int cantRecursos =0;
+	
+	int framePortal =0;
+	int contadorPortal=0;
 
 	char *niveles[]={"matriz.txt","matriz2.txt","matriz3.txt","matriz4.txt"};
 	int nivelActual =0;
@@ -102,6 +105,7 @@ int main() {
 	spriteEnemigos[2] = al_load_bitmap("../imagenes/enemigotanque.png");
 	//ALLEGRO_BITMAP *shettTorre = al_load_bitmap("../imagenes/sheettorre.png");
 	ALLEGRO_BITMAP *sheetJug = al_load_bitmap("../imagenes/sheetjugador.png");
+	ALLEGRO_BITMAP *sheetPortal = al_load_bitmap("../imagenes/sheetportal.png");
 	//spritesheet para "animacion"
 	/*
 	
@@ -184,7 +188,9 @@ int main() {
 					seleccionMenu(&menu,1);
 				}
 				else if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+
 					Opciones opcion = obtenerOpcionMenu(&menu);
+
 					if(opcion == Jugar){
 						nombreTemporal[0]='\0';
 						cantidadLetras = 0;
@@ -238,6 +244,7 @@ int main() {
 				else if (tecla == ALLEGRO_KEY_ENTER){
 					if(cantidadLetras == 3){
 						strcpy(Jugador.nombre,nombreTemporal);
+						estado = EstadoJugando;
 
 						//esto esta de momento. debe actualizarse
 
@@ -295,6 +302,13 @@ int main() {
 				}
 				actBala(balas,MaxBalas,enemigos,MAxEnemigos);
 
+				if(contadorPortal>= framTickPortal){
+					contadorPortal=0;					
+					framePortal++;
+					if(framePortal>=cantFramePortal){
+						framePortal = 0;
+					}
+				}
 				
 
 				construirTorres(torres,cantidadTorres);
@@ -347,16 +361,18 @@ int main() {
 			al_clear_to_color(al_map_rgb(255,255,255));
 
 			if(estado == EstadoMenu){
+				al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_width(fondo),al_get_bitmap_height(fondo),0,0,anchoMap+anchoP,altoMap,0);
 				dibuMenuP(&menu);
-				//al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_height(fondo),al_get_bitmap_width(fondo),0,0,anchoP,altoP,0);
+				
 			}
 			else if(estado == EstadoIngresarNombre){
+				al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_width(fondo),al_get_bitmap_height(fondo),0,0,anchoMap+anchoP,altoMap,0);
 				dibuMenuRanking(&menu,nombreTemporal);
-				//al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_height(fondo),al_get_bitmap_width(fondo),0,0,anchoP,altoP,0);
+				
 			}
 			else if(estado == EstadoJugando){
 
-				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,portal);
+				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,sheetPortal,framePortal);
 
 				for(int i =0; i<cantRecursos; i++){
 					dibRecursos(&recursos[i]);
@@ -380,9 +396,10 @@ int main() {
 				}		
 				dibuMenu(&hud,&Jugador);
 			}
-			else if(estado == EstadoRanking){				
+			else if(estado == EstadoRanking){
+				al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_width(fondo),al_get_bitmap_height(fondo),0,0,anchoMap+anchoP,altoMap,0);				
 				dibuRanking(&datosranking);
-				//al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_height(fondo),al_get_bitmap_width(fondo),0,0,anchoP,altoP,0);
+				
 			}	
 
 			
@@ -400,6 +417,8 @@ int main() {
 	al_destroy_bitmap(camino);
 	al_destroy_bitmap(agua);
 	al_destroy_bitmap(castelo);
+	al_destroy_bitmap(sheetPortal);
+	al_destroy_bitmap(sheetJug);
 	
 	destruRanking(&datosranking);
 	destruMenu(&hud);

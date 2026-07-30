@@ -96,7 +96,7 @@ bool registrarPuntaje(const char nombre[],int puntuacion){
  }
  int comparar()*/
  void dibuRanking(DatoRanking *datos){
-    int centroX = anchoP /2;
+    int centroX = anchoMap /2;
     int inicioY = 100;
 
     al_draw_text(datos->fuente,al_map_rgb(0,0,0),centroX,90,ALLEGRO_ALIGN_CENTRE,"RANKING");

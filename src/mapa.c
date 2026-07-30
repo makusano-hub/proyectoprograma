@@ -110,8 +110,9 @@ void dibujarMapa(ConfigMap *configuracion,
                     ALLEGRO_BITMAP *camino, 
                     ALLEGRO_BITMAP *agua, 
                     ALLEGRO_BITMAP *oro, 
-                    ALLEGRO_BITMAP *arbol,
-                    ALLEGRO_BITMAP *portal){
+                    ALLEGRO_BITMAP *arbol,                   
+                    ALLEGRO_BITMAP *sheetPortal,
+                    int framePortal){
     
     for (int i =0 ; i<FIL; i++){        
         for(int j = 0 ; j<COL;j++){
@@ -137,8 +138,10 @@ void dibujarMapa(ConfigMap *configuracion,
                 al_draw_rectangle(j*cuadrado,i*cuadrado, j*cuadrado + cuadrado, i*cuadrado+cuadrado,al_map_rgb(255,0,0),1);
             }
             if(configuracion-> mapa[i][j]== 'e'){
+                int origenX =framTickPortal *anchoFramePortal;
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-                al_draw_bitmap(portal,j*cuadrado, i*cuadrado,0);                
+                al_draw_scaled_bitmap(sheetPortal,origenX,0,anchoFramePortal,altoFramePortal,j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);
+                //al_draw_bitmap(sheetPortal,j*cuadrado, i*cuadrado,0);                
             }
             if(configuracion-> mapa[i][j]== 'k'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
