@@ -25,18 +25,22 @@ void seleccionMenu(Menu *menu, int direccion){
 Opciones obtenerOpcionMenu(Menu *menu){
     return (Opciones) menu->opcion;
 }
+
 void dibuMenuP(Menu *menu){
     char *opciones[3] = { "Jugar","Ranking","Salir"};
 
     int centroX = anchoP /2;
     int centroY = altoP /2 -60;
 
-    al_draw_text(menu->fuente,al_map_rgb(255,255,255),centroX,centroY -80,ALLEGRO_ALIGN_CENTRE,"defensa");
+    al_draw_filled_rectangle(centroX-180,centroY-100,centroX+100,centroY+100,al_map_rgb(0,0,255));
+
+    al_draw_text(menu->fuente,al_map_rgb(0,255,0),centroX,centroY -80,ALLEGRO_ALIGN_CENTRE,"defensa");
+
     for(int i =0; i<3;i++){
-        int y = centroY +i *50;
+        int y = centroY - 55 +i *55;
 
             if(i==menu->opcion){
-                al_draw_filled_rectangle(centroX-100,y-10,centroX+100,y+25,al_map_rgb(70,70,160));
+                al_draw_filled_rectangle(centroX-120,y-10,centroX+120,y+25,al_map_rgb(70,70,160));
             }
         ALLEGRO_COLOR color;
             if(i==menu->opcion){

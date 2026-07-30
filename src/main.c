@@ -83,7 +83,7 @@ int main() {
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/ 60.0);
 	ALLEGRO_EVENT_QUEUE * queue = al_create_event_queue();
 
-	ALLEGRO_BITMAP *fondo = al_load_bitmap("imagenes/fondodepantallam.png");	
+	ALLEGRO_BITMAP *fondo = al_load_bitmap("../imagenes/fondodepantallam.png");	
 	ALLEGRO_BITMAP *terreno = al_load_bitmap("../imagenes/terreno.png");
 	ALLEGRO_BITMAP *pasto = al_load_bitmap("../imagenes/GrassCenter.png");
 	ALLEGRO_BITMAP *camino = al_load_bitmap("../imagenes/muro.png");
@@ -192,7 +192,7 @@ int main() {
 						//estado = EstadoJugando;
 					}
 					else if(opcion == Ranking){
-						cargarRanking(&datosranking);
+						//cargarRanking(&datosranking);
 						estado = EstadoRanking;
 					}
 					else if(opcion == salir){
@@ -243,9 +243,9 @@ int main() {
 
 						//Jugador.puntajeRank = 1000;
 
-						if(registrarPuntaje(Jugador.nombre,Jugador.puntajeRank)){
+						/*if(registrarPuntaje(Jugador.nombre,Jugador.puntajeRank)){
 							estado = EstadoJugando;
-						}
+						}*/
 					}					
 				}
 				else if(cantidadLetras<3){
@@ -303,8 +303,10 @@ int main() {
 				actJugador(&Jugador);				
 				colisionRecursos(&Jugador, recursos, cantRecursos);
 				if(Jugador.vida <=0){
+
 					registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
 					running = false;
+
 				}	
 				else if(nivelTerminado(&configuracion,enemigos,MAxEnemigos)){
 
@@ -346,9 +348,11 @@ int main() {
 
 			if(estado == EstadoMenu){
 				dibuMenuP(&menu);
+				//al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_height(fondo),al_get_bitmap_width(fondo),0,0,anchoP,altoP,0);
 			}
 			else if(estado == EstadoIngresarNombre){
 				dibuMenuRanking(&menu,nombreTemporal);
+				//al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_height(fondo),al_get_bitmap_width(fondo),0,0,anchoP,altoP,0);
 			}
 			else if(estado == EstadoJugando){
 
@@ -378,6 +382,7 @@ int main() {
 			}
 			else if(estado == EstadoRanking){				
 				dibuRanking(&datosranking);
+				//al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_height(fondo),al_get_bitmap_width(fondo),0,0,anchoP,altoP,0);
 			}	
 
 			
@@ -390,6 +395,7 @@ int main() {
 	al_destroy_bitmap(pasto);	
 	al_destroy_bitmap(oro);
 	al_destroy_bitmap(arbol);
+	al_destroy_bitmap(fondo);
 	//al_destroy_bitmap(enemigobasico);
 	al_destroy_bitmap(camino);
 	al_destroy_bitmap(agua);

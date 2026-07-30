@@ -63,8 +63,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Con
     int poscolumna = (int)((jugador->ejex + jugador->ancho / 2.0f) /cuadrado);
     int posfila = (int)((jugador->ejey + jugador->alto / 2.0f) /cuadrado);
 
-        if(posfila< 0 || posfila >= FIL || poscolumna<0 || poscolumna >=COL)
-        {
+        if(posfila< 0 || posfila >= FIL || poscolumna<0 || poscolumna >=COL){
             return false;
         }
 
@@ -73,8 +72,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Con
             return false;
             //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
         }
-        else
-        {   
+        else{   
             if(*cantidadTorres < MaxTorres){
 
               Torre *nueva = &torres[*cantidadTorres];
