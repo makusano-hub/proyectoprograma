@@ -198,7 +198,7 @@ int main() {
 						//estado = EstadoJugando;
 					}
 					else if(opcion == Ranking){
-						//cargarRanking(&datosranking);
+						cargarRanking(&datosranking);
 						estado = EstadoRanking;
 					}
 					else if(opcion == salir){
@@ -216,7 +216,7 @@ int main() {
 				}
 			}
 			else if(estado == EstadoRanking){
-				cargarRanking(&datosranking);
+				//cargarRanking(&datosranking);
 				
 				if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE){
 					estado = EstadoMenu;
