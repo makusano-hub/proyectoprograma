@@ -40,7 +40,7 @@ int main() {
 	Recursos recursos[MaxRecursos] = {0};
 	Menu menu;
 	EstadoJuego estado = EstadoMenu;
-	ConfigMap configuracion;
+	ConfigMap configuracion ={0};
 	/*Arbol arboles[MaxArboles];
 	Oro oros[MaxOro];*/
 

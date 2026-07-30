@@ -20,14 +20,14 @@ bool cargarMapa(const char *nombreArchivo,ConfigMap *configuracion,Recursos recu
         return false;
     }
     *cantRecursos =0;
-    if(fscanf(nivel,"%d",configuracion->cantidadEnemigos)!= 1){
+    if(fscanf(nivel,"%d",&configuracion->cantidadEnemigos)!= 1){
         printf("cantidad de enemigos inconclusa",nombreArchivo);
          fclose(nivel);
         return false;
     }
     for(int i = 0; i < FIL; i++){
         for(int j = 0; j < COL; j++){
-            fscanf(nivel, " %c", configuracion->mapa[i][j]);
+            fscanf(nivel, " %c", &configuracion->mapa[i][j]);
             //ALLEGRO_BITMAP *sprite = NULL;          
            
             if (configuracion -> mapa[i][j]=='a')
