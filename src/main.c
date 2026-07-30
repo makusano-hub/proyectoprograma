@@ -104,8 +104,13 @@ int main() {
 	spriteEnemigos[1] = al_load_bitmap("../imagenes/enemigorapido.png");
 	spriteEnemigos[2] = al_load_bitmap("../imagenes/enemigotanque.png");
 	//ALLEGRO_BITMAP *shettTorre = al_load_bitmap("../imagenes/sheettorre.png");
-	ALLEGRO_BITMAP *sheetJug = al_load_bitmap("../imagenes/sheetjugador.png");
+	//ALLEGRO_BITMAP *sheetJug = al_load_bitmap("../imagenes/sheetjugador.png");
 	ALLEGRO_BITMAP *sheetPortal = al_load_bitmap("../imagenes/sheetportal.png");
+
+	ALLEGRO_BITMAP *spriteJugador = al_load_bitmap("../imagenes/sheetlenador.png");
+	/*ALLEGRO_BITMAP *spritesJugador[2];
+	spritesJugador[0] =al_load_bitmap("../imagenes/sheetLenado.png");
+	spritesJugador[1] = al_load_bitmap("../imagenes/sheetMinero.png");
 	//spritesheet para "animacion"
 	/*
 	
@@ -159,7 +164,7 @@ int main() {
 
 
 
-	inicJugador(&Jugador,&configuracion);
+	inicJugador(&Jugador,&configuracion,spriteJugador);
 	inicTorres(torres,MaxTorres);
 	inicBala(balas,MaxBalas,bala);
 	inicTorreInicial(&castillo,&configuracion,castelo);
@@ -418,7 +423,8 @@ int main() {
 	al_destroy_bitmap(agua);
 	al_destroy_bitmap(castelo);
 	al_destroy_bitmap(sheetPortal);
-	al_destroy_bitmap(sheetJug);
+	//al_destroy_bitmap(sheetJug);
+	al_destroy_bitmap(spriteJugador);
 	
 	destruRanking(&datosranking);
 	destruMenu(&hud);

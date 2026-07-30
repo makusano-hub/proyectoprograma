@@ -32,7 +32,7 @@ void dibuMenuP(Menu *menu){
     int centroX = anchoMap /2;
     int centroY = altoMap /2 -60;
 
-    al_draw_filled_rectangle(centroX-180,centroY-100,centroX+100,centroY+100,al_map_rgb(0,0,255));
+   // al_draw_filled_rectangle(centroX-180,centroY-100,centroX+100,centroY+100,al_map_rgb(0,0,255));
 
     al_draw_text(menu->fuente,al_map_rgb(0,255,0),centroX,centroY -80,ALLEGRO_ALIGN_CENTRE,"defensa");
 

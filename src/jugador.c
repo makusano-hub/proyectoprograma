@@ -8,19 +8,32 @@
 #include "pantalla.h"
 
 
-void inicJugador(Jugador *j,ConfigMap *configuracion){ 
+void inicJugador(Jugador *j,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite){ 
+
     j->velocidad= 5;
-    j->sprite = al_load_bitmap("../imagenes/jugplaceholder.png");
+    j->sprite = sprite;//al_load_bitmap("../imagenes/jugplaceholder.png");
     j->ancho = 32;
     j->alto = 32;
+
     j->vida = 100;
+
 	j->oro = 0;
 	j->madera=0;
+
     j->ejex = 0;
     j->ejey = 0;
+
+	//j->activo = lenador;
 	
 	j->nombre[0] = '\0'; 
 	j->puntajeRank = 500;
+
+	j->frameActual =0;
+	j->filaAnimacion =0;
+	j->contadorAnimacion =0;
+	j->moviendose = false;
+
+
 
 	
 
@@ -37,6 +50,12 @@ void inicJugador(Jugador *j,ConfigMap *configuracion){
     } */  
 
 }
+/*void crearJugadores(){
+	j->
+}
+void inicJugadores(){
+
+}*/
 
 void actJugador(Jugador *j){
 
@@ -66,6 +85,11 @@ void dibuJugador(Jugador *j, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
   
    //al_draw_bitmap_region(j->sprite,0,0,al_get)
     al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
+
+	int origenX = j->frameActual * anchoframeJug;
+	int origenY = j->frameActual * altoFramejug;
+
+	al_draw_bitmap_region(j->sprite,origenX,origenY,anchoframeJug,altoFramejug,j->ejex,j->ejey,0);
   
 }
 
@@ -90,4 +114,25 @@ void movJugador(Jugador *j, teclado *t){
 				j->ejex -= j->velocidad;
 				//printf("izquierda\n");
 			}
+}
+void animacionJugador(Jugador *j){
+	if(j == NULL){
+		return;
+	}
+	if(!j->moviendose){
+		j->frameActual = 0;
+		j->contadorAnimacion=0;
+
+		return;
+	}
+	j->contadorAnimacion++;
+
+	if(j->contadorAnimacion>=FramesTickJug){
+		j->contadorAnimacion=0;
+		j->frameActual++;
+
+		if(j->frameActual >= FramesJug){
+			j->frameActual=0;
+		}
+	}
 }
