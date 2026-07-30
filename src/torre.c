@@ -11,8 +11,8 @@
 void inicTorreInicial(Torre *castillo,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite){
     castillo->ejex = 0;
     castillo->ejey = 0;
-    castillo->ancho = cuadrado;
-    castillo->alto = cuadrado;
+    castillo->ancho = cuadrado+10;
+    castillo->alto = cuadrado+10;
     castillo->activo = true;
     castillo->sprite = sprite; //al_load_bitmap("../imagenes/castelo.png");
     castillo->alcance = 320 ; //sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
@@ -198,7 +198,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Con
     int anchoFrame = anchoImagen / torres-> cantidadFase;
 
     int origenX = torres->faseConstruccion * anchoFrame;
-    al_draw_scaled_bitmap(torres->sprite,origenX,0,anchoFrame,altoImagen,torres->ejex,torres->ejey,torres->ancho,torres->alto,0);
+    al_draw_scaled_bitmap(torres->sprite,origenX,0,anchoFrame,altoImagen,torres->ejex,torres->ejey,torres->ancho,torres->alto+20,0);
   }  
 void dibuTorreS(Torre torres[],int cantidadTorres){
     for(int i =0; i<cantidadTorres;i++){

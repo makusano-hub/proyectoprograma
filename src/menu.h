@@ -14,6 +14,7 @@ typedef enum{
 typedef struct 
 {
     ALLEGRO_FONT *fuente;
+   // ALLEGRO_FONT *fuenteTitulo;
     //ALLEGRO_BITMAP *fondo;
     int opcion;
 

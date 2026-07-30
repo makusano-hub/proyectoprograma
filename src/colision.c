@@ -41,6 +41,7 @@ bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j){
                 if(configuracion-> mapa[fila][cola]=='f')
                 {
                     j->vida -= e->dano;
+                    j->puntajeRank -= 50;
                     printf("enemigo llego a meta %d\n", j->vida);
                     if(j->vida < 0 )
                     {
