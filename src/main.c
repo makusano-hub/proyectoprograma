@@ -301,7 +301,7 @@ int main() {
 					actDisparoTorre(&torres[i],balas,MaxBalas,enemigos,MAxEnemigos);
 				}
 				actBala(balas,MaxBalas,enemigos,MAxEnemigos);
-
+				contadorPortal++;
 				if(contadorPortal>= framTickPortal){
 					contadorPortal=0;					
 					framePortal++;
