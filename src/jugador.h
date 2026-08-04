@@ -16,10 +16,10 @@
 #define FramesJug 5
 #define FramesTickJug 8
 
-#define MaxJugadores
+#define MaxJugadores 2
 
-#define minero 0
-#define lenador 1
+#define minero 1
+#define lenador 0
 //#define entidades 2
 
 typedef struct{
@@ -65,8 +65,8 @@ typedef struct
 }Jugador;
 
 
-/*void inicDatosJugador(DatosJugador *dj)*/
-void inicJugador(Jugador *j,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite);
+void inicDatosJugador(DatosJugador *dj);
+void inicJugador(Jugador *j,int tipo,float x, float y,ALLEGRO_BITMAP *sprite,DatosJugador *dj);
 
 void inicJugadores(Jugador jugadores[],ConfigMap *configuracion,ALLEGRO_BITMAP *sprites[],DatosJugador *dj);
 

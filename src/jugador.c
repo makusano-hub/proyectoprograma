@@ -17,7 +17,7 @@ void inicDatosJugador(DatosJugador *dj){
 }
 
 
-void inicJugador(Jugador *j,float x, float y,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite,DatosJugador *dj){ 
+void inicJugador(Jugador *j,int tipo,float x, float y,ALLEGRO_BITMAP *sprite,DatosJugador *dj){ 
 
     j->velocidad= 5;
     j->sprite = sprite;//al_load_bitmap("../imagenes/jugplaceholder.png");
@@ -31,8 +31,8 @@ void inicJugador(Jugador *j,float x, float y,ConfigMap *configuracion,ALLEGRO_BI
 	j->puntajeRank = 2500;
 	*/
 
-    j->ejex = 0;
-    j->ejey = 0;
+    j->ejex = x;
+    j->ejey = y;
 
 	//j->activo = lenador;
 	
@@ -65,7 +65,7 @@ void inicJugadores(Jugador jugadores[],ConfigMap *configuracion,ALLEGRO_BITMAP *
 	float posXlenador =0;
 	float posYlenador =0;
 	buscarPosicion(configuracion,'j',&posXlenador,&posYlenador);
-	inicJugador(&jugadores[0],lenador,posXlenador,posYlenador,sprites[0],dj);
+	inicJugador(&jugadores[lenador],lenador,posXlenador,posYlenador,sprites[lenador],dj);
 
 	float posXminero = posXlenador;
 	float posYminero = posYlenador;
@@ -166,8 +166,10 @@ void animacionJugador(Jugador *j){
 }
 
 void cambiarJugador(Jugador jugadores[],int *jugadorActivo){
+
 	jugadores[*jugadorActivo].moviendose = false;
 	jugadores[*jugadorActivo].frameActual =0;
 
 	*jugadorActivo = (*jugadorActivo +1) % MaxJugadores;
+	
 }

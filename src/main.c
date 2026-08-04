@@ -70,6 +70,8 @@ int main() {
 	int nivelActual =0;
 	int cantidadNiveles = 4;
 
+	int jugadorActivo = lenador;
+
 
 	srand(time(NULL));
 	
@@ -114,9 +116,9 @@ int main() {
 
 	//ALLEGRO_BITMAP *spriteJugador = al_load_bitmap("../imagenes/sheetlenador.png");
 
-	ALLEGRO_BITMAP *spritesJugador[2];
-	spritesJugador[0] =al_load_bitmap("../imagenes/sheetLenado.png");
-	spritesJugador[1] = al_load_bitmap("../imagenes/sheetMinero.png");
+	ALLEGRO_BITMAP *spritesJugador[MaxJugadores];
+	spritesJugador[lenador] = al_load_bitmap("../imagenes/sheetlenado.png");
+	spritesJugador[minero] = al_load_bitmap("../imagenes/sheetminero.png");
 	
 	
 	
@@ -169,7 +171,7 @@ int main() {
 	}
 
 
-	
+	inicDatosJugador(&datosjugador);
 	inicJugadores(jugadores,&configuracion,spritesJugador,&datosjugador);
 	inicTorres(torres,MaxTorres);
 	inicBala(balas,MaxBalas,bala);
@@ -264,7 +266,7 @@ int main() {
 				}
 				else if (tecla == ALLEGRO_KEY_ENTER){
 					if(cantidadLetras == 3){
-						strcpy(Jugador.nombre,nombreTemporal);
+						strcpy(datosjugador.nombre,nombreTemporal);
 						estado = EstadoJugando;
 
 						//esto esta de momento. debe actualizarse
@@ -311,7 +313,7 @@ int main() {
 				
 					moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
 					animacion(&enemigos[i]);
-					colisionMetaEnemigo(&configuracion,&enemigos[i], &Jugador);
+					colisionMetaEnemigo(&configuracion,&enemigos[i], &jugadores[jugadorActivo]);
 				/*if(rango(&castillo,&enemigos[i])){
 				printf("enemigo%d en rango\n",i);
 				}*/
@@ -334,13 +336,13 @@ int main() {
 
 				construirTorres(torres,cantidadTorres);
 				//moverEnemigo(&enemigo,&teclado);
-				movJugador(&Jugador,&teclado);
-				animacionJugador(&Jugador);
-				actJugador(&Jugador);				
-				colisionRecursos(&Jugador, recursos, cantRecursos);
-				if(Jugador.vida <=0){
+				movJugador(&jugadores[jugadorActivo],&teclado);
+				animacionJugador(&jugadores[jugadorActivo]);
+				actJugador(&jugadores[jugadorActivo]);				
+				colisionRecursos(&jugadores[jugadorActivo], recursos, cantRecursos);
+				if(datosjugador.vida <=0){
 
-					registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
+					registrarPuntaje(datosjugador.nombre,datosjugador.puntajeRank);
 					//crear pantalla de derrota o fin de juego
 					running = false;
 
@@ -367,12 +369,12 @@ int main() {
 						inicTorres(torres,MaxTorres);
 						cantidadTorres =0;
 
-						buscarPosicion(&configuracion,'j',&Jugador.ejex,&Jugador.ejey);
+						buscarPosicion(&configuracion,'j',&jugadores[jugadorActivo].ejex,&jugadores[jugadorActivo].ejey);
 						inicTorreInicial(&castillo,&configuracion,castelo);
-						Jugador.puntajeRank += 500;
+						datosjugador.puntajeRank += 500;
 					}
 					else{
-						registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
+						registrarPuntaje(datosjugador.nombre,datosjugador.puntajeRank);
 						running = false;
 					}
 				}
@@ -408,7 +410,7 @@ int main() {
 					diOro(&oros[i]);	
 				}		*/				
 
-				dibuJugador(&Jugador,pasto,camino);
+				dibuJugador(&jugadores[jugadorActivo]);
 				dibuTorre(&castillo);
 				dibuTorreS(torres,cantidadTorres);
 				dibuBala(balas,MaxBalas);
@@ -417,7 +419,7 @@ int main() {
 				{
 				dibujoEnemigo(&enemigos[i],pasto,camino);
 				}		
-				dibuMenu(&hud,&Jugador);
+				dibuMenu(&hud,&jugadores[jugadorActivo]);
 			}
 			else if(estado == EstadoRanking){
 				al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_width(fondo),al_get_bitmap_height(fondo),0,0,anchoMap+anchoP,altoMap,0);				
@@ -442,7 +444,10 @@ int main() {
 	al_destroy_bitmap(castelo);
 	al_destroy_bitmap(sheetPortal);
 	//al_destroy_bitmap(sheetJug);
-	al_destroy_bitmap(spriteJugador);
+	for(int i =0;i<MaxJugadores;i++){
+		al_destroy_bitmap(spritesJugador[MaxJugadores]);
+	}
+	
 	
 	destruRanking(&datosranking);
 	destruMenu(&hud);

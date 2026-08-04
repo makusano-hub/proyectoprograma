@@ -20,7 +20,7 @@ typedef struct{
 
 bool initMenu(HUD *hud);
 
-void dibuMenu(HUD *hud, Jugador *j);
+void dibuMenu(HUD *hud, Jugador *j,DatosJugador *dj);
 
 void destruMenu(HUD *hud);
 
