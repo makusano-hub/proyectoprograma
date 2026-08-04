@@ -147,11 +147,11 @@ void dibujarMapa(ConfigMap *configuracion,
             if(configuracion-> mapa[i][j]== 'k'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
             }
-            if(configuracion->mapa == '.'){
+            if(configuracion->mapa[i][j] == '.'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 al_draw_bitmap(casa,j*cuadrado,i*cuadrado,0);
             }
-            if(configuracion->mapa == 'j'){
+            if(configuracion->mapa[i][j] == 'j'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 
             }

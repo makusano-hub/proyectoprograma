@@ -220,17 +220,17 @@ int main() {
 				}
 			}
 			else if(estado == EstadoJugando){
-				teclapresionada(&teclado, event.keyboard.keycode);
+				
 				if (event.keyboard.keycode == ALLEGRO_KEY_TAB)
 				{
-					cambiarJugador(jugadores,&configuracion);
+					cambiarJugador(jugadores,&jugadorActivo);
 				}
 				else{
 					teclapresionada(&teclado,event.keyboard.keycode);
 
 					if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
 
-					crearTorreJugador(torres,&cantidadTorres,&jugadores[jugadorActivo],&configuracion,torre);
+					crearTorreJugador(torres,&cantidadTorres,&jugadores[jugadorActivo],&datosjugador,&configuracion,torre);
 
 					}
 				}
@@ -313,7 +313,7 @@ int main() {
 				
 					moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
 					animacion(&enemigos[i]);
-					colisionMetaEnemigo(&configuracion,&enemigos[i], &jugadores[jugadorActivo]);
+					colisionMetaEnemigo(&configuracion,&enemigos[i], &jugadores[jugadorActivo],&datosjugador);
 				/*if(rango(&castillo,&enemigos[i])){
 				printf("enemigo%d en rango\n",i);
 				}*/
@@ -339,7 +339,7 @@ int main() {
 				movJugador(&jugadores[jugadorActivo],&teclado);
 				animacionJugador(&jugadores[jugadorActivo]);
 				actJugador(&jugadores[jugadorActivo]);				
-				colisionRecursos(&jugadores[jugadorActivo], recursos, cantRecursos);
+				colisionRecursos(&jugadores[jugadorActivo], recursos, cantRecursos,&datosjugador);
 				if(datosjugador.vida <=0){
 
 					registrarPuntaje(datosjugador.nombre,datosjugador.puntajeRank);
@@ -419,7 +419,7 @@ int main() {
 				{
 				dibujoEnemigo(&enemigos[i],pasto,camino);
 				}		
-				dibuMenu(&hud,&jugadores[jugadorActivo]);
+				dibuMenu(&hud,&jugadores[jugadorActivo],&datosjugador);
 			}
 			else if(estado == EstadoRanking){
 				al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_width(fondo),al_get_bitmap_height(fondo),0,0,anchoMap+anchoP,altoMap,0);				

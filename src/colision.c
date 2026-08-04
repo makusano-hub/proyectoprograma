@@ -20,7 +20,7 @@ bool colisionJugEn(Jugador j,Enemigo e){
             j.ejey <= recursos.y + recursos.alto  &&
             j.ejey + j.alto >= recursos.y);
 }*/
-bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j){
+bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j,DatosJugador *dj){
     if(e->vivo == false){
         return false;
     }
@@ -40,12 +40,12 @@ bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j){
                 }
                 if(configuracion-> mapa[fila][cola]=='f')
                 {
-                    j->vida -= e->dano;
-                    j->puntajeRank -= 50;
-                    printf("enemigo llego a meta %d\n", j->vida);
-                    if(j->vida < 0 )
+                    dj->vida -= e->dano;
+                    dj->puntajeRank -= 50;
+                    printf("enemigo llego a meta %d\n", dj->vida);
+                    if(dj->vida < 0 )
                     {
-                        j->vida =0;
+                        dj->vida =0;
                     }
                     e->vivo = false;
                     
@@ -55,7 +55,7 @@ bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j){
     }
      return false;
 }
-void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
+void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos,DatosJugador *dj){
 
     int auxExtraccion = 60;
     for(int i = 0 ; i<cantRecursos;i++){
@@ -91,10 +91,10 @@ void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos){
             r->valor -= 10;
             r->intervalo = 0;
             if(r->tipo == 'a'){
-                j->madera += extraidoMadera;
+                dj->madera += extraidoMadera;
             }
             if(r->tipo == 'o'){
-                j->oro += extraidOro;
+                dj->oro += extraidOro;
             }
             actRecursos(r);
         }

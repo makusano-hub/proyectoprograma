@@ -16,7 +16,7 @@ void inicTorreInicial(Torre *castillo,ConfigMap *configuracion,ALLEGRO_BITMAP *s
     castillo->activo = true;
     castillo->sprite = sprite; //al_load_bitmap("../imagenes/castelo.png");
     castillo->alcance = 320 ; //sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
-    castillo->dano = 40;
+    castillo->dano = 100;
 
     castillo->faseConstruccion=0;
     castillo->auxConstruccion =0;
@@ -56,7 +56,7 @@ void inicTorres(Torre torres[],int cantidadTorres){
 }
    // al_load_bitmap("../imagenes/torre.png");
     
-bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite){
+bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,DatosJugador *dj,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite){
 
     //posicionamiento jugador
 
@@ -67,8 +67,8 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Con
             return false;
         }
 
-        if(jugador->oro < costoOro || jugador->madera < costoMadera){
-            printf("no hay suficientes recursos oro %d, madera %d\n",jugador->oro,jugador->madera);
+        if(dj->oro < costoOro || dj->madera < costoMadera){
+            printf("no hay suficientes recursos oro %d, madera %d\n",dj->oro,dj->madera);
             return false;
             //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
         }
@@ -96,8 +96,8 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Con
              nueva->disparo=0;
              nueva->intervaloDisparo = 240;
 
-             jugador->oro -= costoOro;
-             jugador->madera -=costoMadera;
+             dj->oro -= costoOro;
+             dj->madera -=costoMadera;
             if(configuracion->mapa[posfila][poscolumna] =='t'){
 
                 configuracion-> mapa[posfila][poscolumna] = 'T';
