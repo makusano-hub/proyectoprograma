@@ -26,7 +26,7 @@ void inicJugador(Jugador *j,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite){
 	//j->activo = lenador;
 	
 	j->nombre[0] = '\0'; 
-	j->puntajeRank = 500;
+	j->puntajeRank = 2500;
 
 	j->frameActual =0;
 	j->filaAnimacion =0;
@@ -84,12 +84,13 @@ void dibuJugador(Jugador *j, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
  //al_draw_filled_rectangle(j->ejex,j->ejey, j->ejex+anchoJugador, j->ejey+altoJugador,al_map_rgb(255,0,0));
   
    //al_draw_bitmap_region(j->sprite,0,0,al_get)
-    al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
+  //  al_draw_scaled_bitmap(j->sprite,0,0,al_get_bitmap_width(j->sprite),al_get_bitmap_height(j->sprite), j->ejex, j->ejey,j->ancho,j->alto,0);
 
 	int origenX = j->frameActual * anchoframeJug;
-	int origenY = j->frameActual * altoFramejug;
+	
 
-	al_draw_bitmap_region(j->sprite,origenX,origenY,anchoframeJug,altoFramejug,j->ejex,j->ejey,0);
+	//al_draw_bitmap_region(j->sprite,origenX,0,anchoframeJug,altoFramejug,j->ejex,j->ejey,0);
+	al_draw_scaled_bitmap(j->sprite,origenX,0,anchoframeJug,altoFramejug,j->ejex,j->ejey,j->ancho,j->alto,0);
   
 }
 
@@ -97,21 +98,25 @@ void movJugador(Jugador *j, teclado *t){
     		if(t->arriba)
 			{
 				j->ejey -= j->velocidad;
+				j->moviendose =true;
 				//printf("arriba\n");
 			}
 			if(t->abajo)
 			{
 				j->ejey  += j->velocidad;
+				j->moviendose =true;
 				//printf("abajo\n");
 			}
 			if(t->der)
 			{
 				j->ejex += j->velocidad;
+				j->moviendose =true;
 				//printf("derecha\n");
 			}
 			if(t->izq)
 			{
 				j->ejex -= j->velocidad;
+				j->moviendose =true;
 				//printf("izquierda\n");
 			}
 }

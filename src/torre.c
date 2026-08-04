@@ -124,6 +124,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Con
         */
         
         }
+        return true;
     }
 
     void construirTorre(Torre *torre){

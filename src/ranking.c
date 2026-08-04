@@ -69,8 +69,10 @@ bool registrarPuntaje(const char nombre[],int puntuacion){
 
     int cantidad = leerRanking(ranking,MaxRanker);
     snprintf(ranking[cantidad].nombre,sizeof(ranking[cantidad].nombre),"%.3s",nombre);
+
     ranking[cantidad].puntuacion = puntuacion;
     cantidad++;
+    
     OrdenarPuntaje(ranking,cantidad);
     if(cantidad>MaxRanker){
         cantidad = MaxRanker;

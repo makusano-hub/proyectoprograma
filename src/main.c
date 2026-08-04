@@ -34,7 +34,7 @@ typedef enum{
 int main() {
 
 	teclado teclado;
-	Jugador Jugador;
+	Jugador Jugador;// convertir en arreglo de jugadores para multiple entidades de jugadores Jugador jugadore[Maxjugadores]
 	Enemigo enemigos[MAxEnemigos];
 	Portal spawn[MaxPortales];
 	Recursos recursos[MaxRecursos] = {0};
@@ -93,10 +93,13 @@ int main() {
 	ALLEGRO_BITMAP *agua = al_load_bitmap("../imagenes/agua.png");
 	ALLEGRO_BITMAP *oro = al_load_bitmap("../imagenes/sheetoro.png");//("../imagenes/oro.png");
 	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/sheetarbol.png");//("../imagenes/arbol.png");
-	ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
+	//ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/sheettorre.png");
-	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castelo.png");
+	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castillo.png");
 	ALLEGRO_BITMAP *bala = al_load_bitmap("../imagenes/bala.png");
+	ALLEGRO_BITMAP *casa = al_load_bitmap("../imagenes/casa.png");
+
+	ALLEGRO_BITMAP *torreOro = al_load_bitmap("../imagenes/toreOro.png");
 
 
 	ALLEGRO_BITMAP *spriteEnemigos[3];
@@ -111,8 +114,8 @@ int main() {
 	/*ALLEGRO_BITMAP *spritesJugador[2];
 	spritesJugador[0] =al_load_bitmap("../imagenes/sheetLenado.png");
 	spritesJugador[1] = al_load_bitmap("../imagenes/sheetMinero.png");
-	//spritesheet para "animacion"
-	/*
+	spritesheet para "animacion"
+	
 	
 	
 	ALLEGRO_BITMAP *sheetoro = al_load_bitmap(../imagenes/sheetoro.png);
@@ -319,11 +322,13 @@ int main() {
 				construirTorres(torres,cantidadTorres);
 				//moverEnemigo(&enemigo,&teclado);
 				movJugador(&Jugador,&teclado);
+				animacionJugador(&Jugador);
 				actJugador(&Jugador);				
 				colisionRecursos(&Jugador, recursos, cantRecursos);
 				if(Jugador.vida <=0){
 
 					registrarPuntaje(Jugador.nombre,Jugador.puntajeRank);
+					//crear pantalla de derrota o fin de juego
 					running = false;
 
 				}	

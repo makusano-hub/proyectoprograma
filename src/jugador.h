@@ -13,7 +13,7 @@
 
 #define anchoframeJug 64
 #define altoFramejug 64
-#define FramesJug 6
+#define FramesJug 5
 #define FramesTickJug 8
 
 #define minero 0

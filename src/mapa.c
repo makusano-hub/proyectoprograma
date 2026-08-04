@@ -21,7 +21,7 @@ bool cargarMapa(const char *nombreArchivo,ConfigMap *configuracion,Recursos recu
     }
     *cantRecursos =0;
     if(fscanf(nivel,"%d",&configuracion->cantidadEnemigos)!= 1){
-        printf("cantidad de enemigos inconclusa",nombreArchivo);
+        printf("cantidad de enemigos inconclusa");
          fclose(nivel);
         return false;
     }
@@ -144,6 +144,9 @@ void dibujarMapa(ConfigMap *configuracion,
                 //al_draw_bitmap(sheetPortal,j*cuadrado, i*cuadrado,0);                
             }
             if(configuracion-> mapa[i][j]== 'k'){
+                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
+            }
+            if(configuracion->mapa == '.'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
             }
         }
