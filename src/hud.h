@@ -15,6 +15,7 @@ typedef struct{
     ALLEGRO_BITMAP *iconoOro; 
     ALLEGRO_BITMAP *iconoMadera; 
     ALLEGRO_BITMAP *iconoVida;
+    ALLEGRO_BITMAP *iconoTorre;
 }HUD;
 
 bool initMenu(HUD *hud);

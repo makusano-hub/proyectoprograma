@@ -8,6 +8,7 @@ bool initMenu(HUD *hud){
     hud->iconoMadera = al_load_bitmap("../imagenes/wood_5.png");
     hud->iconoOro = al_load_bitmap("../imagenes/iconoOro(1).png");
     hud->iconoVida = al_load_bitmap("../imagenes/iconoVida(1).png");
+    hud->iconoTorre = al_load_bitmap("../imagenes/toreOro.png");
     if(hud->fuente == NULL){
         return false;
     }
@@ -47,6 +48,9 @@ void dibuMenu(HUD *hud, Jugador *j){
     al_draw_scaled_bitmap(hud->iconoMadera,0,0,al_get_bitmap_width(hud->iconoMadera),al_get_bitmap_height(hud->iconoMadera),xMenu+100,115,32,32,0);
 
     al_draw_textf(hud->fuente,al_map_rgb(255,255,0), xMenu + 20,160,0,"puntaje: %d",j->puntajeRank);
+
+    al_draw_scaled_bitmap(hud->iconoTorre,0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),xMenu+100,200,32,32,0);
+    al_draw_textf(hud->fuente,al_map_rgb(255,80,80),xMenu+20, 200,0,"Coste" );
 
 
 }

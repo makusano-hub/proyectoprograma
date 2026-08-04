@@ -16,24 +16,36 @@
 #define FramesJug 5
 #define FramesTickJug 8
 
+#define MaxJugadores
+
 #define minero 0
 #define lenador 1
-#define entidades 2
+//#define entidades 2
+
+typedef struct{
+  char nombre[4];
+  int puntajeRank;
+
+  int vida;
+  int oro;
+  int madera;
+
+}DatosJugador;
 
 
 typedef struct 
 {
 
-  char nombre[4];
-  int puntajeRank;
+  //char nombre[4];
+  //int puntajeRank;
 
   float ejex;
   float ejey;
 
   float velocidad;
-  int vida;   /* data */
-  int oro;
-  int madera;
+  //int vida;   
+  //int oro;
+  //int madera;
 
   float casillaX;
   float casillaY;
@@ -47,17 +59,24 @@ typedef struct
   int contadorAnimacion;
   bool moviendose;
 
-  
+  DatosJugador *datos;
 
   ALLEGRO_BITMAP *sprite;
 }Jugador;
 
+
+/*void inicDatosJugador(DatosJugador *dj)*/
 void inicJugador(Jugador *j,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite);
+
+void inicJugadores(Jugador jugadores[],ConfigMap *configuracion,ALLEGRO_BITMAP *sprites[],DatosJugador *dj);
+
 void actJugador(Jugador *j);
-void dibuJugador(Jugador *j,ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino);
+void dibuJugador(Jugador *j);
+void dibuJugadores(Jugador jugadores[],int cantidad);
+
 void movJugador(Jugador *j, teclado *t);
 
-void cambiarJugador(Jugador *j);
+void cambiarJugador(Jugador jugadores[],int *jugadorActivo);
 void animacionJugador(Jugador *j);
 
 #endif

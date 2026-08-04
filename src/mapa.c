@@ -112,6 +112,7 @@ void dibujarMapa(ConfigMap *configuracion,
                     ALLEGRO_BITMAP *oro, 
                     ALLEGRO_BITMAP *arbol,                   
                     ALLEGRO_BITMAP *sheetPortal,
+                    ALLEGRO_BITMAP *casa,
                     int framePortal){
     
     for (int i =0 ; i<FIL; i++){        
@@ -148,6 +149,11 @@ void dibujarMapa(ConfigMap *configuracion,
             }
             if(configuracion->mapa == '.'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
+                al_draw_bitmap(casa,j*cuadrado,i*cuadrado,0);
+            }
+            if(configuracion->mapa == 'j'){
+                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
+                
             }
         }
 

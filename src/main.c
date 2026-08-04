@@ -34,7 +34,9 @@ typedef enum{
 int main() {
 
 	teclado teclado;
-	Jugador Jugador;// convertir en arreglo de jugadores para multiple entidades de jugadores Jugador jugadore[Maxjugadores]
+	//Jugador Jugador;// convertir en arreglo de jugadores para multiple entidades de jugadores Jugador jugadore[Maxjugadores]
+	Jugador jugadores[MaxJugadores];
+	DatosJugador datosjugador;
 	Enemigo enemigos[MAxEnemigos];
 	Portal spawn[MaxPortales];
 	Recursos recursos[MaxRecursos] = {0};
@@ -110,14 +112,15 @@ int main() {
 	//ALLEGRO_BITMAP *sheetJug = al_load_bitmap("../imagenes/sheetjugador.png");
 	ALLEGRO_BITMAP *sheetPortal = al_load_bitmap("../imagenes/sheetportal.png");
 
-	ALLEGRO_BITMAP *spriteJugador = al_load_bitmap("../imagenes/sheetlenador.png");
-	/*ALLEGRO_BITMAP *spritesJugador[2];
+	//ALLEGRO_BITMAP *spriteJugador = al_load_bitmap("../imagenes/sheetlenador.png");
+
+	ALLEGRO_BITMAP *spritesJugador[2];
 	spritesJugador[0] =al_load_bitmap("../imagenes/sheetLenado.png");
 	spritesJugador[1] = al_load_bitmap("../imagenes/sheetMinero.png");
-	spritesheet para "animacion"
 	
 	
 	
+	/*
 	ALLEGRO_BITMAP *sheetoro = al_load_bitmap(../imagenes/sheetoro.png);
 	ALLEGRO_BITMAP *sheetmadera = al_load_bitmap(../imagenes/sheetarbol.png);
 
@@ -166,8 +169,8 @@ int main() {
 	}
 
 
-
-	inicJugador(&Jugador,&configuracion,spriteJugador);
+	
+	inicJugadores(jugadores,&configuracion,spritesJugador,&datosjugador);
 	inicTorres(torres,MaxTorres);
 	inicBala(balas,MaxBalas,bala);
 	inicTorreInicial(&castillo,&configuracion,castelo);
@@ -216,12 +219,22 @@ int main() {
 			}
 			else if(estado == EstadoJugando){
 				teclapresionada(&teclado, event.keyboard.keycode);
-
-				if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
-
-					crearTorreJugador(torres,&cantidadTorres,&Jugador,&configuracion,torre);
-
+				if (event.keyboard.keycode == ALLEGRO_KEY_TAB)
+				{
+					cambiarJugador(jugadores,&configuracion);
 				}
+				else{
+					teclapresionada(&teclado,event.keyboard.keycode);
+
+					if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+
+					crearTorreJugador(torres,&cantidadTorres,&jugadores[jugadorActivo],&configuracion,torre);
+
+					}
+				}
+				
+
+				
 			}
 			else if(estado == EstadoRanking){
 				//cargarRanking(&datosranking);
@@ -382,7 +395,7 @@ int main() {
 			}
 			else if(estado == EstadoJugando){
 
-				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,sheetPortal,framePortal);
+				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,sheetPortal,casa,framePortal);
 
 				for(int i =0; i<cantRecursos; i++){
 					dibRecursos(&recursos[i]);
