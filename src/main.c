@@ -71,6 +71,7 @@ int main() {
 	int cantidadNiveles = 4;
 
 	int jugadorActivo = lenador;
+	TipoTorre torreSeleccionada = torreNormal;
 
 
 	srand(time(NULL));
@@ -226,12 +227,26 @@ int main() {
 				{
 					cambiarJugador(jugadores,&jugadorActivo);
 				}
+				else if(event.keyboard.keycode == ALLEGRO_KEY_1){
+					torreSeleccionada = torreNormal;
+				}
+				else if(event.keyboard.keycode == ALLEGRO_KEY_2){
+					torreSeleccionada = torreRapida;
+				}
 				else{
 					teclapresionada(&teclado,event.keyboard.keycode);
 
 					if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+						ALLEGRO_BITMAP *spriteTorreElegido;
+						if(torreSeleccionada == torreRapida){
+							spriteTorreElegido = torreOro;
+						}
+						else{
+							spriteTorreElegido = torre;
+						}
 
-					crearTorreJugador(torres,&cantidadTorres,&jugadores[jugadorActivo],&datosjugador,&configuracion,torre);
+					crearTorreJugador(torres,&cantidadTorres,&jugadores[jugadorActivo],&datosjugador,&configuracion,spriteTorreElegido,
+						torreSeleccionada);
 
 					}
 				}
@@ -445,6 +460,8 @@ int main() {
 	al_destroy_bitmap(agua);
 	al_destroy_bitmap(castelo);
 	al_destroy_bitmap(sheetPortal);
+	al_destroy_bitmap(torre);
+	al_destroy_bitmap(torreOro);
 	//al_destroy_bitmap(sheetJug);
 	/*for(int i =0;i<MaxJugadores;i++){
 		al_destroy_bitmap(spritesJugador[MaxJugadores]);
