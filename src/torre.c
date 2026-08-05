@@ -56,7 +56,7 @@ void inicTorres(Torre torres[],int cantidadTorres){
 }
    // al_load_bitmap("../imagenes/torre.png");
     
-bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,DatosJugador *dj,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite){
+bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,DatosJugador *dj,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite,TipoTorre tipo){
 
     //posicionamiento jugador
 
@@ -72,10 +72,13 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
             return false;
             //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
         }
+
         else{   
             if(*cantidadTorres < MaxTorres){
 
               Torre *nueva = &torres[*cantidadTorres];
+
+              nueva->tipo = tipo;
 
              nueva->ejex = poscolumna * cuadrado;
              nueva->ejey = posfila *cuadrado;
@@ -83,21 +86,35 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
              nueva->ancho=cuadrado;
              nueva->alto=cuadrado;
 
-             nueva->dano = 10;
-             nueva->alcance = 192;
+            
 
              nueva->activo = true;
              nueva->sprite= sprite;
 
              nueva->faseConstruccion =0;
              nueva->auxConstruccion=0;
-             nueva->cantidadFase = 5;
-             nueva->construida = false;
+             
              nueva->disparo=0;
-             nueva->intervaloDisparo = 240;
+             
 
              dj->oro -= costoOro;
              dj->madera -=costoMadera;
+             if(tipo == torreRapida){
+
+                nueva->cantidadFase =1;
+                nueva->construida = true;
+                nueva->dano = 5;
+                nueva->alcance = 192;
+                nueva->intervaloDisparo = 10;
+             }
+             else if(tipo == torreNormal){
+                nueva->cantidadFase = 5;
+                nueva->construida = false;
+                nueva->dano = 20;
+                nueva->alcance = 320;
+                nueva->intervaloDisparo = 240;
+             }
+
             if(configuracion->mapa[posfila][poscolumna] =='t'){
 
                 configuracion-> mapa[posfila][poscolumna] = 'T';

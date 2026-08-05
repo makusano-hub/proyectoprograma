@@ -11,8 +11,16 @@
 #define costoOro 10
 #define costoMadera 10
 
+typedef enum{
+    torreNormal,
+    torreRapida
+}TipoTorre;
+
 typedef struct 
 {
+
+    TipoTorre tipo;
+
     int dano;
     float alcance;
     
@@ -48,7 +56,7 @@ typedef struct{
 void inicTorreInicial(Torre *castillo,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite);
 void inicTorres(Torre torres[], int cantidadTorres);
 
-bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,DatosJugador *dj,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite);
+bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,DatosJugador *dj,ConfigMap *configuracion, ALLEGRO_BITMAP *sprite,TipoTorre tipo);
 
 void construirTorre(Torre *torre);
 void construirTorres(Torre torres[], int cantidadTorres);
