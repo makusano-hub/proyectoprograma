@@ -101,6 +101,7 @@ int main() {
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/sheettorre.png");
 	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castillo.png");
 	ALLEGRO_BITMAP *bala = al_load_bitmap("../imagenes/bala.png");
+	
 	ALLEGRO_BITMAP *casa = al_load_bitmap("../imagenes/casa.png");
 
 	ALLEGRO_BITMAP *torreOro = al_load_bitmap("../imagenes/toreOro.png");
