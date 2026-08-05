@@ -117,7 +117,7 @@ int main() {
 	//ALLEGRO_BITMAP *spriteJugador = al_load_bitmap("../imagenes/sheetlenador.png");
 
 	ALLEGRO_BITMAP *spritesJugador[MaxJugadores];
-	spritesJugador[lenador] = al_load_bitmap("../imagenes/sheetlenado.png");
+	spritesJugador[lenador] = al_load_bitmap("../imagenes/sheetlenador.png");
 	spritesJugador[minero] = al_load_bitmap("../imagenes/sheetminero.png");
 	
 	
@@ -410,7 +410,8 @@ int main() {
 					diOro(&oros[i]);	
 				}		*/				
 
-				dibuJugador(&jugadores[jugadorActivo]);
+				//dibuJugador(&jugadores[jugadorActivo]);
+				dibuJugadores(jugadores,MaxJugadores,jugadorActivo);
 				dibuTorre(&castillo);
 				dibuTorreS(torres,cantidadTorres);
 				dibuBala(balas,MaxBalas);
@@ -444,9 +445,9 @@ int main() {
 	al_destroy_bitmap(castelo);
 	al_destroy_bitmap(sheetPortal);
 	//al_destroy_bitmap(sheetJug);
-	for(int i =0;i<MaxJugadores;i++){
+	/*for(int i =0;i<MaxJugadores;i++){
 		al_destroy_bitmap(spritesJugador[MaxJugadores]);
-	}
+	}*/
 	
 	
 	destruRanking(&datosranking);

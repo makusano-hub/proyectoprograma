@@ -38,6 +38,7 @@ typedef struct
 
   //char nombre[4];
   //int puntajeRank;
+  int tipo;
 
   float ejex;
   float ejey;
@@ -72,7 +73,7 @@ void inicJugadores(Jugador jugadores[],ConfigMap *configuracion,ALLEGRO_BITMAP *
 
 void actJugador(Jugador *j);
 void dibuJugador(Jugador *j);
-void dibuJugadores(Jugador jugadores[],int cantidad);
+void dibuJugadores(Jugador jugadores[],int cantidad, int jugadoActivo);
 
 void movJugador(Jugador *j, teclado *t);
 
