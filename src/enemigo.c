@@ -53,7 +53,7 @@ void crearTipoEnemigo(Enemigo *e, int enemigoTipo, ALLEGRO_BITMAP *spritesEnemig
         //e->tinte = al_map_rgb(255,255,255);
     }
     else if(enemigoTipo == 1){//rapido
-        e->velocidad = 1.65f;
+        e->velocidad = 1.5f; //aje la velocidad previa
         e->vida = 12;
         e->dano = 1;
                

@@ -101,7 +101,7 @@ int main() {
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/sheettorre.png");
 	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castillo.png");
 	ALLEGRO_BITMAP *bala = al_load_bitmap("../imagenes/bala.png");
-	
+	ALLEGRO_BITMAP *aldea = al_load_bitmap("../imagenes/aldea.png");
 	ALLEGRO_BITMAP *casa = al_load_bitmap("../imagenes/casa.png");
 
 	ALLEGRO_BITMAP *torreOro = al_load_bitmap("../imagenes/toreOro.png");
@@ -398,7 +398,7 @@ int main() {
 			}
 			else if(estado == EstadoJugando){
 
-				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,sheetPortal,casa,framePortal);
+				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,sheetPortal,casa,aldea,framePortal);
 
 				for(int i =0; i<cantRecursos; i++){
 					dibRecursos(&recursos[i]);

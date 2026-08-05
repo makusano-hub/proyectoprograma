@@ -113,6 +113,7 @@ void dibujarMapa(ConfigMap *configuracion,
                     ALLEGRO_BITMAP *arbol,                   
                     ALLEGRO_BITMAP *sheetPortal,
                     ALLEGRO_BITMAP *casa,
+                    ALLEGRO_BITMAP *aldea,
                     int framePortal){
     
     for (int i =0 ; i<FIL; i++){        
@@ -129,28 +130,35 @@ void dibujarMapa(ConfigMap *configuracion,
                 //al_draw_bitmap_region(terreno, 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                al_draw_bitmap(agua, j*cuadrado, i*cuadrado, 0);
             }           
-            if(configuracion-> mapa[i][j]== 'c' || configuracion-> mapa[i][j] == 'e'){
+            if(configuracion-> mapa[i][j]== 'c' || configuracion-> mapa[i][j] == 'e')
+            {
                  //al_draw_rectangle(j*cuadrado, i*cuadrado, j*cuadrado+cuadrado, i*cuadrado+cuadrado, al_map_rgb(255, 255, 0), 1);
                  //al_draw_bitmap_region(camino, 32, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(camino, j*cuadrado, i*cuadrado, 0);
             }                    
-           if(configuracion-> mapa[i][j]== 'f'){
+           if(configuracion-> mapa[i][j]== 'f')
+            {
                 al_draw_bitmap(pasto, j*cuadrado,i*cuadrado,0);
-                al_draw_rectangle(j*cuadrado,i*cuadrado, j*cuadrado + cuadrado, i*cuadrado+cuadrado,al_map_rgb(255,0,0),1);
+                 al_draw_scaled_bitmap(aldea,0,0,al_get_bitmap_width(aldea),al_get_bitmap_height(aldea),j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);
+                //al_draw_rectangle(j*cuadrado,i*cuadrado, j*cuadrado + cuadrado, i*cuadrado+cuadrado,al_map_rgb(255,0,0),1);
             }
-            if(configuracion-> mapa[i][j]== 'e'){
+            if(configuracion-> mapa[i][j]== 'e')
+            {
                 int origenX =framePortal *anchoFramePortal;
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 al_draw_scaled_bitmap(sheetPortal,origenX,0,anchoFramePortal,altoFramePortal,j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);
                 //al_draw_bitmap(sheetPortal,j*cuadrado, i*cuadrado,0);                
             }
-            if(configuracion-> mapa[i][j]== 'k'){
-                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-            }
-            if(configuracion->mapa[i][j] == 'y'){
-                al_draw_bitmap(casa,j*cuadrado,i*cuadrado,0);
+            if(configuracion-> mapa[i][j]== 'k')
+            {
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                
+            }
+            if(configuracion->mapa[i][j] == '.'){
+                
+                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
+                al_draw_scaled_bitmap(casa,0,0,al_get_bitmap_width(casa),al_get_bitmap_height(casa),j* cuadrado, i*cuadrado,cuadrado,cuadrado,0 );
+                //al_draw_bitmap(casa,j*cuadrado,i*cuadrado,0);
             }
             if(configuracion->mapa[i][j] == 'j'){
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
