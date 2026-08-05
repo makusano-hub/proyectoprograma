@@ -51,17 +51,19 @@ void dibuMenu(HUD *hud, Jugador *j,DatosJugador *dj){
 
     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"TORRES");
 
-    al_draw_tinted_scaled_bitmap(hud->iconoTorre,al_map_rgb(80,80,80),0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),xMenu+20,210,48,48,0);
-     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"Torre Normal"); 
-    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"Coste Oro: 10");
-    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"Coste Madera: 10");
+    al_draw_tinted_scaled_bitmap(hud->iconoTorre,al_map_rgb(80,80,80),0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),
+    xMenu+20,210,48,48,0);
+     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,210,0,"Torre Normal"); 
+    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,230,0,"Coste Oro: 10");
+    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,240,0,"Coste Madera: 10");
 
 
-     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"Torre Rapida");
-      al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"Coste Oro: 30");
-       al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"Coste Madera: 30");
-    al_draw_scaled_bitmap(hud->iconoTorre,0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),xMenu+100,200,32,32,0);
-    al_draw_textf(hud->fuente,al_map_rgb(255,80,80),xMenu+20, 200,0,"Coste" );
+    al_draw_scaled_bitmap(hud->iconoTorre,0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),xMenu+20,280,48,48,0);
+     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,280,0,"Torre Rapida");
+      al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,300,0,"Coste Oro: 30");
+       al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,310,0,"Coste Madera: 30");
+    
+    //al_draw_textf(hud->fuente,al_map_rgb(255,80,80),xMenu+20, 200,0,"Coste" );
 
 
 }
