@@ -11,6 +11,9 @@
 #define costoOro 10
 #define costoMadera 10
 
+#define costoOroRapido 20
+#define costoMaderaRapido 20
+
 typedef enum{
     torreNormal,
     torreRapida

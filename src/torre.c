@@ -97,8 +97,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
              nueva->disparo=0;
              
 
-             dj->oro -= costoOro;
-             dj->madera -=costoMadera;
+            
              if(tipo == torreRapida){
 
                 nueva->cantidadFase =1;
@@ -106,6 +105,8 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
                 nueva->dano = 5;
                 nueva->alcance = 192;
                 nueva->intervaloDisparo = 10;
+                dj->oro -= costoOroRapido;
+                dj->madera -=costoMaderaRapido;
              }
              else if(tipo == torreNormal){
                 nueva->cantidadFase = 5;
@@ -113,6 +114,8 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
                 nueva->dano = 20;
                 nueva->alcance = 320;
                 nueva->intervaloDisparo = 240;
+                dj->oro -= costoOro;
+                dj->madera -=costoMadera;
              }
 
             if(configuracion->mapa[posfila][poscolumna] =='t'){
