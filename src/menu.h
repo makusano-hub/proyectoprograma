@@ -24,7 +24,8 @@ bool inicMenuP(Menu *menu);
 void seleccionMenu(Menu *menu, int direccion);
 void dibuMenuP(Menu *menu);
 void dibuMenuRanking(Menu *menu, const char nombreTemporal[]);
-void dibuPantallaFinal(Menu *menu, bool victoria, int puntaje);
+void dibuPantallaFinalVictoria(Menu *menu, int puntaje);
+void dibuPantallaFinalDerrota(Menu *menu, int puntaje);
 void destruMenuP(Menu *menu);
 Opciones obtenerOpcionMenu(Menu *menu);
 

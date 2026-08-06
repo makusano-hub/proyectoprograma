@@ -369,9 +369,6 @@ int main() {
 					//crear pantalla de derrota o fin de juego
 					
 					estado = EstadoDerrota;
-
-					//running = false;
-
 				}	
 				else if(nivelTerminado(&configuracion,enemigos,MAxEnemigos)){
 
@@ -455,10 +452,10 @@ int main() {
 				
 			}
 			else if(estado == EstadoVictoria){
-				dibuPantallaFinal(&menu,true,datosjugador.puntajeRank);
+				dibuPantallaFinalVictoria(&menu,datosjugador.puntajeRank);
 			}
 			else if(estado == EstadoDerrota){
-				dibuPantallaFinal(&menu,true,datosjugador.puntajeRank);
+				dibuPantallaFinalDerrota(&menu,datosjugador.puntajeRank);
 			}	
 
 			
