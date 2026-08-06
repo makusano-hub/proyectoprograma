@@ -67,6 +67,8 @@ void construirTorres(Torre torres[], int cantidadTorres);
 void dibuTorre(Torre *torre);
 void dibuTorreS(Torre torres[],int cantidadTorres);
 
+void dibuCastillo(Torre *castillo);
+
 bool rango(Torre *torre, Enemigo *e);
 
 

@@ -9,10 +9,16 @@
 //void disparoTorre(Torre *T, Enemigo *e);
 
 void inicTorreInicial(Torre *castillo,ConfigMap *configuracion,ALLEGRO_BITMAP *sprite){
+
+    float PosKX;
+    float PosKY;
+    /*
     castillo->ejex = 0;
-    castillo->ejey = 0;
-    castillo->ancho = cuadrado+10;
-    castillo->alto = cuadrado+10;
+    castillo->ejey = 0;*/
+
+    castillo->ancho = 96;
+    castillo->alto = 96;
+
     castillo->activo = true;
     castillo->sprite = sprite; //al_load_bitmap("../imagenes/castelo.png");
     castillo->alcance = 320 ; //sqrt(pow(COL*cuadrado,2) +  pow(FIL*cuadrado,2)); 
@@ -24,8 +30,16 @@ void inicTorreInicial(Torre *castillo,ConfigMap *configuracion,ALLEGRO_BITMAP *s
     castillo->construida = true;
     castillo->disparo=0;
     castillo->intervaloDisparo=240;
-    buscarPosicion(configuracion,'k',&castillo->ejex,&castillo->ejey);
-    
+    if(buscarPosicion(configuracion,'k',&PosKX,&PosKY)){
+        float centroX = PosKX + cuadrado / 2.0;
+        float centroY = PosKY + cuadrado / 2.0;
+        
+        castillo->ejex = centroX -castillo->ancho /2.0f;
+        castillo->ejey = centroY -castillo->alto /2.0f;
+    }
+   
+
+  
 }
 /*void dibu(Torre *castillo){
      al_draw_scaled_bitmap(castillo->sprite,0,0,al_get_bitmap_width(castillo->sprite),al_get_bitmap_height(castillo->sprite),castillo->ejex,castillo->ejey,castillo->ancho,castillo->alto,0);
@@ -185,15 +199,7 @@ bool rango(Torre *torre, Enemigo *e){
     //debo implementar cual es el rango de la torre, ejemplo la distancia de pitagoras es >= rangoTorre entonces torre puede disparar
     return pitagorasDistancia<=torre->alcance;
     
-}   
-
- /*bool disparo(Torre *torre){
-    if(torre->alcance>= pitagorasDistancia){
-        return false;
-    }
- }*/
-
- 
+}    
 void dibuTorre(Torre *torres){
     if(!torres->activo){
         return;
@@ -206,12 +212,17 @@ void dibuTorre(Torre *torres){
     int origenX = torres->faseConstruccion * anchoFrame;
     al_draw_scaled_bitmap(torres->sprite,origenX,0,anchoFrame,altoImagen,torres->ejex,torres->ejey,torres->ancho,torres->alto+20,0);
 }
-  
+
 void dibuTorreS(Torre torres[],int cantidadTorres){
     for(int i =0; i<cantidadTorres;i++){
         dibuTorre(&torres[i]);
     }
 }
 
-//anadir disparo o sea balas
+void dibuCastillo(Torre *castillo){
+    int origenX =0;
+    int origenY =0;
+
+    al_draw_scaled_bitmap(castillo->sprite,origenX,origenY,32,32,castillo->ejex,castillo->ejey,castillo->ancho,castillo->alto,0);
+}
 

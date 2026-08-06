@@ -102,7 +102,8 @@ int main() {
 	ALLEGRO_BITMAP *arbol = al_load_bitmap("../imagenes/sheetarbol.png");//("../imagenes/arbol.png");
 	//ALLEGRO_BITMAP *portal = al_load_bitmap("../imagenes/portal.png");
 	ALLEGRO_BITMAP *torre = al_load_bitmap("../imagenes/sheettorre.png");
-	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castillo.png");
+	//ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castillo.png");
+	ALLEGRO_BITMAP *castelo = al_load_bitmap("../imagenes/castillo_muros.png");
 	ALLEGRO_BITMAP *bala = al_load_bitmap("../imagenes/bala.png");
 	ALLEGRO_BITMAP *aldea = al_load_bitmap("../imagenes/aldea.png");
 	ALLEGRO_BITMAP *casa = al_load_bitmap("../imagenes/casa.png");
@@ -124,6 +125,7 @@ int main() {
 	spritesJugador[lenador] = al_load_bitmap("../imagenes/sheetlenador.png");
 	spritesJugador[minero] = al_load_bitmap("../imagenes/sheetminero.png");
 	
+	//ALLEGRO_BITMAP *tileCastillo = al_load_bitmap("../imagenes/castillo_muros.png");
 	
 	
 	/*
@@ -419,15 +421,18 @@ int main() {
 			}
 			else if(estado == EstadoJugando){
 
-				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,sheetPortal,casa,aldea,framePortal);
+				dibujarMapa(&configuracion,terreno,pasto,camino,agua,oro,arbol,sheetPortal,casa,aldea,castelo,framePortal);
 
 				for(int i =0; i<cantRecursos; i++){
 					dibRecursos(&recursos[i]);
 				}	
 				//dibuJugador(&jugadores[jugadorActivo]);
-				dibuJugadores(jugadores,MaxJugadores,jugadorActivo);
-				dibuTorre(&castillo);
+				
+				//dibuTorre(&castillo);
+				//dibuCastillo(&castillo);
 				dibuTorreS(torres,cantidadTorres);
+
+				dibuJugadores(jugadores,MaxJugadores,jugadorActivo);
 				dibuBala(balas,MaxBalas);
 
 				for(int i =0; i<MAxEnemigos;i++)
