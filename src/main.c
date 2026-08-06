@@ -302,15 +302,15 @@ int main() {
 					}					
 				}
 				else if(cantidadLetras<3){
-						if(caracter>= 'a' && caracter <= 'z'){
-							caracter = caracter - 'a' + 'A';
-						}
-						if(caracter>= 'A' && caracter <= 'Z'){
-							nombreTemporal[cantidadLetras] = (char)caracter;
-							cantidadLetras++;
-							nombreTemporal[cantidadLetras] = '\0';
-						}
+					if(caracter>= 'a' && caracter <= 'z'){
+						caracter = caracter - 'a' + 'A';
 					}
+					if(caracter>= 'A' && caracter <= 'Z'){
+						nombreTemporal[cantidadLetras] = (char)caracter;
+						cantidadLetras++;
+						nombreTemporal[cantidadLetras] = '\0';
+					}
+				}
 			}
 		}
 
@@ -325,22 +325,20 @@ int main() {
 			{
 				for (int i = 0; i < cantidadPortales; i++) {
    					 spawn[i].tiempo++;
-					}
+				}
 
-					spawnEnemigos(&configuracion,spawn,cantidadPortales,enemigos,MAxEnemigos,spriteEnemigos);
+				spawnEnemigos(&configuracion,spawn,cantidadPortales,enemigos,MAxEnemigos,spriteEnemigos);
 
 				for(int i =0; i< MAxEnemigos; i++){	
 					if(!enemigos[i].vivo){
-					continue;
-				     }							
+						continue;
+				    }							
 				
 					moverEnemigoCamino(&enemigos[i],&caminoEnemigos[enemigos[i].portalOrigen]);//cambiar que cada enemigo calcule su camino
 					animacion(&enemigos[i]);
-					colisionMetaEnemigo(&configuracion,&enemigos[i], &jugadores[jugadorActivo],&datosjugador);
-				/*if(rango(&castillo,&enemigos[i])){
-				printf("enemigo%d en rango\n",i);
-				}*/
-				}	 
+					colisionMetaEnemigo(&configuracion,&enemigos[i], &jugadores[jugadorActivo],&datosjugador);				
+				}
+
 				actDisparoTorre(&castillo,balas,MaxBalas,enemigos,MAxEnemigos);
 
 				for(int i =0;i<cantidadTorres;i++){
@@ -425,15 +423,7 @@ int main() {
 
 				for(int i =0; i<cantRecursos; i++){
 					dibRecursos(&recursos[i]);
-				}
-
-				/*for(int i=0; i<cantidadArboles;i++){
-					diArbol(&arboles[i]);
-				}
-				for(int i=0; i<cantidadOros;i++){
-					diOro(&oros[i]);	
-				}		*/				
-
+				}	
 				//dibuJugador(&jugadores[jugadorActivo]);
 				dibuJugadores(jugadores,MaxJugadores,jugadorActivo);
 				dibuTorre(&castillo);
@@ -442,7 +432,7 @@ int main() {
 
 				for(int i =0; i<MAxEnemigos;i++)
 				{
-				dibujoEnemigo(&enemigos[i],pasto,camino);
+					dibujoEnemigo(&enemigos[i],pasto,camino);
 				}		
 				dibuMenu(&hud,&jugadores[jugadorActivo],&datosjugador);
 			}

@@ -22,7 +22,7 @@ bool cargarMapa(const char *nombreArchivo,ConfigMap *configuracion,Recursos recu
     *cantRecursos =0;
     if(fscanf(nivel,"%d",&configuracion->cantidadEnemigos)!= 1){
         printf("cantidad de enemigos inconclusa");
-         fclose(nivel);
+        fclose(nivel);
         return false;
     }
     for(int i = 0; i < FIL; i++){
@@ -32,25 +32,21 @@ bool cargarMapa(const char *nombreArchivo,ConfigMap *configuracion,Recursos recu
            
             if (configuracion -> mapa[i][j]=='a')
             {
-                iniRecursos(&recursos[*cantRecursos], 'a',
-                j * cuadrado, i * cuadrado,
-                arbol);
+                iniRecursos(&recursos[*cantRecursos], 'a',j * cuadrado, i * cuadrado,arbol);
                 (*cantRecursos)++;
             }
             else if (configuracion->mapa[i][j] == 'o')
             {
-                iniRecursos(&recursos[*cantRecursos], 'o',
-                j * cuadrado, i * cuadrado,
-                oro);
-                 (*cantRecursos)++;
+                iniRecursos(&recursos[*cantRecursos], 'o',j * cuadrado, i * cuadrado,oro);
+                (*cantRecursos)++;
             }     
            
             //else if (... == 'o')
         }
         //fscanf(nivel, "%c", &aux); 
     }
-    fclose(nivel);
-   return true;
+ fclose(nivel);
+ return true;
     
 }
 
@@ -121,51 +117,41 @@ void dibujarMapa(ConfigMap *configuracion,
            
             if(configuracion-> mapa[i][j]== 't' || configuracion-> mapa[i][j]== 'j' ||configuracion->  mapa[i][j]== 'o' || configuracion-> mapa[i][j]== 'a' ||configuracion->  mapa[i][j]=='T' )/*tierra*/
             {
-                //al_draw_bitmap_region(pasto, 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
             }
             if(configuracion-> mapa[i][j] == 'l')
-            {
-                //al_draw_filled_rectangle(j*cuadrado, i*cuadrado, j*cuadrado+cuadrado, i*cuadrado+cuadrado, al_map_rgb(255, 255, 255));
-                //al_draw_bitmap_region(terreno, 0, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
+            {                
                al_draw_bitmap(agua, j*cuadrado, i*cuadrado, 0);
             }           
             if(configuracion-> mapa[i][j]== 'c' || configuracion-> mapa[i][j] == 'e')
             {
-                 //al_draw_rectangle(j*cuadrado, i*cuadrado, j*cuadrado+cuadrado, i*cuadrado+cuadrado, al_map_rgb(255, 255, 0), 1);
-                 //al_draw_bitmap_region(camino, 32, 0, 32, 32, j*cuadrado, i*cuadrado, 0);
                 al_draw_bitmap(camino, j*cuadrado, i*cuadrado, 0);
             }                    
-           if(configuracion-> mapa[i][j]== 'f')
+            if(configuracion-> mapa[i][j]== 'f')
             {
                 al_draw_bitmap(pasto, j*cuadrado,i*cuadrado,0);
-                 al_draw_scaled_bitmap(aldea,0,0,al_get_bitmap_width(aldea),al_get_bitmap_height(aldea),j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);
-                //al_draw_rectangle(j*cuadrado,i*cuadrado, j*cuadrado + cuadrado, i*cuadrado+cuadrado,al_map_rgb(255,0,0),1);
+                al_draw_scaled_bitmap(aldea,0,0,al_get_bitmap_width(aldea),al_get_bitmap_height(aldea),j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);
             }
             if(configuracion-> mapa[i][j]== 'e')
             {
                 int origenX =framePortal *anchoFramePortal;
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-                al_draw_scaled_bitmap(sheetPortal,origenX,0,anchoFramePortal,altoFramePortal,j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);
-                //al_draw_bitmap(sheetPortal,j*cuadrado, i*cuadrado,0);                
+                al_draw_scaled_bitmap(sheetPortal,origenX,0,anchoFramePortal,altoFramePortal,j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);              
             }
             if(configuracion-> mapa[i][j]== 'k')
             {
-                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-               
+                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);               
             }
-            if(configuracion->mapa[i][j] == '.'){
-                
+            if(configuracion->mapa[i][j] == '.')
+            {
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 al_draw_scaled_bitmap(casa,0,0,al_get_bitmap_width(casa),al_get_bitmap_height(casa),j* cuadrado, i*cuadrado,cuadrado,cuadrado,0 );
-                //al_draw_bitmap(casa,j*cuadrado,i*cuadrado,0);
             }
-            if(configuracion->mapa[i][j] == 'j'){
-                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
-                
+            if(configuracion->mapa[i][j] == 'j')
+            {
+                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);                
             }
         }
-
     }
 }   
 bool buscarPosicion(ConfigMap *configuracion,char CharBusca,float *x, float *y){

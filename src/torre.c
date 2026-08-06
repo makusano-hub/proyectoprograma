@@ -63,42 +63,38 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
     int poscolumna = (int)((jugador->ejex + jugador->ancho / 2.0f) /cuadrado);
     int posfila = (int)((jugador->ejey + jugador->alto / 2.0f) /cuadrado);
 
-        if(posfila< 0 || posfila >= FIL || poscolumna<0 || poscolumna >=COL){
-            return false;
-        }
+    if(posfila< 0 || posfila >= FIL || poscolumna<0 || poscolumna >=COL){
+        return false;
+    }
 
-        if(dj->oro < costoOro || dj->madera < costoMadera){
-            printf("no hay suficientes recursos oro %d, madera %d\n",dj->oro,dj->madera);
-            return false;
-            //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
-        }
+    if(dj->oro < costoOro || dj->madera < costoMadera){
+        printf("no hay suficientes recursos oro %d, madera %d\n",dj->oro,dj->madera);
+        return false;
+         //poner ojala cuanto oro tiene el jugador como jugador->oro y jugador-->madera            
+    }
 
-        else{   
-            if(*cantidadTorres < MaxTorres){
+    else{   
+        if(*cantidadTorres < MaxTorres){
 
-              Torre *nueva = &torres[*cantidadTorres];
+            Torre *nueva = &torres[*cantidadTorres];
 
-              nueva->tipo = tipo;
+            nueva->tipo = tipo;
 
-             nueva->ejex = poscolumna * cuadrado;
-             nueva->ejey = posfila *cuadrado;
+            nueva->ejex = poscolumna * cuadrado;
+            nueva->ejey = posfila *cuadrado;
 
-             nueva->ancho=cuadrado;
-             nueva->alto=cuadrado;
+            nueva->ancho=cuadrado;
+            nueva->alto=cuadrado;    
 
-            
+            nueva->activo = true;
+            nueva->sprite= sprite;
 
-             nueva->activo = true;
-             nueva->sprite= sprite;
-
-             nueva->faseConstruccion =0;
-             nueva->auxConstruccion=0;
+            nueva->faseConstruccion =0;
+            nueva->auxConstruccion=0;
              
-             nueva->disparo=0;
-             
-
+            nueva->disparo=0;   
             
-             if(tipo == torreRapida){
+            if(tipo == torreRapida){
 
                 nueva->cantidadFase =1;
                 nueva->construida = true;
@@ -107,8 +103,8 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
                 nueva->intervaloDisparo = 10;
                 dj->oro -= costoOroRapido;
                 dj->madera -=costoMaderaRapido;
-             }
-             else if(tipo == torreNormal){
+            }
+            else if(tipo == torreNormal){
                 nueva->cantidadFase = 5;
                 nueva->construida = false;
                 nueva->dano = 20;
@@ -116,20 +112,14 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
                 nueva->intervaloDisparo = 240;
                 dj->oro -= costoOro;
                 dj->madera -=costoMadera;
-             }
-
+            }
             if(configuracion->mapa[posfila][poscolumna] =='t'){
 
                 configuracion-> mapa[posfila][poscolumna] = 'T';
-
-            (*cantidadTorres)++;
-            return true;  
+                (*cantidadTorres)++;
+                return true;  
             }
-            if(configuracion->mapa[posfila][poscolumna] == 'c' ||
-                 configuracion-> mapa[posfila][poscolumna] == 'T' ||
-                  configuracion-> mapa[posfila][poscolumna] == 'e' ||
-                  configuracion-> mapa[posfila][poscolumna] == 'k' ||
-                  configuracion-> mapa[posfila][poscolumna] == 'f')
+            if(configuracion->mapa[posfila][poscolumna] == 'c' || configuracion-> mapa[posfila][poscolumna] == 'T' || configuracion-> mapa[posfila][poscolumna] == 'e' || configuracion-> mapa[posfila][poscolumna] == 'k' || configuracion-> mapa[posfila][poscolumna] == 'f')
             {
                 printf("no se puede construir en esta casiila");
                 return false;
@@ -137,41 +127,36 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
             else if(*cantidadTorres >= MaxTorres){
                 return false;
             }                   
-        }
+        }       
+    }
+    return true;
+}
 
-        /*ver que no hayan tores en la misma casilla de matriz
-            if(mapa[i][j] == 'T' || mapa[i][j] == 'c' || mapa[i][j] == 'e' || mapa ) o una funcion que verifique y recorra si existe una torre en esa casilla
-        */
-        
-        }
-        return true;
+void construirTorre(Torre *torre){
+    if(!torre->activo || torre->construida){
+        return;
     }
-
-    void construirTorre(Torre *torre){
-        if(!torre->activo || torre->construida){
-            return;
-        }
-        torre->auxConstruccion++;
-        if(torre->auxConstruccion< 60 ){ //modifica el tiempo del intervalo que seconstruye ejemplo 60fps es un segundo
-            return;
-        }
-        torre->auxConstruccion = 0;
-        if(torre->faseConstruccion < torre->cantidadFase - 1){
-            torre->faseConstruccion++;
-        }
-        if(torre->faseConstruccion >= torre->cantidadFase -1){
-            torre->construida = true;
-        }
+    torre->auxConstruccion++;
+    if(torre->auxConstruccion< 60 ){ //modifica el tiempo del intervalo que seconstruye ejemplo 60fps es un segundo
+        return;
     }
-    void construirTorres(Torre torres[],int cantidadTorres){
-        for(int i =0;i<cantidadTorres;i++){
-            construirTorre(&torres[i]);
-        }
+    torre->auxConstruccion = 0;
+    if(torre->faseConstruccion < torre->cantidadFase - 1){
+        torre->faseConstruccion++;
     }
+    if(torre->faseConstruccion >= torre->cantidadFase -1){
+        torre->construida = true;
+    }
+}
+void construirTorres(Torre torres[],int cantidadTorres){
+    for(int i =0;i<cantidadTorres;i++){
+        construirTorre(&torres[i]);
+    }
+}
 
 
     //ver si es int o bool porque si es pitagoras true o que retorne el rango unicamente
- bool rango(Torre *torre, Enemigo *e){
+bool rango(Torre *torre, Enemigo *e){
     if(!e->vivo || !torre->activo || !torre->construida){
         return false;
     }
@@ -200,7 +185,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
     //debo implementar cual es el rango de la torre, ejemplo la distancia de pitagoras es >= rangoTorre entonces torre puede disparar
     return pitagorasDistancia<=torre->alcance;
     
- }   
+}   
 
  /*bool disparo(Torre *torre){
     if(torre->alcance>= pitagorasDistancia){
@@ -209,7 +194,7 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
  }*/
 
  
-  void dibuTorre(Torre *torres){
+void dibuTorre(Torre *torres){
     if(!torres->activo){
         return;
     }
@@ -220,7 +205,8 @@ bool crearTorreJugador(Torre torres[], int *cantidadTorres, Jugador *jugador,Dat
 
     int origenX = torres->faseConstruccion * anchoFrame;
     al_draw_scaled_bitmap(torres->sprite,origenX,0,anchoFrame,altoImagen,torres->ejex,torres->ejey,torres->ancho,torres->alto+20,0);
-  }  
+}
+  
 void dibuTorreS(Torre torres[],int cantidadTorres){
     for(int i =0; i<cantidadTorres;i++){
         dibuTorre(&torres[i]);

@@ -15,21 +15,15 @@ typedef struct{
 
 bool registrarPuntaje(const char nombre[], int puntuacion);
 
- typedef struct{
+typedef struct{
     UserRanking usuarios[10];
     int cantidad;
     ALLEGRO_FONT *fuente;
- }DatoRanking;
+}DatoRanking;
+
 void cargarRanking(DatoRanking *datoranking);
- bool inicRanking(DatoRanking *datoranking);
- void dibuRanking(DatoRanking *datoranking);
- void destruRanking(DatoRanking *datoranking);
- //void dibuMenuRanking(DatoRanking *datos);
+bool inicRanking(DatoRanking *datoranking);
+void dibuRanking(DatoRanking *datoranking);
+void destruRanking(DatoRanking *datoranking);
 
-/*
-
- 
- void guardarRanking(char nombre[], int puntuacion);
- 
-*/
- #endif
+#endif

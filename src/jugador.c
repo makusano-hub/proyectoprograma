@@ -81,23 +81,22 @@ void inicJugadores(Jugador jugadores[],ConfigMap *configuracion,ALLEGRO_BITMAP *
 
 void actJugador(Jugador *j){
 
-   			 if(j->ejex < 0 )
-			{
-				j->ejex=0;
-			}
-			if(j->ejex > anchoMap - j->ancho)
-			{
-				j->ejex = anchoMap - j->ancho;
-			}
-			if(j->ejey > altoMap - j->alto)
-			{
-				j->ejey = altoMap - j->alto;
-			}
-			if(j->ejey < 0)
-			{
-				j->ejey = 0;
-			}
-
+	if(j->ejex < 0 )
+	{
+		j->ejex=0;
+	}
+	if(j->ejex > anchoMap - j->ancho)
+	{
+		j->ejex = anchoMap - j->ancho;
+	}
+	if(j->ejey > altoMap - j->alto)
+	{
+		j->ejey = altoMap - j->alto;
+	}
+	if(j->ejey < 0)
+	{
+		j->ejey = 0;
+	}
 }
 
 void dibuJugador(Jugador *j){
@@ -131,32 +130,28 @@ void dibuJugadores(Jugador jugadores[],int cantidad,int jugadorActivo){
 
 void movJugador(Jugador *j, teclado *t){
 
-			j->moviendose = false;
+	j->moviendose = false;
 
-    		if(t->arriba)
-			{
-				j->ejey -= j->velocidad;
-				j->moviendose =true;
-				//printf("arriba\n");
-			}
-			if(t->abajo)
-			{
-				j->ejey  += j->velocidad;
-				j->moviendose =true;
-				//printf("abajo\n");
-			}
-			if(t->der)
-			{
-				j->ejex += j->velocidad;
-				j->moviendose =true;
-				//printf("derecha\n");
-			}
-			if(t->izq)
-			{
-				j->ejex -= j->velocidad;
-				j->moviendose =true;
-				//printf("izquierda\n");
-			}
+    if(t->arriba)
+	{
+		j->ejey -= j->velocidad;
+		j->moviendose =true;				
+	}
+	if(t->abajo)
+	{
+		j->ejey  += j->velocidad;
+		j->moviendose =true;			
+	}
+	if(t->der)
+	{
+		j->ejex += j->velocidad;
+		j->moviendose =true;		
+	}
+	if(t->izq)
+	{
+		j->ejex -= j->velocidad;
+		j->moviendose =true;		
+	}
 }
 void animacionJugador(Jugador *j){
 	if(j == NULL){

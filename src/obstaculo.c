@@ -36,26 +36,32 @@ void iniRecursos(Recursos *recursos,char tipo, float x, float y, ALLEGRO_BITMAP 
     }
     recursos->valorinic = recursos->valor;
 }
-void actRecursos(Recursos *recursos){
-    if(recursos->valor<=0){
+void actRecursos(Recursos *recursos)
+{
+    if(recursos->valor<=0)
+    {
         recursos->valor = 0;        
         recursos->vivo =false;
     }
     else if(recursos->valor <=10)
-    {   recursos->valor =10;
+    {   
+        recursos->valor =10;
         recursos->estado = 2;
     }
     else if(recursos->valor <= recursos->valorinic /2)
     {
         recursos->estado = 1;
     }
-    else{
+    else
+    {
         recursos->estado = 0;
     }
 
 }
-void dibRecursos(Recursos *recursos){
-    if(recursos->vivo == true){
+void dibRecursos(Recursos *recursos)
+{
+    if(recursos->vivo == true)
+    {
          
         int origen = recursos->estado * 724;
 
@@ -63,6 +69,9 @@ void dibRecursos(Recursos *recursos){
     
         //al_draw_scaled_bitmap(recursos->sprite,0,0,al_get_bitmap_width(recursos->sprite),al_get_bitmap_height(recursos->sprite),recursos->x,recursos->y,recursos->ancho,recursos->alto,0);
     }
-    else return;
+    else
+    {
+        return;
+    } 
 }
 

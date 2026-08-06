@@ -28,7 +28,7 @@ void cargarRanking(DatoRanking *datos){
 }
 
 //iniciar
- static int leerRanking(UserRanking ranking[],int maximo){
+static int leerRanking(UserRanking ranking[],int maximo){
 
     FILE *archivo = fopen("ranking.txt","r");
     int cantidad = 0;
@@ -48,9 +48,9 @@ void cargarRanking(DatoRanking *datos){
 
     //falta comparar puntajes
     
- }
+}
  //ordenar
- static void OrdenarPuntaje(UserRanking ranking[],int cantidad){
+static void OrdenarPuntaje(UserRanking ranking[],int cantidad){
     for(int i = 0; i<cantidad-1;i++){
         for(int j = i+1; j< cantidad;j++){
             if(ranking[j].puntuacion > ranking[i].puntuacion){
@@ -61,7 +61,7 @@ void cargarRanking(DatoRanking *datos){
             }
         }
     }
- }
+}
 
 //registrarpuntaje
 bool registrarPuntaje(const char nombre[],int puntuacion){
@@ -86,18 +86,7 @@ bool registrarPuntaje(const char nombre[],int puntuacion){
     return true;
 }
 
- /*
- void guardarRanking(char nombre[], int puntuacion){
-    UserRanking user[11];
-    int cantidad =0;
-
-    FILE *archivo =fopen("ranking.txt","r");
-    if(archivo!=NULL){
-        while(cantidad < 11)
-    }
- }
- int comparar()*/
- void dibuRanking(DatoRanking *datos){
+void dibuRanking(DatoRanking *datos){
     int centroX = anchoMap /2;
     int inicioY = 100;
 
@@ -107,18 +96,16 @@ bool registrarPuntaje(const char nombre[],int puntuacion){
         al_draw_text(datos->fuente,al_map_rgb(80,80,80),centroX,inicioY,ALLEGRO_ALIGN_CENTRE,"no hay puntajes registrados");
     }
     for(int i =0; i< datos->cantidad; i++){
-        al_draw_textf(datos->fuente,al_map_rgb(0,0,0),centroX,inicioY + i * 35, ALLEGRO_ALIGN_CENTRE," %d. %s - %d",i+1,
-        datos->usuarios[i].nombre,
-        datos->usuarios[i].puntuacion);
+        al_draw_textf(datos->fuente,al_map_rgb(0,0,0),centroX,inicioY + i * 35, ALLEGRO_ALIGN_CENTRE," %d. %s - %d",i+1,datos->usuarios[i].nombre,datos->usuarios[i].puntuacion);
     }
-
     al_draw_text(datos->fuente,al_map_rgb(80,80,80),centroX,altoP-50,ALLEGRO_ALIGN_CENTRE,"ESC para salir");
- }
- void destruRanking(DatoRanking *datos)
- {
+}
+
+void destruRanking(DatoRanking *datos)
+{
     if(datos->fuente != NULL ){
         al_destroy_font(datos->fuente);
         datos->fuente = NULL;
     }
     datos->cantidad =0;
- }
+}

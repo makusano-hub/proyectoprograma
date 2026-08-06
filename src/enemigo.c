@@ -141,13 +141,13 @@ void dibujoEnemigo(Enemigo *e, ALLEGRO_BITMAP *pasto, ALLEGRO_BITMAP *camino){
 
 void actualizarEnemigo(Enemigo *e){
     //for(int i=0; i <MAxEnemigos; i++){   
-        if(e->vivo == false)
-        {
-              return;
-        }
-        if(e->vida <= 0){
-            e->vivo = false;
-        }
+    if(e->vivo == false)
+    {
+        return;
+    }
+    if(e->vida <= 0){
+        e->vivo = false;
+    }
     //}
 }
 
@@ -248,16 +248,16 @@ void spawnEnemigos(ConfigMap * configuracion, Portal portales[], int cantidadPor
 
 bool enemigoMeta(ConfigMap * configuracion,Enemigo *e){
        
-        if(!e->vivo){
-            return false;
-        }
+    if(!e->vivo){
+       return false;
+    }
 
-            int posColumna = e->ejex/cuadrado;
-            int posFila = e->ejey/cuadrado;
+    int posColumna = e->ejex/cuadrado;
+    int posFila = e->ejey/cuadrado;
 
-        if(posFila<0 || posFila >= FIL || posColumna < 0 || posColumna >= COL){
-            return false;
-         }
+    if(posFila<0 || posFila >= FIL || posColumna < 0 || posColumna >= COL){
+        return false;
+    }
 
     return configuracion->  mapa[posFila][posColumna] == 'f';     
 }
@@ -278,19 +278,17 @@ bool moverEnemigoCamino(Enemigo *e, Camino *Camino){
     float diferenciaX = destinoX - e->ejex;
     float diferenciaY = destinoY - e->ejey;
 
-    if(fabsf(diferenciaX)<= e->velocidad &&
-        fabsf(diferenciaY)<= e->velocidad){
-            e->ejex = destinoX;
-            e->ejey = destinoY;
+    if(fabsf(diferenciaX)<= e->velocidad && fabsf(diferenciaY)<= e->velocidad){
+       e->ejex = destinoX;
+       e->ejey = destinoY;
 
-            e->indiceCamino++;
+       e->indiceCamino++;
 
-            if(e->indiceCamino >= Camino->longitud){
-                return true;
-            }
-            return false;
+       if(e->indiceCamino >= Camino->longitud){
+           return true;
         }
-
+       return false;
+    }
 
         if(diferenciaX > 0){
             e->ejex += e->velocidad;

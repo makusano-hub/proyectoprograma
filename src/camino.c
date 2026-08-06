@@ -143,7 +143,7 @@ bool calcularCamino(ConfigMap *configuracion, int filaInicio, int columnaInicio,
         return false;
     }
 
-    for (int fila=0;fila<FIL;fila++){
+    for (int fila=0 ;fila<FIL ;fila++){
 
         for(int columna=0 ;columna<COL ;columna++){
 
@@ -199,17 +199,17 @@ bool calcularCamino(ConfigMap *configuracion, int filaInicio, int columnaInicio,
 
             int nuevaColumna = actual.posColumna +movimientoColumna[direccion];
 
-                if(nuevaFila < 0 || nuevaFila >= FIL || nuevaColumna <0 || nuevaColumna >=COL){
-                    continue;
-                }
+            if(nuevaFila < 0 || nuevaFila >= FIL || nuevaColumna <0 || nuevaColumna >=COL){
+                 continue;
+            }
 
-                if(visitado[nuevaFila][nuevaColumna]){
-                    continue;
-                }
+            if(visitado[nuevaFila][nuevaColumna]){
+                 continue;
+            }
 
-                if(!celdaDisponible(configuracion-> mapa[nuevaFila][nuevaColumna])){
-                    continue;
-                }
+            if(!celdaDisponible(configuracion-> mapa[nuevaFila][nuevaColumna])){
+                 continue;
+            }
 
             visitado[nuevaFila][nuevaColumna]=true;
 

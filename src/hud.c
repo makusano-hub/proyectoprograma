@@ -12,15 +12,15 @@ bool initMenu(HUD *hud){
     if(hud->fuente == NULL){
         return false;
     }
-     if(hud->iconoMadera == NULL){
+    if(hud->iconoMadera == NULL){
         printf("no se cargo iconmadera");
         return false;
     }
-     if(hud->iconoOro == NULL){
+    if(hud->iconoOro == NULL){
         printf("no se cargo iconoro");
         return false;
     }
-     if(hud->iconoVida == NULL){
+    if(hud->iconoVida == NULL){
         printf("no se cargo iconvida");
         return false;
     }
@@ -51,17 +51,16 @@ void dibuMenu(HUD *hud, Jugador *j,DatosJugador *dj){
 
     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +20,180,0,"TORRES");
 
-    al_draw_tinted_scaled_bitmap(hud->iconoTorre,al_map_rgb(80,80,80),0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),
-    xMenu+20,210,48,48,0);
-     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,210,0,"Torre Normal"); 
+    al_draw_tinted_scaled_bitmap(hud->iconoTorre,al_map_rgb(80,80,80),0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),xMenu+20,210,48,48,0);
+    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,210,0,"Torre Normal"); 
     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,230,0,"Coste Oro: 10");
     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,240,0,"Coste Madera: 10");
 
 
     al_draw_scaled_bitmap(hud->iconoTorre,0,0,al_get_bitmap_width(hud->iconoTorre),al_get_bitmap_height(hud->iconoTorre),xMenu+20,280,48,48,0);
-     al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,280,0,"Torre Rapida");
-      al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,300,0,"Coste Oro: 30");
-       al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,310,0,"Coste Madera: 30");
+    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,280,0,"Torre Rapida");
+    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,300,0,"Coste Oro: 30");
+    al_draw_text(hud->fuente,al_map_rgb(255,255,255),xMenu +80,310,0,"Coste Madera: 30");
     
     //al_draw_textf(hud->fuente,al_map_rgb(255,80,80),xMenu+20, 200,0,"Coste" );
 
@@ -72,15 +71,15 @@ void destruMenu(HUD *hud){
         al_destroy_font(hud->fuente);
         hud->fuente = NULL;
     }
-     if(hud->iconoVida != NULL){
+    if(hud->iconoVida != NULL){
         al_destroy_bitmap(hud->iconoVida);
         hud->iconoVida = NULL;
     }
-     if(hud->iconoOro != NULL){
+    if(hud->iconoOro != NULL){
         al_destroy_bitmap(hud->iconoOro);
         hud->iconoOro = NULL;
     }
-     if(hud->iconoMadera != NULL){
+    if(hud->iconoMadera != NULL){
         al_destroy_bitmap(hud->iconoMadera);
         hud->iconoMadera = NULL;
     }

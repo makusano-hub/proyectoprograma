@@ -33,25 +33,24 @@ bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j,DatosJu
     for(int fila = filInicio; fila<= filFin; fila++)
     {
         for(int cola = colInicio; cola<=colFin; cola++)
-            {
-                if(fila < 0 || fila>=FIL ||
-                    cola<0||cola >=COL){
-                    continue;
-                }
-                if(configuracion-> mapa[fila][cola]=='f')
-                {
-                    dj->vida -= e->dano;
-                    dj->puntajeRank -= 50;
-                    printf("enemigo llego a meta %d\n", dj->vida);
-                    if(dj->vida < 0 )
-                    {
-                        dj->vida =0;
-                    }
-                    e->vivo = false;
-                    
-                    return true;
-                }
+        {
+            if(fila < 0 || fila>=FIL ||
+                cola<0||cola >=COL){
+                continue;
             }
+            if(configuracion-> mapa[fila][cola]=='f'){
+                dj->vida -= e->dano;
+                dj->puntajeRank -= 50;
+                printf("enemigo llego a meta %d\n", dj->vida);
+                if(dj->vida < 0 )
+                {
+                    dj->vida =0;
+                }
+                e->vivo = false;
+                    
+                return true;
+            }
+        }
     }
      return false;
 }
