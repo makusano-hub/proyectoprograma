@@ -7,19 +7,9 @@ bool colisionJugEn(Jugador j,Enemigo e){
     if(e.vivo == false){
         return false;
     } 
-
-    return( j.ejex <= e.ejex + e.ancho &&
-            j.ejex + j.ancho >= e.ejex &&
-            j.ejey <= e.ejey + e.alto &&
-            j.ejey + j.alto >= e.ejey);
+    return( j.ejex <= e.ejex + e.ancho && j.ejex + j.ancho >= e.ejex &&j.ejey <= e.ejey + e.alto &&j.ejey + j.alto >= e.ejey);
     
 }
-/*bool colisionObsJug(Jugador j, Recursos recursos){
-    return( j.ejex <= recursos.x + recursos.ancho &&
-            j.ejex + j.ancho >= recursos.x &&
-            j.ejey <= recursos.y + recursos.alto  &&
-            j.ejey + j.alto >= recursos.y);
-}*/
 bool colisionMetaEnemigo(ConfigMap *configuracion,Enemigo *e, Jugador *j,DatosJugador *dj){
     if(e->vivo == false){
         return false;
@@ -63,12 +53,11 @@ void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos,DatosJug
             continue;
         }
 
-        bool choque = j->ejex <= r->x + r->ancho &&
-                j->ejex + j->ancho >= r->x &&
-                j->ejey <= r->y + r->alto  &&
-                j->ejey + j->alto >= r->y;
+        bool choque = j->ejex <= r->x + r->ancho && j->ejex + j->ancho >= r->x && j->ejey <= r->y + r->alto  && j->ejey + j->alto >= r->y;
 
-        if(!choque){
+        bool Recoleccion = (j->tipo == lenador && r->tipo == 'a') || (j->tipo == minero && r->tipo == 'o');
+        
+        if(!choque || !Recoleccion){
             r->intervalo = 0;
             continue;
         }            
@@ -97,35 +86,5 @@ void colisionRecursos(Jugador *j, Recursos recursos[], int cantRecursos,DatosJug
             }
             actRecursos(r);
         }
-        /*
-        if(r->tipo == 'a'){
-            if (j->ejex <= r->x + r->ancho &&
-                j->ejex + j->ancho >= r->x &&
-                j->ejey <= r->y + r->alto  &&
-                j->ejey + j->alto >= r->y)
-            {
-                    aca el jugador saca el recurso instantaneamente
-                j->madera += r->valor;
-
-                r->valor = 0;
-                r->vivo = false;
-            }
-            
-        }       
-        if(r->tipo == 'o'){
-            if (j->ejex <= r->x + r->ancho &&
-                j->ejex + j->ancho >= r->x &&
-                j->ejey <= r->y + r->alto  &&
-                j->ejey + j->alto >= r->y)
-            {
-
-                aca saca el recurso el jugador instantaneamente
-                j->oro += r->valor;
-
-                r->valor = 0;
-                r->vivo = false;
-            }
-            
-        }*/
     }
 }
