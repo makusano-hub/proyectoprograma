@@ -87,10 +87,7 @@ void dibujarMapa(ConfigMap *configuracion,
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
                 al_draw_scaled_bitmap(sheetPortal,origenX,0,anchoFramePortal,altoFramePortal,j*cuadrado,i*cuadrado,cuadrado,cuadrado,0);              
             }
-            if(configuracion-> mapa[i][j]== 'k')
-            {
-                al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);               
-            }
+            
             if(configuracion->mapa[i][j] == '.')
             {
                 al_draw_bitmap(pasto,j*cuadrado,i*cuadrado,0);
@@ -102,6 +99,11 @@ void dibujarMapa(ConfigMap *configuracion,
             }
             int columnaTileCastillo = -1;
             int filaTileCastillo = -1;
+            if(configuracion-> mapa[i][j]== 'k')
+            {
+               columnaTileCastillo = 0;
+                filaTileCastillo = 0;          
+            }
             if(configuracion->mapa[i][j] == 'h'){
                 columnaTileCastillo = 1;
                 filaTileCastillo = 0;
@@ -110,12 +112,12 @@ void dibujarMapa(ConfigMap *configuracion,
                 columnaTileCastillo =2;
                 filaTileCastillo =0;
             }
-            if(configuracion->mapa[i][j] == '1'){
-                columnaTileCastillo =0;
-                filaTileCastillo =1;
-            }
             if(configuracion->mapa[i][j] == '2'){
                 columnaTileCastillo =1;
+                filaTileCastillo =1;
+            }
+            if(configuracion->mapa[i][j] == '1'){
+                columnaTileCastillo =0;
                 filaTileCastillo=1;
             }
             if(configuracion->mapa[i][j]=='3'){
