@@ -58,9 +58,35 @@ void dibuMenuP(Menu *menu){
 void dibuMenuRanking(Menu *menu, const char nombreTemporal[]){
     int centroX = anchoMap/2;
     int centroY = altoMap/2;
-    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese 3letras");
+    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese 10 letras");
     al_draw_text(menu->fuente,al_map_rgb(0,0,0),centroX,centroY,ALLEGRO_ALIGN_CENTRE,nombreTemporal);
     al_draw_textf(menu->fuente,al_map_rgb(80,80,80),centroX,centroY+50,ALLEGRO_ALIGN_CENTRE,"Enter para continuar");
+}
+
+
+void dibuPantallaFinal(Menu *menu, bool victoria, int puntaje){
+    ALLEGRO_DISPLAY *display = al_get_current_display();
+
+    int anchoPantallafinal = al_get_display_width(display);
+    int altoPantallaFinal = al_get_display_height(display);
+
+    ALLEGRO_COLOR fondo;
+    ALLEGRO_COLOR colorTitulo;
+
+    if(victoria){
+        fondo = al_map_rgb(25,70,35);
+        colorTitulo = al_map_rgb(255,220,70);
+    }
+    else{
+        fondo = al_map_rgb (70,20,20);
+        colorTitulo = al_map_rgb(255,80,80);
+    }
+
+    al_clear_to_color(fondo);
+    al_draw_filled_rectangle(anchoPantallafinal *0.2f,altoPantallaFinal*0.2f,anchoPantallafinal *0.8f,altoPantallaFinal *0.8f,al_map_rgba(0,0,0,155));
+    al_draw_text(menu->fuente,colorTitulo,anchoPantallafinal/2,altoPantallaFinal/2 -80,ALLEGRO_ALIGN_CENTER,victoria ? "VICTORIA" : "DERROTA");
+    al_draw_textf(menu->fuente,al_map_rgb(255,255,255),anchoPantallafinal/2,altoPantallaFinal/2,ALLEGRO_ALIGN_CENTER,"PUNTAJE: %d",puntaje);
+    al_draw_text(menu->fuente,al_map_rgb(220,220,220),anchoPantallafinal/2,altoPantallaFinal/2+70,ALLEGRO_ALIGN_CENTER,"PRESIONA ENTER PARA CONTINUAR");
 }
 
 void destruMenuP(Menu *menu){

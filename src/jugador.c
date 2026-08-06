@@ -181,6 +181,7 @@ void animacionJugador(Jugador *j){
 }
 
 void cambiarJugador(Jugador jugadores[],int *jugadorActivo){
+	
 	jugadores[*jugadorActivo].activo = false;
 	jugadores[*jugadorActivo].moviendose = false;
 	jugadores[*jugadorActivo].frameActual =0;

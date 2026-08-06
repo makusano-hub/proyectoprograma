@@ -28,7 +28,9 @@ typedef enum{
 	EstadoMenu,
 	EstadoJugando,
 	EstadoRanking,
-	EstadoIngresarNombre
+	EstadoIngresarNombre,
+	EstadoDerrota,
+	EstadoVictoria
 }EstadoJuego;
 
 int main() {
@@ -55,7 +57,7 @@ int main() {
 	DatoRanking datosranking;
 
 
-	char nombreTemporal[4] ="";
+	char nombreTemporal[10] ="";
 	int cantidadLetras =0;
 
 	int cantidadTorres =0;
@@ -87,7 +89,7 @@ int main() {
 	
 	
 	
-	ALLEGRO_DISPLAY *display = crear_pantalla();
+	ALLEGRO_DISPLAY *display = crear_pantalla();	
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/ 60.0);
 	ALLEGRO_EVENT_QUEUE * queue = al_create_event_queue();
 
@@ -261,6 +263,11 @@ int main() {
 					estado = EstadoMenu;
 				}
 			}
+			else if(estado == EstadoVictoria || estado == EstadoDerrota){
+				if(event.keyboard.keycode == ALLEGRO_KEY_ENTER){
+					estado = EstadoMenu;
+				}
+			}
 
 			
 		}
@@ -360,7 +367,10 @@ int main() {
 
 					registrarPuntaje(datosjugador.nombre,datosjugador.puntajeRank);
 					//crear pantalla de derrota o fin de juego
-					running = false;
+					
+					estado = EstadoDerrota;
+
+					//running = false;
 
 				}	
 				else if(nivelTerminado(&configuracion,enemigos,MAxEnemigos)){
@@ -391,7 +401,8 @@ int main() {
 					}
 					else{
 						registrarPuntaje(datosjugador.nombre,datosjugador.puntajeRank);
-						running = false;
+						estado = EstadoVictoria;
+						//running = false;
 					}
 				}
 			}						
@@ -442,6 +453,12 @@ int main() {
 				al_draw_scaled_bitmap(fondo,0,0,al_get_bitmap_width(fondo),al_get_bitmap_height(fondo),0,0,anchoMap+anchoP,altoMap,0);				
 				dibuRanking(&datosranking);
 				
+			}
+			else if(estado == EstadoVictoria){
+				dibuPantallaFinal(&menu,true,datosjugador.puntajeRank);
+			}
+			else if(estado == EstadoDerrota){
+				dibuPantallaFinal(&menu,true,datosjugador.puntajeRank);
 			}	
 
 			

@@ -23,7 +23,7 @@
 //#define entidades 2
 
 typedef struct{
-  char nombre[4];
+  char nombre[10];
   int puntajeRank;
 
   int vida;
