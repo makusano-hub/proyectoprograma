@@ -7,6 +7,7 @@
 
 #include "movimiento.h"
 #include "mapa.h"
+#define nombreJug 3
 
 #define anchoJugador 32
 #define altoJugador 32
@@ -23,7 +24,7 @@
 //#define entidades 2
 
 typedef struct{
-  char nombre[10];
+  char nombre[nombreJug+1];
   int puntajeRank;
 
   int vida;

@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "pantalla.h"
+#include "jugador.h"
 #include <stdio.h>
 #include <string.h>
 #include <allegro5/allegro_primitives.h>
@@ -28,17 +29,22 @@ Opciones obtenerOpcionMenu(Menu *menu){
 
 void dibuMenuP(Menu *menu){
     char *opciones[3] = { "Jugar","Ranking","Salir"};
+    
+    int centroX = anchoP/2;
+    int centroY = altoP/2;
+    
+    al_draw_filled_rectangle(centroX -220,centroY-170,centroX +220,centroY+170,al_map_rgba(20,20,20,220));
 
-    int centroX = anchoMap /2;
-    int centroY = altoMap /2 -60; 
+    al_draw_rectangle(centroX -220,centroY-170,centroX +220,centroY+170,al_map_rgb(220,180,60),4);
 
-    al_draw_text(menu->fuente,al_map_rgb(0,255,0),centroX,centroY -80,ALLEGRO_ALIGN_CENTRE,"defensa");
+    al_draw_text(menu->fuente,al_map_rgb(0,255,0),centroX,centroY -80,ALLEGRO_ALIGN_CENTRE,"DEFENSA");
 
     for(int i =0; i<3;i++){
-        int y = centroY - 55 +i *55;
+        int y = centroY - 45 +i *60;
 
         if(i==menu->opcion){
-           al_draw_filled_rectangle(centroX-120,y-10,centroX+120,y+25,al_map_rgb(70,70,160));
+           al_draw_filled_rectangle(centroX-140,y-15,centroX+140,y+25,al_map_rgb(100,70,25));
+           al_draw_rectangle(centroX-140,y-15,centroX+140,y+25,al_map_rgb(100,70,25),2);
         }
         ALLEGRO_COLOR color;
         if(i==menu->opcion){
@@ -52,9 +58,9 @@ void dibuMenuP(Menu *menu){
 }
 
 void dibuMenuRanking(Menu *menu, const char nombreTemporal[]){
-    int centroX = anchoMap/2;
-    int centroY = altoMap/2;
-    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese 10 letras");
+    int centroX = anchoP/2;
+    int centroY = altoP/2;
+    al_draw_textf(menu->fuente,al_map_rgb(0,0,0),centroX,centroY-70,ALLEGRO_ALIGN_CENTRE, "Ingrese %d letras",nombreJug);
     al_draw_text(menu->fuente,al_map_rgb(0,0,0),centroX,centroY,ALLEGRO_ALIGN_CENTRE,nombreTemporal);
     al_draw_textf(menu->fuente,al_map_rgb(80,80,80),centroX,centroY+50,ALLEGRO_ALIGN_CENTRE,"Enter para continuar");
 }

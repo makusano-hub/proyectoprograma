@@ -5,11 +5,11 @@
 #include <allegro5/allegro_image.h>
 #include    "mapa.h"
 
-#define anchoMap COL*cuadrado
-#define altoMap FIL*cuadrado
+#define anchoMap (COL*cuadrado)
+#define altoMap (FIL*cuadrado)
 #define anchoMenu 250
 
-#define anchoP  anchoMap + anchoMenu
+#define anchoP  (anchoMap + anchoMenu)
 #define altoP   altoMap
 
 

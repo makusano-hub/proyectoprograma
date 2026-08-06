@@ -57,7 +57,7 @@ int main() {
 	DatoRanking datosranking;
 
 
-	char nombreTemporal[10] ="";
+	char nombreTemporal[nombreJug] ="";
 	int cantidadLetras =0;
 
 	int cantidadTorres =0;
@@ -303,7 +303,7 @@ int main() {
 						}*/
 					}					
 				}
-				else if(cantidadLetras<3){
+				else if(cantidadLetras<nombreJug){
 					if(caracter>= 'a' && caracter <= 'z'){
 						caracter = caracter - 'a' + 'A';
 					}
