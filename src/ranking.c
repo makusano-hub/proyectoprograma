@@ -86,17 +86,24 @@ bool registrarPuntaje(const char nombre[],int puntuacion){
     return true;
 }
 
-void dibuRanking(DatoRanking *datos){
-    int centroX = anchoMap /2;
+void dibuRanking(DatoRanking *datos){    
     int inicioY = 100;
 
-    al_draw_text(datos->fuente,al_map_rgb(0,0,0),centroX,90,ALLEGRO_ALIGN_CENTRE,"RANKING");
+    int centroX = anchoP/2;
+    int centroY = altoP/2;
+    
+    al_draw_filled_rectangle(centroX -250,centroY-300,centroX +250,centroY+300,al_map_rgba(20,20,20,220));
+
+    al_draw_rectangle(centroX -250,centroY-300,centroX +250,centroY+300,al_map_rgb(220,180,60),4);
+
+
+    al_draw_text(datos->fuente,al_map_rgb(255,255,255),centroX,centroY -260,ALLEGRO_ALIGN_CENTRE,"RANKING");
 
     if(datos->cantidad == 0){
-        al_draw_text(datos->fuente,al_map_rgb(80,80,80),centroX,inicioY,ALLEGRO_ALIGN_CENTRE,"no hay puntajes registrados");
+        al_draw_text(datos->fuente,al_map_rgb(255,0,0),centroX,inicioY,ALLEGRO_ALIGN_CENTRE,"no hay puntajes registrados");
     }
     for(int i =0; i< datos->cantidad; i++){
-        al_draw_textf(datos->fuente,al_map_rgb(0,0,0),centroX,inicioY + i * 35, ALLEGRO_ALIGN_CENTRE," %d. %s - %d",i+1,datos->usuarios[i].nombre,datos->usuarios[i].puntuacion);
+        al_draw_textf(datos->fuente,al_map_rgb(255,255,255),centroX,centroY-195 + i * 35, ALLEGRO_ALIGN_CENTRE," %d. %s - %d",i+1,datos->usuarios[i].nombre,datos->usuarios[i].puntuacion);
     }
     al_draw_text(datos->fuente,al_map_rgb(80,80,80),centroX,altoP-50,ALLEGRO_ALIGN_CENTRE,"ESC para salir");
 }
